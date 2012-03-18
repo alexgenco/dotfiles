@@ -1,4 +1,9 @@
+" pathogen
+runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
+call pathogen#helptags()
+
+" misc
 syntax enable
 filetype plugin indent on
 set backspace=indent,eol,start
@@ -9,8 +14,26 @@ set number
 set noswapfile
 colorscheme desert
 
-nmap <C-k> :tabn<CR>
-nmap <C-j> :tabp<CR>
+" indentation
+set autoindent
+set smartindent
+set smarttab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set expandtab
+
+" turn off bells
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+
+" turn off swp files
+set nobackup
+set nowb
+
+" persistent undo
+set undodir=~/.vim/backups
+set undofile
 
 " ctrlp
 let g:ctrlp_map = '<D-t>'
@@ -18,7 +41,6 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_open_new_file = 't'
 let g:ctrlp_by_filename = 1
-
 let g:ctrlp_prompt_mappings = {
   \ 'AcceptSelection("e")': [],
   \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
@@ -27,6 +49,7 @@ let g:ctrlp_prompt_mappings = {
 " powerline
 let g:Powerline_symbols = 'fancy'
 
+" my stuff
 set scrolloff=6
 
 map Y y$
@@ -38,7 +61,10 @@ nmap "" V:s:':":g<CR>:noh<CR><ESC>
 " insert empty line without entering insert mode
 nmap <C-o> o<ESC>S<ESC>
 
-set noerrorbells visualbell t_vb=
-autocmd GUIEnter * set visualbell t_vb=
-
 nmap D d$
+
+" switch tabs, dont know which i like better
+nmap <C-k> :tabn<CR>
+nmap ,z :tabp<CR>
+nmap <C-j> :tabp<CR>
+nmap ,x :tabn<CR>

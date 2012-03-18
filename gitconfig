@@ -1,0 +1,13 @@
+[user]
+  email = agenco@kabam.com
+  name = Alex Genco
+[alias]
+  st = status
+  co = checkout
+  ci = commit
+  br = branch
+	b = branch
+	cp = cherry-pick
+	prb = pull --rebase
+[color]
+	ui = true
