@@ -34,9 +34,10 @@ plugins=(git bundler gem)
 source $ZSH/oh-my-zsh.sh
 
 export EDITOR=vim
-export PATH=/usr/local/lib:/usr/local/mysql/lib:/opt/local/bin:/opt/local/bin:/opt/local/sbin:$HOME/.rvm/scripts/rvm:.:$PATH
+export PATH=~/bin:/usr/local/lib:/usr/local/mysql/lib:/opt/local/bin:/opt/local/bin:/opt/local/sbin:$HOME/.rvm/scripts/rvm:.:$PATH
+
 if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+  . ~/.bash_aliases
 fi
 
 [[ -s "/Users/agenco/.rvm/scripts/rvm" ]] && source "/Users/agenco/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
