@@ -17,14 +17,16 @@ echo "Initializing submodules"
 git submodule init
 git submodule update
 
-backup_dir="~/.backups"
+backup_dir=$HOME/.backups
 
 for dotfile in bash_profile gvimrc pryrc zshrc bash_aliases gitconfig vimrc vim oh-my-zsh
 do
-  if [ -e ~/.$dotfile -o -h ~/.$dotfile ]; then
+  if [ -h ~/.$dotfile ]; then
+    rm ~/.$dotfile
+  elif [ -e ~/.$dotfile ]; then
     mkdir -p $backup_dir
     mv ~/.$dotfile $backup_dir/$dotfile
-    echo "Backed up ~/.$dotfile to $backup_dir/$dotfile"
+    echo "Backed up ~/.$dotfile to $backup_dir"
   fi
 
   ln -s ./$dotfile ~/.$dotfile
