@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ ! `dirname $0` == '.' ]; then
+if [ `dirname $0` != "." ]; then
   echo "Run $0 from inside its parent directory"
   exit 1
 fi
