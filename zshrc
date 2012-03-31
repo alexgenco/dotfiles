@@ -44,3 +44,8 @@ fi
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
 
 export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
+
+export MEME_USERNAME=memer-ruby
+export MEME_PASSWORD=LOLMEMES!!
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

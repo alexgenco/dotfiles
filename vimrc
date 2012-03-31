@@ -13,6 +13,8 @@ set encoding=utf-8 " Necessary to show unicode glyphs
 set number
 set noswapfile
 colorscheme desert
+set ignorecase
+set incsearch
 
 " indentation
 set autoindent
@@ -32,15 +34,15 @@ set nobackup
 set nowb
 
 " persistent undo
-set undodir=~/.vim/backups
 set undofile
+set undodir=$HOME/.vim/undo
 
 " ctrlp
 let g:ctrlp_map = '<D-t>'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_open_new_file = 't'
-let g:ctrlp_by_filename = 1
+let g:ctrlp_by_filename = 0
 let g:ctrlp_prompt_mappings = {
   \ 'AcceptSelection("e")': [],
   \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
@@ -63,8 +65,9 @@ nmap <C-o> o<ESC>S<ESC>
 
 nmap D d$
 
-" switch tabs, dont know which i like better
-nmap <C-k> :tabn<CR>
-nmap ,z :tabp<CR>
-nmap <C-j> :tabp<CR>
-nmap ,x :tabn<CR>
+" switch tabs
+nmap fj :tabp<CR>
+nmap fk :tabn<CR>
+
+" ack
+nmap <C-f> :Ack! ''<left>

@@ -1,6 +1,10 @@
+if filereadable("~/.vimrc")
+  so ~/.vimrc
+endif
+
 colorscheme molokai
 "colorscheme solarized
-set guifont=Courier_New:h15
+set guifont=Courier_New:h16
 
 set cursorline
 
