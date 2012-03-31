@@ -28,6 +28,8 @@ do
   echo "Linked ~/.$dotfile to $dotfile"
 done
 
+source ~/.zshrc
+
 echo "Successfully setup dotfiles!"
 
 exit 0
