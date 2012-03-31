@@ -29,7 +29,7 @@ do
     echo "Backed up ~/.$dotfile to $backup_dir"
   fi
 
-  ln -s ./$dotfile ~/.$dotfile
+  ln -s $PWD/$dotfile $HOME/.$dotfile
   echo "Linked ~/.$dotfile"
 done
 
