@@ -13,6 +13,10 @@ do
   fi
 done
 
+echo "Initializing submodules"
+git submodule init
+git submodule update
+
 for dotfile in bash_profile gvimrc pryrc zshrc bash_aliases gitconfig vimrc vim oh-my-zsh
 do
   if [ -f ~/.$dotfile -o -d ~/.$dotfile ]; then
