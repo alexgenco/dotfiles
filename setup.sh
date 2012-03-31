@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ `dirname $0` != "." ]; then
   echo "Run $0 from inside its parent directory"
@@ -17,18 +17,26 @@ echo "Initializing submodules"
 git submodule init
 git submodule update
 
+backup_dir=$HOME/.backups
+
 for dotfile in bash_profile gvimrc pryrc zshrc bash_aliases gitconfig vimrc vim oh-my-zsh
 do
   if [ -f ~/.$dotfile -o -d ~/.$dotfile ]; then
-    echo "Renaming ~/.$dotfile to ~/.${dotfile}_backup"
-    mv ~/.$dotfile ~/.${dotfile}_backup
+    mkdir -p $backup_dir
+    mv ~/.$dotfile $backup_dir/$dotfile
+    echo "Backed up ~/.$dotfile to ~/$backup_dir/$dotfile"
   fi
 
   ln -s ./$dotfile ~/.$dotfile
-  echo "Linked ~/.$dotfile to $dotfile"
+  echo "Linked ~/.$dotfile"
 done
 
-source ~/.zshrc
+if [ `basename $SHELL` != "zsh" ]; then
+  echo "Changing default shell to zsh"
+  chsh -s /bin/zsh
+fi
+
+. ~/.zshrc
 
 echo "Successfully setup dotfiles!"
 
