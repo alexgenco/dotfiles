@@ -17,7 +17,7 @@ echo "Initializing submodules"
 git submodule init
 git submodule update
 
-backup_dir=$HOME/.backups
+backup_dir="~/.backups"
 
 for dotfile in bash_profile gvimrc pryrc zshrc bash_aliases gitconfig vimrc
 do
