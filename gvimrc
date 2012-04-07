@@ -1,8 +1,5 @@
-if filereadable("~/.vimrc")
-  so ~/.vimrc
-endif
-
 colorscheme molokai
+"set background=dark
 "colorscheme solarized
 set guifont=Courier_New:h16
 

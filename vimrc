@@ -12,9 +12,13 @@ set laststatus=2   " Always show the statusline
 set encoding=utf-8 " Necessary to show unicode glyphs
 set number
 set noswapfile
-colorscheme desert
 set ignorecase
 set incsearch
+cnoreabbrev W w
+
+if !has('gui_running')
+  colorscheme desert
+endif
 
 " indentation
 set autoindent
@@ -51,6 +55,25 @@ let g:ctrlp_prompt_mappings = {
 " powerline
 let g:Powerline_symbols = 'fancy'
 
+" ack
+nmap <C-f> :Ack! ''<left>
+
+" rspec
+nmap ,s :call RunSingleSpec()<CR>
+function! RunSingleSpec()
+  let linenumber=line(".")
+  let filename=bufname("%")
+  let command=':!rspec --no-color -l '.linenumber.' '.filename
+  exec command
+endfunction
+
+nmap ,S :call RunSpecs()<CR>
+function! RunSpecs()
+  let filename=bufname("%")
+  let command=':!rspec --no-color '.filename
+  exec command
+endfunction
+
 " my stuff
 set scrolloff=6
 
@@ -59,6 +82,8 @@ map Y y$
 " replace double quotes with single, vice versa
 nmap '' V:s:":':g<CR>:noh<CR><ESC>
 nmap "" V:s:':":g<CR>:noh<CR><ESC>
+vmap '' :s:":':g<CR>:noh<CR><ESC>
+vmap "" :s:':":g<CR>:noh<CR><ESC>
 
 " insert empty line without entering insert mode
 nmap <C-o> o<ESC>S<ESC>
@@ -68,6 +93,3 @@ nmap D d$
 " switch tabs
 nmap fj :tabp<CR>
 nmap fk :tabn<CR>
-
-" ack
-nmap <C-f> :Ack! ''<left>
