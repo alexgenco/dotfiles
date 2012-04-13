@@ -5,7 +5,7 @@ if [ `dirname $0` != "." ]; then
   exit 1
 fi
 
-for dotfile in bash_profile gvimrc pryrc zshrc bash_aliases gitconfig vimrc vim oh-my-zsh
+for dotfile in bash_profile gvimrc pryrc bash_aliases gitconfig git-completion vimrc vim
 do
   if [ ! -f ./${dotfile} -a ! -d ./${dotfile} ]; then
     echo "Couldn't find $dotfile in working directory. Did you rename it or delete it?"
@@ -19,7 +19,7 @@ git submodule update
 
 backup_dir=$HOME/.backups
 
-for dotfile in bash_profile gvimrc pryrc zshrc bash_aliases gitconfig vimrc vim oh-my-zsh
+for dotfile in bash_profile gvimrc pryrc bash_aliases gitconfig git-completion vimrc vim
 do
   if [ -h ~/.$dotfile ]; then
     rm ~/.$dotfile
@@ -32,11 +32,6 @@ do
   ln -s $PWD/$dotfile $HOME/.$dotfile
   echo "Linked ~/.$dotfile"
 done
-
-if [ `basename $SHELL` != "zsh" ]; then
-  echo "Changing default shell to zsh"
-  chsh -s /bin/zsh
-fi
 
 echo "Successfully setup dotfiles! Might need to restart shell?"
 

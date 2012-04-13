@@ -14,6 +14,7 @@ set number
 set noswapfile
 set ignorecase
 set incsearch
+set linebreak
 cnoreabbrev W w
 
 if !has('gui_running')
@@ -38,8 +39,8 @@ set nobackup
 set nowb
 
 " persistent undo
-set undofile
-set undodir=$HOME/.vim/undo
+"set undofile
+"set undodir=$HOME/.vim/undo
 
 " ctrlp
 let g:ctrlp_map = '<D-t>'
@@ -57,9 +58,18 @@ let g:Powerline_symbols = 'fancy'
 
 " ack
 nmap <C-f> :Ack! ''<left>
+nmap f<C-w> :Ack!<CR>
+
+nmap f<C-d> :call AckDef()<CR>
+function! AckDef()
+  let current_word=expand("<cword>")
+  let query='def '.current_word
+  let command=":Ack! '".query."'"
+  exec command
+endfunction
 
 " rspec
-nmap ,s :call RunSingleSpec()<CR>
+nmap ,R :call RunSingleSpec()<CR>
 function! RunSingleSpec()
   let linenumber=line(".")
   let filename=bufname("%")
@@ -67,7 +77,7 @@ function! RunSingleSpec()
   exec command
 endfunction
 
-nmap ,S :call RunSpecs()<CR>
+nmap ,r :call RunSpecs()<CR>
 function! RunSpecs()
   let filename=bufname("%")
   let command=':!rspec --no-color '.filename
@@ -75,9 +85,10 @@ function! RunSpecs()
 endfunction
 
 " my stuff
-set scrolloff=6
 
+set scrolloff=6
 map Y y$
+set autoread
 
 " replace double quotes with single, vice versa
 nmap '' V:s:":':g<CR>:noh<CR><ESC>
