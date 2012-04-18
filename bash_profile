@@ -2,7 +2,7 @@
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
 if [ -e ~/.bash_aliases ]; then
-	source ~/.bash_aliases
+  source ~/.bash_aliases
 fi
 
 if [ -e ~/.git-completion ]; then
@@ -13,3 +13,9 @@ fi
 
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+
+export EDITOR=vim
+export PATH=~/bin:/usr/local/lib:/usr/local/mysql/lib:/opt/local/bin:/opt/local/bin:/opt/local/sbin:$HOME/.rvm/scripts/rvm:.:$PATH
+export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
+
+export HISTCONTROL=ignoredups

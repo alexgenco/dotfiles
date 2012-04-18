@@ -1,4 +1,5 @@
-colorscheme molokai
+"colorscheme molokai
+colorscheme madeofcode
 "set background=dark
 "colorscheme solarized
 set guifont=Courier_New:h16

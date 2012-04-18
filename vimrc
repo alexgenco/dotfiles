@@ -49,9 +49,9 @@ let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_open_new_file = 't'
 let g:ctrlp_by_filename = 0
 let g:ctrlp_prompt_mappings = {
-  \ 'AcceptSelection("e")': [],
-  \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
-  \ }
+      \ 'AcceptSelection("e")': [],
+      \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
+      \ }
 
 " powerline
 let g:Powerline_symbols = 'fancy'
@@ -69,19 +69,37 @@ function! AckDef()
 endfunction
 
 " rspec
-nmap ,R :call RunSingleSpec()<CR>
-function! RunSingleSpec()
-  let linenumber=line(".")
-  let filename=bufname("%")
-  let command=':!rspec --no-color -l '.linenumber.' '.filename
-  exec command
-endfunction
+"nmap ,R :call RunSingleSpec()<CR>
+"function! RunSingleSpec()
+"  let linenumber=line(".")
+"  let filename=bufname("%")
+"  let command=':!rspec --no-color -l '.linenumber.' '.filename
+"  exec command
+"endfunction
+"
+"nmap ,r :call RunSpecs()<CR>
+"function! RunSpecs()
+"  let filename=bufname("%")
+"  let command=':!rspec --no-color '.filename
+"  exec command
+"endfunction
 
-nmap ,r :call RunSpecs()<CR>
-function! RunSpecs()
+" vim-ruby-conque (rspec, rake)
+let mapleader=','
+nmap <silent> <Leader>r :call RunRubyOrRspecCurrentFileConque()<CR>
+nmap <silent> <Leader>R :call RunRspecCurrentLineConque()<CR>
+nmap <silent> <Leader>c :call RunCucumberCurrentFileConque()<CR>
+nmap <silent> <Leader>C :call RunCucumberCurrentLineConque()<CR>
+nmap <silent> <Leader>k :call RunRakeConque()<CR>
+nmap <silent> <Leader>. :call RunLastConqueCommand()<CR>
+
+function! RunRubyOrRspecCurrentFileConque()
   let filename=bufname("%")
-  let command=':!rspec --no-color '.filename
-  exec command
+  if match(filename, "_spec\.rb")
+    call RunRspecCurrentFileConque()
+  else
+    call RunRubyCurrentFileConque()
+  endif
 endfunction
 
 " my stuff
@@ -104,3 +122,22 @@ nmap D d$
 " switch tabs
 nmap fj :tabp<CR>
 nmap fk :tabn<CR>
+
+" inline do ... end
+vmap in J V:s/do/{<CR> V:s/end/}<CR>
+
+" source vimrc on save
+if has("autocmd")
+  autocmd bufwritepost .vimrc source $MYVIMRC
+endif
+
+" shortcut to edit .vimrc
+let mapleader='\'
+nmap <Leader>v :tabedit $MYVIMRC<CR>
+
+" Shortcut to rapidly toggle `set list`
+set list
+nmap <leader>l :set list!<CR>
+
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
