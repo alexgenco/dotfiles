@@ -15,6 +15,7 @@ set noswapfile
 set ignorecase
 set incsearch
 set linebreak
+set hlsearch
 cnoreabbrev W w
 
 if !has('gui_running')
@@ -48,59 +49,38 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_open_new_file = 't'
 let g:ctrlp_by_filename = 0
+let g:ctrlp_max_height = 30
 let g:ctrlp_prompt_mappings = {
-      \ 'AcceptSelection("e")': [],
+      \ 'AcceptSelection("e")': ['<s-cr>'],
       \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
       \ }
 
 " powerline
-let g:Powerline_symbols = 'fancy'
+"let g:Powerline_symbols = 'fancy'
 
 " ack
 nmap <C-f> :Ack! ''<left>
 nmap f<C-w> :Ack!<CR>
 
-nmap f<C-d> :call AckDef()<CR>
-function! AckDef()
+nmap f<C-d> :call AckPrefix("def ")<CR>
+nmap f<C-c> :call AckPrefix("class ")<CR>
+function! AckPrefix(pref)
+  let prefix = a:pref
   let current_word=expand("<cword>")
-  let query='def '.current_word
+  let query=prefix.current_word
   let command=":Ack! '".query."'"
   exec command
 endfunction
 
-" rspec
-"nmap ,R :call RunSingleSpec()<CR>
-"function! RunSingleSpec()
-"  let linenumber=line(".")
-"  let filename=bufname("%")
-"  let command=':!rspec --no-color -l '.linenumber.' '.filename
-"  exec command
-"endfunction
-"
-"nmap ,r :call RunSpecs()<CR>
-"function! RunSpecs()
-"  let filename=bufname("%")
-"  let command=':!rspec --no-color '.filename
-"  exec command
-"endfunction
-
 " vim-ruby-conque (rspec, rake)
 let mapleader=','
-nmap <silent> <Leader>r :call RunRubyOrRspecCurrentFileConque()<CR>
+nmap <silent> <Leader>r :call RunRspecCurrentFileConque()<CR>
 nmap <silent> <Leader>R :call RunRspecCurrentLineConque()<CR>
+nmap <silent> <Leader>b :call RunRubyCurrentFileConque()<CR>
 nmap <silent> <Leader>c :call RunCucumberCurrentFileConque()<CR>
 nmap <silent> <Leader>C :call RunCucumberCurrentLineConque()<CR>
 nmap <silent> <Leader>k :call RunRakeConque()<CR>
 nmap <silent> <Leader>. :call RunLastConqueCommand()<CR>
-
-function! RunRubyOrRspecCurrentFileConque()
-  let filename=bufname("%")
-  if match(filename, "_spec\.rb")
-    call RunRspecCurrentFileConque()
-  else
-    call RunRubyCurrentFileConque()
-  endif
-endfunction
 
 " my stuff
 
@@ -127,17 +107,20 @@ nmap fk :tabn<CR>
 vmap in J V:s/do/{<CR> V:s/end/}<CR>
 
 " source vimrc on save
-if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
-endif
+"if has("autocmd")
+"  autocmd bufwritepost .vimrc source $MYVIMRC
+"endif
 
 " shortcut to edit .vimrc
 let mapleader='\'
 nmap <Leader>v :tabedit $MYVIMRC<CR>
+nmap <Leader>g :tabedit $MYGVIMRC<CR>
 
-" Shortcut to rapidly toggle `set list`
+" line endings and tabs
 set list
-nmap <leader>l :set list!<CR>
 
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
+
+" Turn off highlighting
+nmap <SPACE><ESC> :noh<CR>

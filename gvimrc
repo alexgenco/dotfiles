@@ -1,8 +1,9 @@
 "colorscheme molokai
-colorscheme madeofcode
-"set background=dark
-"colorscheme solarized
-set guifont=Courier_New:h16
+"colorscheme madeofcode
+set background=dark
+let g:solarized_visibility="low"
+colorscheme solarized
+set guifont=Courier_New:h18
 
 set cursorline
 
