@@ -17,9 +17,15 @@ set incsearch
 set linebreak
 set hlsearch
 cnoreabbrev W w
+set scrolloff=3
+set autoread
+set tabpagemax=50
+
 
 if !has('gui_running')
   colorscheme desert
+else
+  source ~/.gvimrc
 endif
 
 " indentation
@@ -59,7 +65,7 @@ let g:ctrlp_prompt_mappings = {
 "let g:Powerline_symbols = 'fancy'
 
 " ack
-nmap <C-f> :Ack! ''<left>
+nmap <D-f> :Ack! ''<left>
 nmap f<C-w> :Ack!<CR>
 
 nmap f<C-d> :call AckPrefix("def ")<CR>
@@ -80,13 +86,11 @@ nmap <silent> <Leader>b :call RunRubyCurrentFileConque()<CR>
 nmap <silent> <Leader>c :call RunCucumberCurrentFileConque()<CR>
 nmap <silent> <Leader>C :call RunCucumberCurrentLineConque()<CR>
 nmap <silent> <Leader>k :call RunRakeConque()<CR>
-nmap <silent> <Leader>. :call RunLastConqueCommand()<CR>
+nmap <silent> <Leader>, :call RunLastConqueCommand()<CR>
 
 " my stuff
 
-set scrolloff=6
 map Y y$
-set autoread
 
 " replace double quotes with single, vice versa
 nmap '' V:s:":':g<CR>:noh<CR><ESC>
@@ -100,21 +104,26 @@ nmap <C-o> o<ESC>S<ESC>
 nmap D d$
 
 " switch tabs
+"nmap fj :tabp<CR>
+nmap <D-j> :tabp<CR>
 nmap fj :tabp<CR>
+"nmap fk :tabn<CR>
+nmap <D-k> :tabn<CR>
 nmap fk :tabn<CR>
 
 " inline do ... end
-vmap in J V:s/do/{<CR> V:s/end/}<CR>
+vmap in J V:s/\s\+do\s\+/ { <CR> V:s/\s\+end\s*/ }<CR>:noh<CR>
 
 " source vimrc on save
 "if has("autocmd")
 "  autocmd bufwritepost .vimrc source $MYVIMRC
 "endif
 
-" shortcut to edit .vimrc
+" shortcut to edit/source .vimrc
 let mapleader='\'
 nmap <Leader>v :tabedit $MYVIMRC<CR>
 nmap <Leader>g :tabedit $MYGVIMRC<CR>
+nmap <Leader>s :source $MYVIMRC<CR>
 
 " line endings and tabs
 set list
@@ -124,3 +133,6 @@ set listchars=tab:▸\ ,eol:¬
 
 " Turn off highlighting
 nmap <SPACE><ESC> :noh<CR>
+
+" VimClojure
+"let g:vimclojure#ParenRainbow = 1 "pretty rainbows lolol

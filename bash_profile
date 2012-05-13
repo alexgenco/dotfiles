@@ -13,11 +13,16 @@ else
   PS1='\[\033[33;1m\]\W\[\033[m\] \[\033[1;34m\]\$\[\033[m\] '
 fi
 
+PS1="\[\033[G\]$PS1"
+
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 
 export EDITOR=vim
-export PATH=~/bin:/usr/local/lib:/usr/local/mysql/lib:/opt/local/bin:/opt/local/bin:/opt/local/sbin:$HOME/.rvm/scripts/rvm:.:$PATH
+export PATH=~/bin:/usr/local/bin:/usr/bin:/usr/local/lib:/usr/local/mysql/lib:/opt/local/bin:/opt/local/sbin:$HOME/.rvm/scripts/rvm:.:$PATH
 export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
 
 export HISTCONTROL=ignoredups
+
+# for access to clojure-contrib library
+export CLASSPATH=$CLASSPATH:/usr/local/Cellar/clojure-contrib/1.2.0

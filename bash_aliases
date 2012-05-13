@@ -12,8 +12,12 @@ fi
 
 if [ -d ~/dev/castle ]; then
   alias cas='cd ~/dev/castle'
+  alias cons='cd ~/dev/castle && rails c'
 fi
 
 if [ -f /usr/local/Cellar/clisp/2.49/bin/clisp ]; then
   alias clisp='/usr/local/Cellar/clisp/2.49/bin/clisp'
 fi
+
+alias startpg='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+alias stoppg='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
