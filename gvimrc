@@ -7,11 +7,15 @@
 
 "colorscheme ir_black
 
-colorscheme twilight
+"colorscheme twilight
+
+colorscheme desert
+set nolist
 
 "colorscheme jellybeans
 
 "set background=dark
+"set background=light
 "let g:solarized_visibility="low"
 "colorscheme solarized
 
