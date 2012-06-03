@@ -5,12 +5,16 @@
 
 "colorscheme wombat
 
-"colorscheme ir_black
+colorscheme ir_black
 
 "colorscheme twilight
 
-colorscheme desert
-set nolist
+"colorscheme desert
+"set nolist
+
+"set background=dark
+"colorscheme macvim
+"set nolist
 
 "colorscheme jellybeans
 

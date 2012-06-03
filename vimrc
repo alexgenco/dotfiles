@@ -21,7 +21,6 @@ set scrolloff=3
 set autoread
 set tabpagemax=50
 
-
 if !has('gui_running')
   colorscheme desert
 else
@@ -136,3 +135,6 @@ nmap <SPACE><ESC> :noh<CR>
 
 " VimClojure
 "let g:vimclojure#ParenRainbow = 1 "pretty rainbows lolol
+
+" RABL syntax highlighting
+au! BufNewFile,BufRead *.rabl setf ruby
