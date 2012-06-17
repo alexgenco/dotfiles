@@ -5,12 +5,19 @@
 
 "colorscheme wombat
 
-colorscheme ir_black
+"colorscheme ir_black
+
+"colorscheme inkpot
 
 "colorscheme twilight
 
 "colorscheme desert
 "set nolist
+
+"colorscheme slate
+"set nolist
+
+"colorscheme railscasts
 
 "set background=dark
 "colorscheme macvim
@@ -18,12 +25,12 @@ colorscheme ir_black
 
 "colorscheme jellybeans
 
-"set background=dark
+set background=dark
 "set background=light
-"let g:solarized_visibility="low"
-"colorscheme solarized
+let g:solarized_visibility="low"
+colorscheme solarized
 
-set guifont=Courier_New:h18
+set guifont=Courier:h16
 set cursorline
 set tabpagemax=50
 

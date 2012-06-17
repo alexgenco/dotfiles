@@ -20,6 +20,7 @@ cnoreabbrev W w
 set scrolloff=3
 set autoread
 set tabpagemax=50
+set binary " prevent automatically adding newlines to end of file
 
 if !has('gui_running')
   colorscheme desert
@@ -49,12 +50,15 @@ set nowb
 "set undodir=$HOME/.vim/undo
 
 " ctrlp
+set wildignore+=*/.git/*,*/tmp/*,*/*.orig
 let g:ctrlp_map = '<D-t>'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_open_new_file = 't'
 let g:ctrlp_by_filename = 0
 let g:ctrlp_max_height = 30
+let g:ctrlp_dotfiles = 0
+let g:ctrlp_mruf_last_entered = 1
 let g:ctrlp_prompt_mappings = {
       \ 'AcceptSelection("e")': ['<s-cr>'],
       \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
@@ -138,3 +142,11 @@ nmap <SPACE><ESC> :noh<CR>
 
 " RABL syntax highlighting
 au! BufNewFile,BufRead *.rabl setf ruby
+
+" open git blame in new buffer
+let mapleader='\'
+nmap <Leader>gb :call GitBlame()<CR>
+function! GitBlame()
+  let file = expand('%:p')
+  exec ":tabnew | r !git --no-pager blame ".file
+endfunction
