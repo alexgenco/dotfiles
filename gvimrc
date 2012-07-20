@@ -25,17 +25,24 @@
 
 "colorscheme jellybeans
 
+"set background=dark
+"set list
+""set background=light
+"let g:solarized_visibility="low"
+"colorscheme solarized
+
 set background=dark
-"set background=light
-let g:solarized_visibility="low"
-colorscheme solarized
+set list
+colorscheme Tomorrow-Night
 
 set guifont=Courier:h16
 set cursorline
-set tabpagemax=50
 
-" for mapping ctrlp to CMD-t
+" for mapping peepopen to CMD-t
 macmenu &File.New\ Tab key=<D-S-t>
 
 " for mapping ack to CMD-f
 macmenu &Edit.Find.Find\.\.\. key=<D-S-t>
+
+" horizontal scroll bar
+"set guioptions+=b

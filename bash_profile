@@ -21,6 +21,9 @@ export PATH=~/bin:/usr/local/bin:/usr/bin:/usr/local/lib:/usr/local/mysql/lib:/o
 export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
 
 export HISTCONTROL=ignoredups
+export HISTFILESIZE=3000
 
 # for access to clojure-contrib library
 #export CLASSPATH=$CLASSPATH:/usr/local/Cellar/clojure-contrib/1.2.0
+
+export GOTO_HOME=/Users/agenco/.goto && source $GOTO_HOME/goto.sh
