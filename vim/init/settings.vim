@@ -11,7 +11,6 @@ set encoding=utf-8
 
 " line numbers
 set number
-set numberwidth=5
 
 " no swap files
 set noswapfile
