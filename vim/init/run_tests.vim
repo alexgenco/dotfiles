@@ -6,7 +6,7 @@ function! RunTestTool(tool_cmd)
   let applescript .= "\n"
   let applescript .= 'activate'
   let applescript .= "\n"
-  let applescript .= 'do script "'.a:tool_cmd.'" in last window'
+  let applescript .= 'do script "'.a:tool_cmd.'" in first window'
   let applescript .= "\n"
   let applescript .= 'end tell'."'"
   let foo = system(applescript)
