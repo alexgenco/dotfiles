@@ -26,4 +26,11 @@ export HISTFILESIZE=3000
 # for access to clojure-contrib library
 #export CLASSPATH=$CLASSPATH:/usr/local/Cellar/clojure-contrib/1.2.0
 
+# better history
+export HISTCONTROL=erasedups
+export HISTSIZE=10000
+export HISTTIMEFORMAT="%D %T "
+export HISTIGNORE="&:ls:exit"
+shopt -s histappend
+
 export GOTO_HOME=/Users/agenco/.goto && source $GOTO_HOME/goto.sh
