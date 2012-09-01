@@ -32,6 +32,7 @@ set ignorecase
 set smartcase
 set incsearch
 set hlsearch
+highlight Search guibg=black guifg=yellow gui=underline
 
 " line endings
 set nolist
@@ -75,8 +76,13 @@ autocmd GUIEnter * set visualbell t_vb=
 set title
 
 " turn off swp files
-set nobackup
-set nowb
+"set nobackup
+"set nowb
+
+" store temporary files in a central spot
+set backup
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " ignore filetypes
 set wildignore+=*/.git/*,*/tmp/*,*/*.orig
@@ -90,10 +96,14 @@ set nofoldenable
 
 " use relative line numbers
 "if exists("&relativenumber")
-"  set relativenumber
-"  au BufReadPost * set relativenumber
+  "set relativenumber
+  "au BufReadPost * set relativenumber
 "endif
 
+map <Left> <Nop>
+map <Right> <Nop>
+map <Up> <Nop>
+map <Down> <Nop>
 
 """""""""""""
 " Keybindings
@@ -137,7 +147,9 @@ nnoremap <C-h> 3zh
 nnoremap <tab> %
 
 " PeepOpen
-nnoremap <D-t> :PeepOpen<CR>
+if has('gui_running')
+  nnoremap <D-t> :PeepOpen<CR>
+end
 
 " powerline
 "let g:Powerline_symbols = 'fancy'
@@ -157,10 +169,10 @@ endfunction
 " ack current word
 nnoremap <Leader>ff :Ack!<CR>
 
-" ack def of current word
-nnoremap <Leader>fd :call AckPrefix("def ")<CR>
+" ack def of current word (Ruby)
+nnoremap <Leader>fd :call AckPrefix("def (self\.)*")<CR>
 
-" ack class definition of current word
+" ack class definition of current word (Ruby)
 nnoremap <Leader>fc :call AckPrefix("class ")<CR>
 
 " make Y go to end of line
@@ -188,23 +200,24 @@ noremap <Leader>tp :call vimclojure#ToggleParenRainbow()<CR>
 " open git blame in new buffer
 nnoremap <Leader>gb :GitBlame<CR>
 
-map <leader>r :wa<CR>:RunTest<CR>
-map <leader>R :wa<CR>:RunFocusedTest<CR>
+" run tests
+if has('gui_running')
+  let g:vroom_map_keys = 0
+  map <leader>r :wa<CR>:RunTest<CR>
+  map <leader>R :wa<CR>:RunFocusedTest<CR>
+else
+  let g:vroom_write_all = 1
+  let g:vroom_detect_spec_helper = 1
 
-" splits
-nnoremap <Leader>sV :vsplit<CR>
-nnoremap <Leader>sH :split<CR>
-nnoremap <Leader>sh <C-W><left>
-nnoremap <Leader>sl <C-W><right>
-nnoremap <Leader>sj <C-W><down>
-nnoremap <Leader>sk <C-W><up>
-nnoremap <Leader>ss <C-W>w
+  map <leader>r :VroomRunTestFile<CR>
+  map <leader>R :VroomRunNearestTest<CR>
+endif
 
 " strip trailing whitespace
 nnoremap <Leader>SS :%s/\s\+$//e<CR> :noh<CR>
 
 " use jj to exit insert mode
-"inoremap jj <ESC>
+inoremap jj <ESC>
 
 
 """""""""""
@@ -214,15 +227,20 @@ nnoremap <Leader>SS :%s/\s\+$//e<CR> :noh<CR>
 " open git blame in new buffer
 command! GitBlame :call GitBlame()
 function! GitBlame()
-  let file = expand('%:p')
-  exec ":tabnew | r !git --no-pager blame ".file
+  let line = line(".")
+  tabnew
+  r!git --no-pager blame #
+  set buftype=nofile
+  set bufhidden=hide
+  g/^$/d
+  exec ":".line
 endfunction
 
 " Run a test tool with the current file and line number
 " The test tool is run in the last Terminal window
 function! RunTestTool(tool_cmd)
   let dir = system('pwd')
-  let applescript = "osascript -e '".'tell application "Terminal"'
+  let applescript = "osascript -e '".'tell application "iTerm"'
   let applescript .= "\n"
   let applescript .= 'activate'
   let applescript .= "\n"
@@ -302,6 +320,7 @@ syn match   htmlArg contained "\s*data-[-a-zA-Z0-9_]\+"
 " Colorscheme
 """""""""""""
 
+set background=dark
 if has('gui_running')
   "set nolist
   "colorscheme molokai
@@ -313,12 +332,12 @@ if has('gui_running')
   "set nolist
   "colorscheme desert
 
-  set background=dark
   let g:solarized_visibility="low"
   colorscheme solarized
 
-  "set background=dark
   "colorscheme Tomorrow-Night
 else
-  colorscheme desert
+  "colorscheme desert
+  set t_Co=256
+  colorscheme ir_black
 endif

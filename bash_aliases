@@ -23,3 +23,9 @@ alias startpg='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/serv
 alias stoppg='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 
 alias be='bundle exec'
+
+alias dev='git checkout godfather_dev'
+alias staging='git checkout godfather_staging'
+alias production='git checkout godfather_production'
+
+alias c='cat ~/.cci'
