@@ -33,7 +33,7 @@ set noswapfile
 
 " persistent undo
 set undofile
-set undodir=~/.vim-undo
+set undodir=~/.vim/undo
 
 " search
 set ignorecase
