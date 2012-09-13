@@ -1,6 +1,8 @@
 dot files yall
 
 
-        $ git clone --recursive git@github.com:alexgenco/dotfiles.git
+        $ git clone git@github.com:alexgenco/dotfiles.git
         $ cd dotfiles
-        $ ./setup.sh # and pray...
+        $ git submodule init && git submodule update
+
+ln -s that shit
