@@ -142,8 +142,8 @@ nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
 " vertical split
-nnoremap <Leader>s :vsplit<CR><c-w>l
-nnoremap <Leader>hs :split<CR><c-w>j
+nnoremap <Leader>ss :vsplit<CR><c-w>l
+nnoremap <Leader>sh :split<CR><c-w>j
 
 " omnicomplete
 "inoremap <S-Tab> <C-x><C-o>
