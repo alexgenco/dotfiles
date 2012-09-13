@@ -7,18 +7,15 @@
 [submodule "vim/bundle/ctrlp.vim"]
 	path = vim/bundle/ctrlp.vim
 	url = https://github.com/kien/ctrlp.vim.git
-[submodule "vim/bundle/vim-molokai"]
-	path = vim/bundle/vim-molokai
-	url = https://github.com/cschlueter/vim-molokai.git
 [submodule "vim/bundle/molokai"]
 	path = vim/bundle/molokai
 	url = https://github.com/tomasr/molokai.git
 [submodule "vim/bundle/vim-colors-solarized"]
 	path = vim/bundle/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
-[submodule "vim/bundle/vim-powerline"]
-	path = vim/bundle/vim-powerline
-	url = https://github.com/Lokaltog/vim-powerline.git
-[submodule "oh-my-zsh"]
-	path = oh-my-zsh
-	url = git@github.com:alexgenco/oh-my-zsh.git
+[submodule "vim/bundle/vim-surround"]
+	path = vim/bundle/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "vim/bundle/vim-vroom"]
+	path = vim/bundle/vim-vroom
+	url = https://github.com/skalnik/vim-vroom.git

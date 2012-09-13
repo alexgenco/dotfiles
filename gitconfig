@@ -1,6 +1,6 @@
 [user]
-  email = agenco@kabam.com
-  name = Alex Genco
+	email = alexgeno@gmail.com
+	name = Alex Genco
 [alias]
   st = status
   co = checkout
@@ -9,5 +9,10 @@
 	b = branch
 	cp = cherry-pick
 	prb = pull --rebase
+  last = log -n1
+	la = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+  l = "!source ~/.githelpers && pretty_git_log"
 [color]
 	ui = true
+[github]
+	user = alexgenco

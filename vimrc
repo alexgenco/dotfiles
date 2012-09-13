@@ -17,6 +17,7 @@ set nocompatible
 
 " always show the statusline
 set laststatus=2
+set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
 " necessary to show unicode glyphs
 set encoding=utf-8
@@ -26,6 +27,13 @@ set number
 
 " no swap files
 set noswapfile
+
+" mouses
+"set mouse=a
+
+" persistent undo
+set undofile
+set undodir=~/.vim-undo
 
 " search
 set ignorecase
@@ -51,6 +59,9 @@ set tabpagemax=100
 
 " prevent automatically adding newlines to end of file
 set binary
+
+" fast scrolling
+set ttyfast
 
 " tab completion
 set ofu=syntaxcomplete#Complete
@@ -100,11 +111,6 @@ set nofoldenable
   "au BufReadPost * set relativenumber
 "endif
 
-map <Left> <Nop>
-map <Right> <Nop>
-map <Up> <Nop>
-map <Down> <Nop>
-
 """""""""""""
 " Keybindings
 """""""""""""
@@ -129,6 +135,16 @@ function! CleverTab()
 endfunction
 inoremap <Tab> <C-R>=CleverTab()<CR>
 
+" move around splits with <c-hjkl>
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+" vertical split
+nnoremap <Leader>s :vsplit<CR><c-w>l
+nnoremap <Leader>hs :split<CR><c-w>j
+
 " omnicomplete
 "inoremap <S-Tab> <C-x><C-o>
 
@@ -140,22 +156,32 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
 " horizontal scroll
-nnoremap <C-l> 3zl
-nnoremap <C-h> 3zh
+"nnoremap <M-h> 3zl
+"nnoremap <M-l> 3zh
 
 " <tab> to jump to matching character
 nnoremap <tab> %
 
 " PeepOpen
 if has('gui_running')
+  let g:loaded_ctrlp = 0
   nnoremap <D-t> :PeepOpen<CR>
 end
+
+" ctrlp
+let g:ctrlp_working_path_mode = ''
+let g:ctrlp_by_filename = 1
+let g:ctrlp_max_height = 40
 
 " powerline
 "let g:Powerline_symbols = 'fancy'
 
 " custom ack
-nnoremap <D-f> :Ack! ''<left>
+if has("gui_running")
+  nnoremap <D-f> :Ack! ''<left>
+else
+  nnoremap <Leader>a :Ack! ''<left>
+end
 
 " ack something with a prefix (used below)
 function! AckPrefix(pref)
@@ -181,13 +207,16 @@ nnoremap Y y$
 " inline do ... end
 vnoremap in J V:s/\s\+do\s\+/ { <CR> V:s/\s\+end\s*/ }<CR>:noh<CR>
 
+" copy to system clipboard
+vnoremap <leader>c "*y
+
 " shortcut to edit .vimrc/.gvimrc
 nnoremap <Leader>vv :tabedit $MYVIMRC<CR>
 nnoremap <Leader>vg :tabedit $MYGVIMRC<CR>
 if has('gui_running')
-  nnoremap <Leader>vs :source $MYVIMRC<CR>:source $MYGVIMRC<CR>
+  nnoremap <Leader>vs :source $MYVIMRC<CR>:source $MYGVIMRC<CR>:noh<CR>
 else
-  nnoremap <Leader>vs :source $MYVIMRC<CR>
+  nnoremap <Leader>vs :source $MYVIMRC<CR>:noh<CR>
 endif
 
 " turn off highlighting
@@ -197,9 +226,6 @@ nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>""
 "let g:vimclojure#ParenRainbow = 1
 noremap <Leader>tp :call vimclojure#ToggleParenRainbow()<CR>
 
-" open git blame in new buffer
-nnoremap <Leader>gb :GitBlame<CR>
-
 " run tests
 if has('gui_running')
   let g:vroom_map_keys = 0
@@ -208,6 +234,7 @@ if has('gui_running')
 else
   let g:vroom_write_all = 1
   let g:vroom_detect_spec_helper = 1
+  let g:vroom_clear_screen = 1
 
   map <leader>r :VroomRunTestFile<CR>
   map <leader>R :VroomRunNearestTest<CR>
@@ -217,12 +244,32 @@ endif
 nnoremap <Leader>SS :%s/\s\+$//e<CR> :noh<CR>
 
 " use jj to exit insert mode
-inoremap jj <ESC>
+"inoremap jj <ESC>
+
+" switch to last buffer
+nnoremap <leader>m <c-^>
+
+" send to background
+nnoremap <leader>Z <c-z>
+
+" check shell
+nnoremap <leader>z :!<cr>
 
 
 """""""""""
 " Functions
 """""""""""
+
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
+map <leader>n :call RenameFile()<cr>
 
 " open git blame in new buffer
 command! GitBlame :call GitBlame()
@@ -235,12 +282,13 @@ function! GitBlame()
   g/^$/d
   exec ":".line
 endfunction
+nnoremap <Leader>gb :GitBlame<CR>
 
 " Run a test tool with the current file and line number
 " The test tool is run in the last Terminal window
 function! RunTestTool(tool_cmd)
   let dir = system('pwd')
-  let applescript = "osascript -e '".'tell application "iTerm"'
+  let applescript = "osascript -e '".'tell application "Terminal"'
   let applescript .= "\n"
   let applescript .= 'activate'
   let applescript .= "\n"
@@ -321,6 +369,7 @@ syn match   htmlArg contained "\s*data-[-a-zA-Z0-9_]\+"
 """""""""""""
 
 set background=dark
+set nocursorline
 if has('gui_running')
   "set nolist
   "colorscheme molokai
@@ -337,7 +386,10 @@ if has('gui_running')
 
   "colorscheme Tomorrow-Night
 else
-  "colorscheme desert
   set t_Co=256
+  "colorscheme desert
   colorscheme ir_black
+
+  "let g:solarized_termcolors = 256
+  "colorscheme solarized
 endif

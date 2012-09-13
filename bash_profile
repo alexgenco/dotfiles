@@ -34,3 +34,5 @@ export HISTIGNORE="&:ls:exit"
 shopt -s histappend
 
 export GOTO_HOME=/Users/agenco/.goto && source $GOTO_HOME/goto.sh
+
+source /usr/local/etc/bash_completion.d/password-store

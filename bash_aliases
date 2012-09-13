@@ -24,8 +24,11 @@ alias stoppg='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 
 alias be='bundle exec'
 
-alias dev='git checkout godfather_dev'
-alias staging='git checkout godfather_staging'
-alias production='git checkout godfather_production'
+alias ogre='git checkout ogre'
+alias dev='git checkout godfather_dev; git pull'
+alias staging='git checkout godfather_staging; git pull'
+alias production='git checkout godfather_production; git pull'
 
 alias c='cat ~/.cci'
+
+alias ssbs='open vnc://GFBuildServer.local'
