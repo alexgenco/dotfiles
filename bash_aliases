@@ -32,3 +32,7 @@ alias production='git checkout godfather_production; git pull'
 alias c='cat ~/.cci'
 
 alias ssbs='open vnc://GFBuildServer.local'
+
+if [ -d /Applications/dungeonosx ]; then
+  alias zork='cd /Applications/dungeonosx; dungeon'
+fi

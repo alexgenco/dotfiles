@@ -19,3 +19,6 @@
 [submodule "vim/bundle/vim-vroom"]
 	path = vim/bundle/vim-vroom
 	url = https://github.com/skalnik/vim-vroom.git
+[submodule "vim/bundle/scratch.vim"]
+	path = vim/bundle/scratch.vim
+	url = git@github.com:alexgenco/scratch.vim.git

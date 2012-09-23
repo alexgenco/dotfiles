@@ -65,9 +65,10 @@ set ttyfast
 
 " tab completion
 set ofu=syntaxcomplete#Complete
-set wildmode=list:longest
+set wildmode=longest,list
 set complete=.,b,u,]
 set completeopt=preview
+set wildmenu
 
 " indentation
 set autoindent
@@ -143,7 +144,12 @@ nnoremap <c-l> <c-w>l
 
 " vertical split
 nnoremap <Leader>ss :vsplit<CR><c-w>l
+
+" horizontal split
 nnoremap <Leader>sh :split<CR><c-w>j
+
+" resize splits
+nnoremap <Leader>s= <c-w>=
 
 " omnicomplete
 "inoremap <S-Tab> <C-x><C-o>
@@ -161,6 +167,9 @@ nnoremap <C-y> 3<C-y>
 
 " <tab> to jump to matching character
 nnoremap <tab> %
+
+" scratch buffer in new split
+nnoremap <leader>sk :Sscratch<CR>
 
 " PeepOpen
 if has('gui_running')
@@ -209,6 +218,7 @@ vnoremap in J V:s/\s\+do\s\+/ { <CR> V:s/\s\+end\s*/ }<CR>:noh<CR>
 
 " copy to system clipboard
 vnoremap <leader>c "*y
+vnoremap <leader>x "*d
 
 " shortcut to edit .vimrc/.gvimrc
 nnoremap <Leader>vv :tabedit $MYVIMRC<CR>
@@ -224,7 +234,7 @@ nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>""
 
 " paren rainbow
 "let g:vimclojure#ParenRainbow = 1
-noremap <Leader>tp :call vimclojure#ToggleParenRainbow()<CR>
+"noremap <Leader>tp :call vimclojure#ToggleParenRainbow()<CR>
 
 " run tests
 if has('gui_running')
@@ -342,6 +352,10 @@ endfunction
 
 " RABL syntax highlighting
 au! BufNewFile,BufRead *.rabl setf ruby
+
+" clojure syntax highlighting
+let g:clj_highlight_builtins=1
+au BufRead,BufNewFile *.clj setf clojure
 
 " html5 syntax highlighting
 "
