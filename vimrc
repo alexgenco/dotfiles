@@ -151,6 +151,9 @@ nnoremap <Leader>sh :split<CR><c-w>j
 " resize splits
 nnoremap <Leader>s= <c-w>=
 
+" rotate splits
+nnoremap <Leader>sr <c-w>r
+
 " omnicomplete
 "inoremap <S-Tab> <C-x><C-o>
 
@@ -260,7 +263,7 @@ nnoremap <Leader>SS :%s/\s\+$//e<CR> :noh<CR>
 nnoremap <leader>m <c-^>
 
 " send to background
-nnoremap <leader>Z <c-z>
+"nnoremap <leader>Z <c-z>
 
 " check shell
 nnoremap <leader>z :!<cr>
@@ -401,8 +404,7 @@ if has('gui_running')
   "colorscheme Tomorrow-Night
 else
   set t_Co=256
-  "colorscheme desert
-  colorscheme ir_black
+  colorscheme molokai
 
   "let g:solarized_termcolors = 256
   "colorscheme solarized

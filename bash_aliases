@@ -24,10 +24,21 @@ alias stoppg='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 
 alias be='bundle exec'
 
-alias ogre='git checkout ogre'
-alias dev='git checkout godfather_dev; git pull'
-alias staging='git checkout godfather_staging; git pull'
-alias production='git checkout godfather_production; git pull'
+function checkout_and_pull_if_needed {
+  local branch=$1
+  local changed=0
+
+  git checkout $branch
+
+  [[ `git log $branch..origin/$branch` ]] && changed=1
+
+  [[ $changed == 1 ]] && git pull origin $branch
+}
+
+alias ogre='checkout_and_pull_if_needed ogre'
+alias dev='checkout_and_pull_if_needed godfather_dev'
+alias stage='checkout_and_pull_if_needed godfather_staging'
+alias prod='checkout_and_pull_if_needed godfather_production'
 
 alias c='cat ~/.cci'
 
@@ -36,3 +47,17 @@ alias ssbs='open vnc://GFBuildServer.local'
 if [ -d /Applications/dungeonosx ]; then
   alias zork='cd /Applications/dungeonosx; dungeon'
 fi
+
+function enable_rvm {
+  [[ -s "/Users/agenco/.rvm/scripts/rvm" ]] && source "/Users/agenco/.rvm/scripts/rvm"
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+}
+alias ervm=enable_rvm
+
+function enable_rbenv {
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+}
+alias erbenv=enable_rbenv
+
+alias got='git'
