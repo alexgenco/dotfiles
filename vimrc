@@ -107,6 +107,8 @@ au BufReadPost * set expandtab
 set foldmethod=indent
 set nofoldenable
 
+set cursorline
+
 " use relative line numbers
 "if exists("&relativenumber")
   "set relativenumber
@@ -387,7 +389,6 @@ syn match   htmlArg contained "\s*data-[-a-zA-Z0-9_]\+"
 """""""""""""
 
 set background=dark
-set nocursorline
 if has('gui_running')
   "set nolist
   "colorscheme molokai
@@ -405,8 +406,7 @@ if has('gui_running')
   "colorscheme Tomorrow-Night
 else
   set t_Co=256
-  colorscheme molokai
 
-  "let g:solarized_termcolors = 256
-  "colorscheme solarized
+  let g:solarized_termcolors = 256
+  colorscheme solarized
 endif
