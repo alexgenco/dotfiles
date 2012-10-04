@@ -45,7 +45,8 @@ highlight Search guibg=black guifg=yellow gui=underline
 " line endings
 set nolist
 set listchars=tab:▸\ ,eol:¬,trail:·
-set nowrap
+set wrap
+set linebreak
 
 " more context while scrolling
 set scrolloff=3

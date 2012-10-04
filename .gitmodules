@@ -15,7 +15,7 @@
 	url = https://github.com/tpope/vim-surround.git
 [submodule "vim/bundle/vim-vroom"]
 	path = vim/bundle/vim-vroom
-	url = https://github.com/skalnik/vim-vroom.git
+	url = https://github.com/alexgenco/vim-vroom.git
 [submodule "vim/bundle/scratch.vim"]
 	path = vim/bundle/scratch.vim
 	url = git@github.com:alexgenco/scratch.vim.git
