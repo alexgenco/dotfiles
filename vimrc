@@ -6,6 +6,21 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
 
+"""""""""""""
+" Colorscheme
+"""""""""""""
+
+set background=dark
+let g:solarized_visibility = "low"
+let g:solarized_termcolors = 256
+let g:solarized_underline  = 1
+
+if !has('gui_running')
+  set t_Co=256
+endif
+colorscheme solarized
+
+
 """"""""""
 " Settings
 """"""""""
@@ -40,7 +55,8 @@ set ignorecase
 set smartcase
 set incsearch
 set hlsearch
-highlight Search guibg=black guifg=yellow gui=underline
+highlight! Search cterm=underline
+highlight! IncSearch cterm=underline
 
 " line endings
 set nolist
@@ -107,7 +123,7 @@ au BufReadPost * set expandtab
 set foldmethod=indent
 set nofoldenable
 
-set cursorline
+set nocursorline
 
 " use relative line numbers
 "if exists("&relativenumber")
@@ -225,6 +241,9 @@ vnoremap in J V:s/\s\+do\s\+/ { <CR> V:s/\s\+end\s*/ }<CR>:noh<CR>
 " copy to system clipboard
 vnoremap <leader>c "*y
 vnoremap <leader>x "*d
+
+" comment out selection
+vnoremap <silent> <leader>/ :s/\(^\s*\<\)/\1# /g<CR>:noh<CR>
 
 " shortcut to edit .vimrc/.gvimrc
 nnoremap <Leader>vv :tabedit $MYVIMRC<CR>
@@ -382,31 +401,3 @@ syn keyword htmlArg contained sizes scoped async reversed sandbox srcdoc
 syn keyword htmlArg contained hidden role
 syn match   htmlArg "\<\(aria-[\-a-zA-Z0-9_]\+\)=" contained
 syn match   htmlArg contained "\s*data-[-a-zA-Z0-9_]\+"
-
-
-"""""""""""""
-" Colorscheme
-"""""""""""""
-
-set background=dark
-if has('gui_running')
-  "set nolist
-  "colorscheme molokai
-
-  "colorscheme madeofcode
-
-  "colorscheme ir_black
-
-  "set nolist
-  "colorscheme desert
-
-  let g:solarized_visibility="low"
-  colorscheme solarized
-
-  "colorscheme Tomorrow-Night
-else
-  set t_Co=256
-
-  let g:solarized_termcolors = 256
-  colorscheme solarized
-endif
