@@ -243,7 +243,7 @@ vnoremap <leader>c "*y
 vnoremap <leader>x "*d
 
 " comment out selection
-vnoremap <silent> <leader>/ :s/\(^\s*\<\)/\1# /g<CR>:noh<CR>
+vnoremap <silent> <leader>/ :s/^/#/g<CR>:noh<CR>
 
 " shortcut to edit .vimrc/.gvimrc
 nnoremap <Leader>vv :tabedit $MYVIMRC<CR>
