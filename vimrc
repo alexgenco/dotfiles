@@ -79,6 +79,7 @@ set binary
 
 " fast scrolling
 set ttyfast
+set scrolljump=8
 
 " tab completion
 set ofu=syntaxcomplete#Complete
@@ -131,6 +132,13 @@ set nocursorline
   "au BufReadPost * set relativenumber
 "endif
 
+" neocomplcache completion
+let g:neocomplcache_enable_at_startup = 1
+
+" tagbar
+nnoremap <leader>` :TagbarToggle<cr>
+
+
 """""""""""""
 " Keybindings
 """""""""""""
@@ -140,6 +148,9 @@ let mapleader = ","
 
 " because I always mess this up
 command! W w
+
+" stop doing this
+nnoremap K k
 
 " tab movement
 nnoremap <D-j> :tabp<CR>
@@ -242,8 +253,8 @@ vnoremap in J V:s/\s\+do\s\+/ { <CR> V:s/\s\+end\s*/ }<CR>:noh<CR>
 vnoremap <leader>c "*y
 vnoremap <leader>x "*d
 
-" comment out selection
-vnoremap <silent> <leader>/ :s/^/#/g<CR>:noh<CR>
+" comments
+vnoremap <leader># :s/^/#/g<CR>:noh<CR>
 
 " shortcut to edit .vimrc/.gvimrc
 nnoremap <Leader>vv :tabedit $MYVIMRC<CR>
