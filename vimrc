@@ -79,7 +79,7 @@ set binary
 
 " fast scrolling
 set ttyfast
-set scrolljump=8
+set scrolljump=5
 
 " tab completion
 set ofu=syntaxcomplete#Complete
@@ -132,9 +132,6 @@ set nocursorline
   "au BufReadPost * set relativenumber
 "endif
 
-" neocomplcache completion
-let g:neocomplcache_enable_at_startup = 1
-
 " tagbar
 nnoremap <leader>` :TagbarToggle<cr>
 
@@ -151,6 +148,10 @@ command! W w
 
 " stop doing this
 nnoremap K k
+
+" save with one hand while sippin brews
+" with the other
+nnoremap <leader><leader> :w<cr>
 
 " tab movement
 nnoremap <D-j> :tabp<CR>
@@ -191,8 +192,8 @@ nnoremap <Leader>sr <c-w>r
 "nnoremap ; :
 
 " scroll viewport faster
-nnoremap <C-e> 3<C-e>
-nnoremap <C-y> 3<C-y>
+"nnoremap <C-e> 3<C-e>
+"nnoremap <C-y> 3<C-y>
 
 " horizontal scroll
 "nnoremap <M-h> 3zl
@@ -301,6 +302,8 @@ nnoremap <leader>m <c-^>
 " check shell
 nnoremap <leader>z :!<cr>
 
+" visual select last put
+nnoremap <leader>V `[v`]
 
 """""""""""
 " Functions

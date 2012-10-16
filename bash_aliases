@@ -61,3 +61,6 @@ function enable_rbenv {
 alias erbenv=enable_rbenv
 
 alias got='git'
+
+alias ta='tmux attach'
+alias sr='screen -r'
