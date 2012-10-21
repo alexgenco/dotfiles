@@ -25,6 +25,13 @@ colorscheme solarized
 " Settings
 """"""""""
 
+" use mouse in terminal vim
+set mouse=a
+
+" vertical line for insert mode, block for regular
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
 syntax enable
 filetype plugin indent on
 set backspace=indent,eol,start
@@ -61,7 +68,7 @@ highlight! IncSearch cterm=underline
 " line endings
 set nolist
 set listchars=tab:▸\ ,eol:¬,trail:·
-set wrap
+set nowrap
 set linebreak
 
 " more context while scrolling
@@ -182,6 +189,12 @@ nnoremap <Leader>sh :split<CR><c-w>j
 " resize splits
 nnoremap <Leader>s= <c-w>=
 
+" automatic split resizing
+set winwidth=84
+set winheight=10
+set winminheight=10
+set winheight=999
+
 " rotate splits
 nnoremap <Leader>sr <c-w>r
 
@@ -200,7 +213,7 @@ nnoremap <Leader>sr <c-w>r
 "nnoremap <M-l> 3zh
 
 " <tab> to jump to matching character
-nnoremap <tab> %
+"nnoremap <tab> %
 
 " scratch buffer in new split
 nnoremap <leader>sk :Sscratch<CR>
@@ -274,18 +287,18 @@ nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>""
 "noremap <Leader>tp :call vimclojure#ToggleParenRainbow()<CR>
 
 " run tests
-if has('gui_running')
-  let g:vroom_map_keys = 0
-  map <leader>r :wa<CR>:RunTest<CR>
-  map <leader>R :wa<CR>:RunFocusedTest<CR>
-else
+"if has('gui_running')
+"  let g:vroom_map_keys = 0
+"  map <leader>r :wa<CR>:RunTest<CR>
+"  map <leader>R :wa<CR>:RunFocusedTest<CR>
+"else
   let g:vroom_write_all = 1
   let g:vroom_detect_spec_helper = 1
   let g:vroom_clear_screen = 1
 
   map <leader>r :VroomRunTestFile<CR>
   map <leader>R :VroomRunNearestTest<CR>
-endif
+"endif
 
 " strip trailing whitespace
 nnoremap <Leader>SS :%s/\s\+$//e<CR> :noh<CR>

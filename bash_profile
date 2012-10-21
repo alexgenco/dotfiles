@@ -37,3 +37,7 @@ export GOTO_HOME=/Users/agenco/.goto && source $GOTO_HOME/goto.sh
 source /usr/local/etc/bash_completion.d/password-store
 
 export JAVA_OPTS="-Xms256m -Xmx512m"
+
+if [ -f ~/.secrets ]; then
+  . ~/.secrets
+fi
