@@ -25,9 +25,6 @@ colorscheme solarized
 " Settings
 """"""""""
 
-" use mouse in terminal vim
-set mouse=a
-
 " vertical line for insert mode, block for regular
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
@@ -51,7 +48,7 @@ set number
 set noswapfile
 
 " mouses
-"set mouse=a
+set mouse=a
 
 " persistent undo
 set undofile
@@ -139,9 +136,6 @@ set nocursorline
   "au BufReadPost * set relativenumber
 "endif
 
-" tagbar
-nnoremap <leader>` :TagbarToggle<cr>
-
 
 """""""""""""
 " Keybindings
@@ -150,8 +144,9 @@ nnoremap <leader>` :TagbarToggle<cr>
 " use , as map leader
 let mapleader = ","
 
-" because I always mess this up
+" because I always mess these up
 command! W w
+command! Q q
 
 " stop doing this
 nnoremap K k
@@ -191,9 +186,9 @@ nnoremap <Leader>s= <c-w>=
 
 " automatic split resizing
 set winwidth=84
-set winheight=10
-set winminheight=10
-set winheight=999
+"set winheight=10
+"set winminheight=10
+"set winheight=999
 
 " rotate splits
 nnoremap <Leader>sr <c-w>r
@@ -217,6 +212,12 @@ nnoremap <Leader>sr <c-w>r
 
 " scratch buffer in new split
 nnoremap <leader>sk :Sscratch<CR>
+
+" surround visual selection
+vnoremap <leader>] "sc[<C-R>s]<esc>
+vnoremap <leader>[ "sc[ <C-R>s ]<esc>
+vnoremap <leader>} "sc{<C-R>s}<esc>
+vnoremap <leader>{ "sc{ <C-R>s }<esc>
 
 " PeepOpen
 if has('gui_running')
@@ -274,13 +275,19 @@ vnoremap <leader># :s/^/#/g<CR>:noh<CR>
 nnoremap <Leader>vv :tabedit $MYVIMRC<CR>
 nnoremap <Leader>vg :tabedit $MYGVIMRC<CR>
 if has('gui_running')
-  nnoremap <Leader>vs :source $MYVIMRC<CR>:source $MYGVIMRC<CR>:noh<CR>
+  nnoremap <silent> <Leader>vs :source $MYVIMRC<CR>:source $MYGVIMRC<CR>:nohlsearch<Bar>:echo<CR>""
 else
-  nnoremap <Leader>vs :source $MYVIMRC<CR>:noh<CR>
+  nnoremap <silent> <Leader>vs :source $MYVIMRC<CR>:nohlsearch<Bar>:echo<CR>""
 endif
 
 " turn off highlighting
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>""
+
+" toggle single/double quotes
+nnoremap <silent> <leader>'' V:s/"/'/g<cr>:noh<cr>
+nnoremap <silent> <leader>"" V:s/'/"/g<cr>:noh<cr>
+vnoremap <silent> <leader>' :s/"/'/g<cr>:noh<cr>
+vnoremap <silent> <leader>" :s/'/"/g<cr>:noh<cr>
 
 " paren rainbow
 "let g:vimclojure#ParenRainbow = 1
@@ -298,6 +305,7 @@ nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>""
 
   map <leader>r :VroomRunTestFile<CR>
   map <leader>R :VroomRunNearestTest<CR>
+  map <leader>A :VroomRunTestSuite<CR>
 "endif
 
 " strip trailing whitespace
