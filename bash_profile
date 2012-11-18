@@ -5,10 +5,8 @@ fi
 if [ -e ~/.git-completion ]; then
   source ~/.git-completion
   GIT_PS1_SHOWDIRTYSTATE="true"
-  #PS1='\[\033[33;1m\]\W\[\033[m\]\[\033[1;32m\]$(__git_ps1 "|%s")\[\033[m\]\[\033[1;34m\]\$\[\033[m\] '
   PS1='\[\033[33;1m\]\W\[\033[m\]\[\033[1;32m\]$(__git_ps1 "|%s")\[\033[m\]\[\033[1;34m\]\$\[\033[m\] '
 else
-  #PS1='\[\033[33;1m\]\W\[\033[m\] \[\033[1;34m\]\$\[\033[m\] '
   PS1='\[\033[33;1m\]\W\[\033[m\]\[\033[1;34m\]\$\[\033[m\] '
 fi
 
@@ -16,7 +14,7 @@ export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 
 export EDITOR=vim
-export PATH=~/bin:/usr/local/bin:/usr/bin:/usr/local/lib:/usr/local/mysql/lib:/opt/local/bin:/opt/local/sbin:$HOME/.rvm/scripts/rvm:.:$PATH
+export PATH=~/bin:/usr/local/bin:/usr/bin:/usr/local/lib:/usr/local/mysql/lib:/opt/local/bin:/opt/local/sbin:.:$PATH
 export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
 
 export HISTCONTROL=ignoredups
@@ -38,6 +36,5 @@ source /usr/local/etc/bash_completion.d/password-store
 
 export JAVA_OPTS="-Xms256m -Xmx512m"
 
-if [ -f ~/.secrets ]; then
-  . ~/.secrets
-fi
+[[ -f ~/.secrets ]]    && . ~/.secrets
+[[ -f ~/.man_colors ]] && . ~/.man_colors

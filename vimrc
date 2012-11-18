@@ -22,12 +22,31 @@ colorscheme solarized
 
 
 """"""""""
+" Autocmds
+""""""""""
+
+augroup vimrcEx
+  " Clear all autocmds in the group
+  autocmd!
+
+  " Jump to last cursor position unless it's invalid or in an event handler
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+augroup END
+
+
+""""""""""
 " Settings
 """"""""""
 
-" vertical line for insert mode, block for regular
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" dont clear vim when exiting
+"set t_ti= t_te=
+
+" vertical line for insert mode, horizontal for regular
+"let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+"let &t_EI = "\<Esc>]50;CursorShape=2\x7"
 
 syntax enable
 filetype plugin indent on
@@ -48,7 +67,7 @@ set number
 set noswapfile
 
 " mouses
-set mouse=a
+"set mouse=a
 
 " persistent undo
 set undofile
@@ -63,7 +82,7 @@ highlight! Search cterm=underline
 highlight! IncSearch cterm=underline
 
 " line endings
-set nolist
+set list
 set listchars=tab:▸\ ,eol:¬,trail:·
 set nowrap
 set linebreak
@@ -220,10 +239,10 @@ vnoremap <leader>} "sc{<C-R>s}<esc>
 vnoremap <leader>{ "sc{ <C-R>s }<esc>
 
 " PeepOpen
-if has('gui_running')
-  let g:loaded_ctrlp = 0
-  nnoremap <D-t> :PeepOpen<CR>
-end
+"if has('gui_running')
+"  let g:loaded_ctrlp = 0
+"  nnoremap <D-t> :PeepOpen<CR>
+"end
 
 " ctrlp
 let g:ctrlp_working_path_mode = ''
@@ -234,11 +253,7 @@ let g:ctrlp_max_height = 40
 "let g:Powerline_symbols = 'fancy'
 
 " custom ack
-if has("gui_running")
-  nnoremap <D-f> :Ack! ''<left>
-else
-  nnoremap <Leader>a :Ack! ''<left>
-end
+nnoremap <Leader>a :Ack! ''<left>
 
 " ack something with a prefix (used below)
 function! AckPrefix(pref)
@@ -312,7 +327,7 @@ vnoremap <silent> <leader>" :s/'/"/g<cr>:noh<cr>
 nnoremap <Leader>SS :%s/\s\+$//e<CR> :noh<CR>
 
 " use jj to exit insert mode
-"inoremap jj <ESC>
+inoremap jj <ESC>
 
 " switch to last buffer
 nnoremap <leader>m <c-^>
@@ -326,9 +341,17 @@ nnoremap <leader>z :!<cr>
 " visual select last put
 nnoremap <leader>V `[v`]
 
+
 """""""""""
 " Functions
 """""""""""
+
+" tmux pairing compatibility
+function! EnableTmuxSettings()
+  set t_Co=16
+  colorscheme desert
+endfunction
+nnoremap <leader>vx :call EnableTmuxSettings()<cr>
 
 function! RenameFile()
   let old_name = expand('%')
@@ -405,6 +428,7 @@ endfunction
 function! CopyToClipboard(string)
   let @* = a:string
 endfunction
+
 
 """"""""
 " Syntax
