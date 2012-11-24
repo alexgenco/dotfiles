@@ -8,6 +8,7 @@
   br = branch
 	b = branch
 	cp = cherry-pick
+	chp = cherry-pick
 	prb = pull --rebase
   last = log -n1
 	la = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
