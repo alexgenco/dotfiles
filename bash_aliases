@@ -36,9 +36,9 @@ function checkout_and_pull_if_needed {
 }
 
 alias ogre='checkout_and_pull_if_needed ogre'
-alias dev='checkout_and_pull_if_needed godfather_dev'
-alias stage='checkout_and_pull_if_needed godfather_staging'
-alias prod='checkout_and_pull_if_needed godfather_production'
+alias dev='checkout_and_pull_if_needed develop'
+alias stage='checkout_and_pull_if_needed stage'
+alias prod='checkout_and_pull_if_needed master'
 
 alias c='cat ~/.cci'
 
@@ -50,15 +50,23 @@ fi
 
 function enable_rvm {
   [[ -s "/Users/agenco/.rvm/scripts/rvm" ]] && source "/Users/agenco/.rvm/scripts/rvm"
-  [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" && export RUBY_MANAGER='rvm'
 }
 alias ervm=enable_rvm
 
 function enable_rbenv {
   export PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
+  eval "$(rbenv init -)" && export RUBY_MANAGER='rbenv'
 }
 alias erbenv=enable_rbenv
+
+function detect_ruby_manager {
+  [[ $PWD == ~ ]]                           && return 0
+  [[ $RUBY_MANAGER ]]                       && return 0
+  [[ -f ./.rvmrc ]]         && enable_rvm   && return 0
+  [[ -f ./.rbenv-version ]] && enable_rbenv && return 0
+}
+cd() { builtin cd $@; detect_ruby_manager; }
 
 alias got='git'
 
