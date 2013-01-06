@@ -28,6 +28,7 @@ export HISTCONTROL=erasedups
 export HISTSIZE=10000
 export HISTTIMEFORMAT="%D %T "
 export HISTIGNORE="&:ls:exit"
+export PROMPT_COMMAND='history -a'
 shopt -s histappend
 
 export GOTO_HOME=/Users/agenco/.goto && source $GOTO_HOME/goto.sh
@@ -38,3 +39,6 @@ export JAVA_OPTS="-Xms256m -Xmx512m"
 
 [[ -f ~/.secrets ]]    && . ~/.secrets
 [[ -f ~/.man_colors ]] && . ~/.man_colors
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

@@ -41,6 +41,10 @@ augroup END
 " Settings
 """"""""""
 
+"	time out on mapping after three seconds,
+"	time out on key codes after a tenth of a second
+set timeout timeoutlen=3000 ttimeoutlen=100
+
 " dont clear vim when exiting
 "set t_ti= t_te=
 
@@ -247,7 +251,7 @@ vnoremap <leader>{ "sc{ <C-R>s }<esc>
 " ctrlp
 let g:ctrlp_working_path_mode = ''
 let g:ctrlp_by_filename = 1
-let g:ctrlp_max_height = 40
+let g:ctrlp_max_height = 10
 
 " powerline
 "let g:Powerline_symbols = 'fancy'
@@ -264,14 +268,14 @@ function! AckPrefix(pref)
   exec command
 endfunction
 
-" ack current word
-nnoremap <Leader>ff :Ack!<CR>
-
 " ack def of current word (Ruby)
 nnoremap <Leader>fd :call AckPrefix("def (self\.)*")<CR>
 
 " ack class definition of current word (Ruby)
 nnoremap <Leader>fc :call AckPrefix("class ")<CR>
+
+" ack current word
+nnoremap <Leader>ff :Ack!<CR>
 
 " make Y go to end of line
 nnoremap Y y$
@@ -341,6 +345,8 @@ nnoremap <leader>z :!<cr>
 " visual select last put
 nnoremap <leader>V `[v`]
 
+" run haskell file
+autocmd FileType haskell nnoremap <buffer> <leader>r :!clear && runghc -i./src %<cr>
 
 """""""""""
 " Functions
@@ -379,55 +385,55 @@ nnoremap <Leader>gb :GitBlame<CR>
 
 " Run a test tool with the current file and line number
 " The test tool is run in the last Terminal window
-function! RunTestTool(tool_cmd)
-  let dir = system('pwd')
-  let applescript = "osascript -e '".'tell application "Terminal"'
-  let applescript .= "\n"
-  let applescript .= 'activate'
-  let applescript .= "\n"
-  let applescript .= 'do script "'.a:tool_cmd.'" in first window'
-  let applescript .= "\n"
-  let applescript .= 'end tell'."'"
-  let foo = system(applescript)
-endfunction
-
-" If the file ends with _spec.rb, RunTestTool with rspec
-" If the file ends with .feature, RunTestTool with cuke
-command! RunFocusedTest :call RunFocusedTest()
-function! RunFocusedTest()
-  let spec = system('if [ x != "x"$(which spec) ] ; then echo -n spec ; elif [ x != "x"$(which rspec) ] ; then echo -n rspec ; fi')
-  let filename = expand("%")
-  if filename =~ '_spec\.rb$'
-    let spec_command = "bundle exec ".spec." ".filename.":".line(".")
-    call RunTestTool(spec_command)
-    call CopyToClipboard(spec_command)
-  endif
-  if filename =~ '\.feature$'
-    let spec_command = "bundle exec cuke ".filename.":".line(".")
-    call RunTestTool(spec_command)
-    call CopyToClipboard(spec_command)
-  endif
-endfunction
-
-command! RunTests :call RunTests()
-function! RunTests()
-  let spec = system('if [ x != "x"$(which spec) ] ; then echo -n spec ; elif [ x != "x"$(which rspec) ] ; then echo -n rspec ; fi')
-  let filename = expand("%")
-  if filename =~ '_spec\.rb$'
-    let spec_command = "bundle exec ".spec." ".filename
-    call RunTestTool(spec_command)
-    call CopyToClipboard(spec_command)
-  endif
-  if filename =~ '\.feature$'
-    let spec_command = "bundle exec cuke ".filename
-    call RunTestTool(spec_command)
-    call CopyToClipboard(spec_command)
-  endif
-endfunction
-
-function! CopyToClipboard(string)
-  let @* = a:string
-endfunction
+"function! RunTestTool(tool_cmd)
+"  let dir = system('pwd')
+"  let applescript = "osascript -e '".'tell application "Terminal"'
+"  let applescript .= "\n"
+"  let applescript .= 'activate'
+"  let applescript .= "\n"
+"  let applescript .= 'do script "'.a:tool_cmd.'" in first window'
+"  let applescript .= "\n"
+"  let applescript .= 'end tell'."'"
+"  let foo = system(applescript)
+"endfunction
+"
+"" If the file ends with _spec.rb, RunTestTool with rspec
+"" If the file ends with .feature, RunTestTool with cuke
+"command! RunFocusedTest :call RunFocusedTest()
+"function! RunFocusedTest()
+"  let spec = system('if [ x != "x"$(which spec) ] ; then echo -n spec ; elif [ x != "x"$(which rspec) ] ; then echo -n rspec ; fi')
+"  let filename = expand("%")
+"  if filename =~ '_spec\.rb$'
+"    let spec_command = "bundle exec ".spec." ".filename.":".line(".")
+"    call RunTestTool(spec_command)
+"    call CopyToClipboard(spec_command)
+"  endif
+"  if filename =~ '\.feature$'
+"    let spec_command = "bundle exec cuke ".filename.":".line(".")
+"    call RunTestTool(spec_command)
+"    call CopyToClipboard(spec_command)
+"  endif
+"endfunction
+"
+"command! RunTests :call RunTests()
+"function! RunTests()
+"  let spec = system('if [ x != "x"$(which spec) ] ; then echo -n spec ; elif [ x != "x"$(which rspec) ] ; then echo -n rspec ; fi')
+"  let filename = expand("%")
+"  if filename =~ '_spec\.rb$'
+"    let spec_command = "bundle exec ".spec." ".filename
+"    call RunTestTool(spec_command)
+"    call CopyToClipboard(spec_command)
+"  endif
+"  if filename =~ '\.feature$'
+"    let spec_command = "bundle exec cuke ".filename
+"    call RunTestTool(spec_command)
+"    call CopyToClipboard(spec_command)
+"  endif
+"endfunction
+"
+"function! CopyToClipboard(string)
+"  let @* = a:string
+"endfunction
 
 
 """"""""
@@ -460,3 +466,9 @@ syn keyword htmlArg contained sizes scoped async reversed sandbox srcdoc
 syn keyword htmlArg contained hidden role
 syn match   htmlArg "\<\(aria-[\-a-zA-Z0-9_]\+\)=" contained
 syn match   htmlArg contained "\s*data-[-a-zA-Z0-9_]\+"
+
+" make text red if it goes over 80 col
+"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+"match OverLength /\%81v.\+/
+
+au BufRead,BufNewFile *.txt set wrap

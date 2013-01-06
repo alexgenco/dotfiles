@@ -5,14 +5,10 @@
   st = status
   co = checkout
   ci = commit
-  br = branch
 	b = branch
-	cp = cherry-pick
 	chp = cherry-pick
 	prb = pull --rebase
-  last = log -n1
-	la = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
-  l = "!source ~/.githelpers && pretty_git_log"
+  dc = diff --cached
 [color]
 	ui = true
 [github]

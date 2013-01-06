@@ -1,3 +1,5 @@
+# vim: filetype=sh:
+
 alias la='ls -lath'
 
 if [ -e /Applications/MacVim.app ]; then
@@ -66,7 +68,7 @@ function detect_ruby_manager {
   [[ -f ./.rvmrc ]]         && enable_rvm   && return 0
   [[ -f ./.rbenv-version ]] && enable_rbenv && return 0
 }
-cd() { builtin cd $@; detect_ruby_manager; }
+#cd() { builtin cd $@; detect_ruby_manager; }
 
 alias got='git'
 
