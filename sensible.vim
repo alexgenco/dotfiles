@@ -1,6 +1,3 @@
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
-
 " sensible.vim - Defaults everyone can agree on
 " Maintainer:   Tim Pope <http://tpo.pe/>
 
