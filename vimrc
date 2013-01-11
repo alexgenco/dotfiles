@@ -137,8 +137,6 @@ au BufReadPost * set expandtab
 set foldmethod=indent
 set nofoldenable
 
-set cursorline
-
 
 """""""""""""
 " Keybindings
