@@ -37,8 +37,9 @@ source /usr/local/etc/bash_completion.d/password-store
 
 export JAVA_OPTS="-Xms256m -Xmx512m"
 
-[[ -f ~/.secrets ]]    && . ~/.secrets
-[[ -f ~/.man_colors ]] && . ~/.man_colors
+[[ -f ~/.secrets ]]        && . ~/.secrets
+[[ -f ~/.man_colors ]]     && . ~/.man_colors
+#[[ -f ~/bin/jackedin.sh ]] && ~/bin/jackedin.sh
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

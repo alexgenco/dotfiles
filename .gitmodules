@@ -13,3 +13,6 @@
 [submodule "vim/bundle/vim-vroom"]
 	path = vim/bundle/vim-vroom
 	url = https://github.com/alexgenco/vim-vroom.git
+[submodule "vim/bundle/rspec.vim"]
+	path = vim/bundle/rspec.vim
+	url = https://github.com/mikbe/rspec.vim.git

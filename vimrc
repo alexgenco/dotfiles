@@ -11,7 +11,6 @@ call pathogen#infect()
 """""""""""""
 
 set background=dark
-let g:solarized_contrast   = "high"
 let g:solarized_visibility = "low"
 let g:solarized_termcolors = 256
 let g:solarized_underline  = 1
@@ -138,6 +137,9 @@ au BufReadPost * set expandtab
 set foldmethod=indent
 set nofoldenable
 
+" minimum width
+set winwidth=90
+
 
 """""""""""""
 " Keybindings
@@ -176,8 +178,8 @@ nnoremap <Leader>sh :split<CR><c-w>j
 
 " ctrlp
 let g:ctrlp_working_path_mode = ''
-let g:ctrlp_by_filename = 1
-let g:ctrlp_max_height = 10
+let g:ctrlp_max_height = 20
+let g:ctrlp_custom_ignore = '\.pyc$'
 
 " ack current word
 nnoremap <Leader>ff :Ack!<CR>
@@ -210,9 +212,6 @@ map <leader>r :VroomRunTestFile<CR>
 map <leader>R :VroomRunNearestTest<CR>
 map <leader>A :VroomRunTestSuite<CR>
 
-" use jj to exit insert mode
-inoremap jj <ESC>
-
 " switch to last buffer
 nnoremap <leader>m <c-^>
 
@@ -221,6 +220,10 @@ nnoremap <leader>z :!<cr>
 
 " run haskell file
 autocmd FileType haskell nnoremap <buffer> <leader>r :!clear && runhaskell -i./src %<cr>
+
+" run python file
+autocmd FileType python set sw=4 sts=4 et
+autocmd FileType python nnoremap <buffer> <leader>r :call RunPythonFile()<cr>
 
 
 """""""""""
@@ -253,6 +256,15 @@ function! GitBlame()
 endfunction
 nnoremap <Leader>gb :GitBlame<CR>
 
+function! RunPythonFile()
+  let fname = expand("%:t")
+  if match(fname, "_test.py$")
+    exec "!clear && python -m unittest tests.".expand("%:t:r")
+  elseif match(fname, ".py$")
+    exec "!clear && python %"
+  endif
+endfunction
+
 
 """"""""
 " Syntax
@@ -265,4 +277,25 @@ au! BufNewFile,BufRead *.rabl setf ruby
 let g:clj_highlight_builtins=1
 au BufRead,BufNewFile *.clj setf clojure
 
-au BufRead,BufNewFile *.txt set wrap
+au BufRead,BufNewFile *.txt setlocal wrap nolist linebreak
+au BufRead,BufNewFile *.txt call SetLineWrapMovements()
+
+au BufRead,BufNewFile *.rb call SetPipeObjects()
+
+function! SetLineWrapMovements()
+  noremap  <buffer> <silent> k gk
+  noremap  <buffer> <silent> j gj
+  noremap  <buffer> <silent> 0 g0
+  noremap  <buffer> <silent> $ g$
+endfunction
+
+function! SetPipeObjects()
+  nnoremap di\| T\|d,
+  nnoremap da\| F\|d,
+  nnoremap ci\| T\|c,
+  nnoremap ca\| F\|c,
+  nnoremap yi\| T\|y,
+  nnoremap ya\| F\|y,
+  nnoremap vi\| T\|v,
+  nnoremap va\| F\|v,
+endfunction

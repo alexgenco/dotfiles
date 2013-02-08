@@ -37,12 +37,9 @@ function checkout_and_pull_if_needed {
   [[ $changed == 1 ]] && git pull origin $branch
 }
 
-alias ogre='checkout_and_pull_if_needed ogre'
-alias dev='checkout_and_pull_if_needed develop'
-alias stage='checkout_and_pull_if_needed stage'
-alias prod='checkout_and_pull_if_needed master'
-
-alias c='cat ~/.cci'
+alias dev='git checkout develop; git pull origin develop'
+alias stage='git checkout stage; git pull origin stage'
+alias prod='git checkout master; git pull origin master'
 
 alias ssbs='open vnc://GFBuildServer.local'
 
@@ -62,16 +59,4 @@ function enable_rbenv {
 }
 alias erbenv=enable_rbenv
 
-function detect_ruby_manager {
-  [[ $PWD == ~ ]]                           && return 0
-  [[ $RUBY_MANAGER ]]                       && return 0
-  [[ -f ./.rvmrc ]]         && enable_rvm   && return 0
-  [[ -f ./.rbenv-version ]] && enable_rbenv && return 0
-}
-#cd() { builtin cd $@; detect_ruby_manager; }
-
-alias got='git'
-
 alias ta='tmux attach'
-
-alias vimd='vim -p `git diff --name-only`'
