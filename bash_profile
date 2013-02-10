@@ -31,15 +31,20 @@ export HISTIGNORE="&:ls:exit"
 export PROMPT_COMMAND='history -a'
 shopt -s histappend
 
-export GOTO_HOME=/Users/agenco/.goto && source $GOTO_HOME/goto.sh
+if [ -f ~/.goto ]; then
+  export GOTO_HOME=/Users/agenco/.goto
+  source $GOTO_HOME/goto.sh
+fi
 
-source /usr/local/etc/bash_completion.d/password-store
+if [ -f /usr/local/etc/bash_completion.d/password-store ]; then
+  source /usr/local/etc/bash_completion.d/password-store
+fi
 
 export JAVA_OPTS="-Xms256m -Xmx512m"
 
-[[ -f ~/.secrets ]]        && . ~/.secrets
-[[ -f ~/.man_colors ]]     && . ~/.man_colors
-#[[ -f ~/bin/jackedin.sh ]] && ~/bin/jackedin.sh
+[[ -f ~/.secrets ]]    && . ~/.secrets
+[[ -f ~/.man_colors ]] && . ~/.man_colors
+[[ -f ~/.bash_local ]] && . ~/.bash_local
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
