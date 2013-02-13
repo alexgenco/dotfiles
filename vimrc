@@ -201,7 +201,7 @@ nnoremap <Leader>vv :tabedit $MYVIMRC<CR>
 nnoremap <silent> <Leader>vs :source $MYVIMRC<CR>:nohlsearch<Bar>:echo<CR>""
 
 " turn off highlighting
-nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>""
+nnoremap <silent> <Space> :w<cr>:nohlsearch<Bar>:echo<CR>""
 
 " run tests
 let g:vroom_write_all = 1
@@ -276,6 +276,9 @@ au! BufNewFile,BufRead *.rabl setf ruby
 " clojure syntax highlighting
 let g:clj_highlight_builtins=1
 au BufRead,BufNewFile *.clj setf clojure
+
+" rspec syntax
+au BufRead,BufNewFile *_spec.rb set filetype=rspec
 
 au BufRead,BufNewFile *.txt setlocal wrap nolist linebreak
 au BufRead,BufNewFile *.txt call SetLineWrapMovements()
