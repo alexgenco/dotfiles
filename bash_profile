@@ -31,7 +31,7 @@ export HISTIGNORE="&:ls:exit"
 export PROMPT_COMMAND='history -a'
 shopt -s histappend
 
-if [ -f ~/.goto ]; then
+if [ -d ~/.goto ]; then
   export GOTO_HOME=/Users/agenco/.goto
   source $GOTO_HOME/goto.sh
 fi
