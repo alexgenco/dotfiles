@@ -140,6 +140,10 @@ set nofoldenable
 " minimum width
 set winwidth=90
 
+" try cursor line again. it's slow, but it should
+" force me to use other methods to jump around
+set cursorline
+
 
 """""""""""""
 " Keybindings
@@ -210,7 +214,6 @@ let g:vroom_clear_screen = 1
 
 map <leader>r :VroomRunTestFile<CR>
 map <leader>R :VroomRunNearestTest<CR>
-map <leader>A :VroomRunTestSuite<CR>
 
 " switch to last buffer
 nnoremap <leader>m <c-^>
