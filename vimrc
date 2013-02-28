@@ -41,14 +41,10 @@ augroup END
 " Settings
 """"""""""
 
-" time out on mapping after three seconds,
-"	time out on key codes after a tenth of a second
-set timeout timeoutlen=3000 ttimeoutlen=100
-
+set nocompatible
 syntax enable
 filetype plugin indent on
 set backspace=indent,eol,start
-set nocompatible
 
 " always show the statusline
 set laststatus=2
@@ -98,6 +94,9 @@ set complete=.,b,u,]
 set completeopt=preview
 set wildmenu
 
+" mode lines
+set modelines=5
+
 " indentation
 set autoindent
 set smartindent
@@ -133,6 +132,10 @@ set wildignore+=*/.git/*,*/tmp/*,*/*.orig
 " prevent tabs from becoming tabstops for some reason
 au BufReadPost * set expandtab
 
+" time out on mapping after three seconds,
+" time out on key codes after a tenth of a second
+set timeout timeoutlen=3000 ttimeoutlen=100
+
 " fold based on syntax
 set foldmethod=indent
 set nofoldenable
@@ -157,16 +160,6 @@ command! Q q
 
 " stop doing this
 nnoremap K k
-
-" from :h ins-completion
-function! CleverTab()
-  if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
-    return "\<Tab>"
-  else
-    return "\<C-N>"
-  endif
-endfunction
-inoremap <Tab> <C-R>=CleverTab()<CR>
 
 " move around splits with <c-hjkl>
 nnoremap <c-j> <c-w>j
@@ -232,6 +225,17 @@ autocmd FileType python nnoremap <buffer> <leader>r :call RunPythonFile()<cr>
 """""""""""
 " Functions
 """""""""""
+
+
+" from :h ins-completion
+function! CleverTab()
+  if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+    return "\<Tab>"
+  else
+    return "\<C-N>"
+  endif
+endfunction
+inoremap <Tab> <C-R>=CleverTab()<CR>
 
 function! RenameFile()
   let old_name = expand('%')
