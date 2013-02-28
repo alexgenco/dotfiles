@@ -28,5 +28,4 @@ export HISTIGNORE="&:ls:exit"
 export PROMPT_COMMAND='history -a'
 shopt -s histappend
 
-[[ -f ~/.secrets ]] && source ~/.secrets
 [[ -f ~/.bash_profile.local ]] && source ~/.bash_profile.local
