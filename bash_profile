@@ -2,12 +2,17 @@ if [ -e ~/.bash_aliases ]; then
   source ~/.bash_aliases
 fi
 
+function __jobs_info {
+  local active_jobs=`jobs | wc -l | tr -d ' '`
+  [[ $active_jobs != "0" ]] && echo "[$active_jobs]"
+}
+
 if [ -e ~/.git-completion ]; then
   source ~/.git-completion
   GIT_PS1_SHOWDIRTYSTATE="true"
-  PS1='\[\e[2;37m\]\u:\W$(__git_ps1 "(%s)")\$\[\e[0m\] '
+  PS1='\[\e[1;37m\]\u$(__jobs_info):\W$(__git_ps1 "(%s)")\$\[\e[0m\] '
 else
-  PS1='\[\e[2;37m\]\u:\W\$\[\e[0m\] '
+  PS1='\[\e[1;37m\]\u$(__jobs_info):\W\$\[\e[0m\] '
 fi
 
 export CLICOLOR=1

@@ -198,7 +198,7 @@ nnoremap <Leader>vv :tabedit $MYVIMRC<CR>
 nnoremap <silent> <Leader>vs :source $MYVIMRC<CR>:nohlsearch<Bar>:echo<CR>""
 
 " turn off highlighting
-nnoremap <silent> <Space> :w<cr>:nohlsearch<Bar>:echo<CR>""
+nnoremap <silent> <Space> :w<cr>:nohlsearch \| set nocursorcolumn<Bar>:echo<CR>""
 
 " run tests
 let g:vroom_write_all = 1
@@ -213,6 +213,9 @@ nnoremap <leader>m <c-^>
 
 " check shell
 nnoremap <leader>z :!<cr>
+
+" show cursorcol for lining things up, etc.
+nnoremap <leader>\| :set cursorcolumn<CR>
 
 " run haskell file
 autocmd FileType haskell nnoremap <buffer> <leader>r :!clear && runhaskell -i./src %<cr>
