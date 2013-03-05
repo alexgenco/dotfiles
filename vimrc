@@ -230,6 +230,10 @@ let g:gitgutter_enabled = 0
 " toggle gitgutter
 nnoremap <leader>gg :ToggleGitGutter<cr>
 
+" navigate gitgutter hunks
+nnoremap <leader>gj :GitGutterNextHunk<cr>
+nnoremap <leader>gk :GitGutterPrevHunk<cr>
+
 
 """""""""""
 " Functions
