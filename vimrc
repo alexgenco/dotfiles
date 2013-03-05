@@ -224,6 +224,12 @@ autocmd FileType haskell nnoremap <buffer> <leader>r :!clear && runhaskell -i./s
 autocmd FileType python set sw=4 sts=4 et
 autocmd FileType python nnoremap <buffer> <leader>r :call RunPythonFile()<cr>
 
+" gitgutter off by default
+let g:gitgutter_enabled = 0
+
+" toggle gitgutter
+nnoremap <leader>gg :ToggleGitGutter<cr>
+
 
 """""""""""
 " Functions
