@@ -234,6 +234,9 @@ nnoremap <leader>gg :ToggleGitGutter<cr>
 nnoremap <leader>gj :GitGutterNextHunk<cr>
 nnoremap <leader>gk :GitGutterPrevHunk<cr>
 
+" pretty print ruby object
+vnoremap <leader>pp !ruby -e 'require "pp";pp eval(ARGF.read)'<cr>
+
 
 """""""""""
 " Functions
