@@ -10,9 +10,6 @@
 [submodule "vim/bundle/vim-colors-solarized"]
 	path = vim/bundle/vim-colors-solarized
 	url = https://github.com/alexgenco/vim-colors-solarized.git
-[submodule "vim/bundle/vim-vroom"]
-	path = vim/bundle/vim-vroom
-	url = https://github.com/alexgenco/vim-vroom.git
-[submodule "vim/bundle/vim-gitgutter"]
-	path = vim/bundle/vim-gitgutter
-	url = git://github.com/airblade/vim-gitgutter.git
+[submodule "vim/bundle/vim-rspec"]
+	path = vim/bundle/vim-rspec
+	url = https://github.com/thoughtbot/vim-rspec.git

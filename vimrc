@@ -145,7 +145,7 @@ set winwidth=90
 
 " try cursor line again. it's slow, but it should
 " force me to use other methods to jump around
-set cursorline
+set nocursorline
 
 
 """""""""""""
@@ -161,6 +161,10 @@ command! Q q
 " stop doing this
 nnoremap K k
 
+" Open new split panes to right and bottom
+set splitbelow
+set splitright
+
 " move around splits with <c-hjkl>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
@@ -168,10 +172,12 @@ nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
 " vertical split
-nnoremap <Leader>ss :vsplit<CR><c-w>l
+"nnoremap <Leader>ss :vsplit<CR><c-w>l
+nnoremap <Leader>ss :echo "don't be lazy! use :vs"<CR>
 
 " horizontal split
-nnoremap <Leader>sh :split<CR><c-w>j
+"nnoremap <Leader>sh :split<CR><c-w>j
+nnoremap <Leader>sh :echo "don't be lazy! use :sp"<CR>
 
 " ctrlp
 let g:ctrlp_working_path_mode = ''
@@ -198,15 +204,17 @@ nnoremap <Leader>vv :tabedit $MYVIMRC<CR>
 nnoremap <silent> <Leader>vs :source $MYVIMRC<CR>:nohlsearch<Bar>:echo<CR>""
 
 " turn off highlighting
-nnoremap <silent> <Space> :w<cr>:nohlsearch \| set nocursorcolumn<Bar>:echo<CR>""
+nnoremap <silent> <Space> :nohlsearch \| set nocursorcolumn<Bar>:echo<CR>""
 
 " run tests
-let g:vroom_write_all = 1
-let g:vroom_detect_spec_helper = 1
-let g:vroom_clear_screen = 1
-
-map <leader>r :VroomRunTestFile<CR>
-map <leader>R :VroomRunNearestTest<CR>
+"let g:vroom_write_all = 1
+"let g:vroom_detect_spec_helper = 1
+"let g:vroom_clear_screen = 1
+"
+"map <leader>r :VroomRunTestFile<CR>
+"map <leader>R :VroomRunNearestTest<CR>
+map <Leader>r :call RunCurrentSpecFile()<CR>
+map <Leader>R :call RunNearestSpec()<CR>
 
 " switch to last buffer
 nnoremap <leader>m <c-^>
@@ -236,6 +244,9 @@ nnoremap <leader>gk :GitGutterPrevHunk<cr>
 
 " pretty print ruby object
 vnoremap <leader>pp !ruby -e 'require "pp";pp eval(ARGF.read)'<cr>
+
+" mkdir for the current buffer
+nnoremap <leader>dm :!mkdir -p `dirname %`<cr>
 
 
 """""""""""
