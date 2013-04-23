@@ -10,16 +10,16 @@ call pathogen#infect()
 " Colorscheme
 """""""""""""
 
-"set background=dark
-"let g:solarized_visibility = "low"
-"let g:solarized_termcolors = 256
-"let g:solarized_underline  = 1
-
-"if !has('gui_running')
-"  set t_Co=256
+"if has('gui_running')
+"  colorscheme detailed
+"else
+  set t_Co=256
+  let g:solarized_visibility = "low"
+  let g:solarized_termcolors = 256
+  let g:solarized_underline  = 1
+  colorscheme solarized
+  set background=dark
 "endif
-"colorscheme solarized
-colorscheme detailed
 
 
 """"""""""
