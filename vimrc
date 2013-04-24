@@ -6,38 +6,6 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
 
-"""""""""""""
-" Colorscheme
-"""""""""""""
-
-"if has('gui_running')
-"  colorscheme detailed
-"else
-  set t_Co=256
-  let g:solarized_visibility = "low"
-  let g:solarized_termcolors = 256
-  let g:solarized_underline  = 1
-  colorscheme solarized
-  set background=dark
-"endif
-
-
-""""""""""
-" Autocmds
-""""""""""
-
-augroup vimrcEx
-  " Clear all autocmds in the group
-  autocmd!
-
-  " Jump to last cursor position unless it's invalid or in an event handler
-  autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
-augroup END
-
-
 """"""""""
 " Settings
 """"""""""
@@ -46,6 +14,8 @@ set nocompatible
 syntax enable
 filetype plugin indent on
 set backspace=indent,eol,start
+set t_Co=256
+set background=dark
 
 " always show the statusline
 set laststatus=2
@@ -66,8 +36,8 @@ highlight! Search cterm=underline
 highlight! IncSearch cterm=underline
 
 " line endings
-set list
-set listchars=tab:▸\ ,eol:¬,trail:·
+"set list
+"set listchars=tab:▸\ ,eol:¬,trail:·
 set nowrap
 set linebreak
 
@@ -143,6 +113,32 @@ set nofoldenable
 
 " minimum width
 set winwidth=90
+
+
+"""""""""""""
+" Colorscheme
+"""""""""""""
+
+let g:solarized_termcolors = 256
+let g:solarized_visibility = "high"
+let g:solarized_contrast = "high"
+color solarized
+
+
+""""""""""
+" Autocmds
+""""""""""
+
+augroup vimrcEx
+  " Clear all autocmds in the group
+  autocmd!
+
+  " Jump to last cursor position unless it's invalid or in an event handler
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+augroup END
 
 
 """""""""""""
