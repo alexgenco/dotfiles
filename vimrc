@@ -14,8 +14,6 @@ set nocompatible
 syntax enable
 filetype plugin indent on
 set backspace=indent,eol,start
-set t_Co=256
-set background=dark
 
 " always show the statusline
 set laststatus=2
@@ -112,7 +110,10 @@ set foldmethod=indent
 set nofoldenable
 
 " minimum width
-set winwidth=90
+set winwidth=100
+
+" minimum height
+set winheight=30
 
 
 """""""""""""
@@ -121,7 +122,9 @@ set winwidth=90
 
 let g:solarized_termcolors = 256
 let g:solarized_visibility = "high"
-let g:solarized_contrast = "high"
+let g:solarized_contrast   = "high"
+set t_Co=256
+set background=dark
 color solarized
 
 
@@ -158,12 +161,6 @@ nnoremap K k
 set splitbelow
 set splitright
 
-" move around splits with <c-hjkl>
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
-
 " ctrlp
 let g:ctrlp_working_path_mode = ''
 let g:ctrlp_max_height = 20
@@ -192,9 +189,10 @@ nnoremap <silent> <Leader>vs :source $MYVIMRC<CR>:nohlsearch<Bar>:echo<CR>""
 nnoremap <silent> <Space> :nohlsearch \| set nocursorcolumn<Bar>:echo<CR>""
 
 " run tests
-let g:rspec_command = "!bundle exec rspec {spec}"
+let g:rspec_command = "!clear && rspec {spec}"
 map <Leader>r :call RunCurrentSpecFile()<CR>
 map <Leader>R :call RunNearestSpec()<CR>
+map <Leader>t :call RunAllSpecs()<CR>
 
 " switch to last buffer
 nnoremap <leader>m <c-^>
@@ -216,7 +214,7 @@ autocmd FileType python nnoremap <buffer> <leader>r :call RunPythonFile()<cr>
 vnoremap <leader>pp !ruby -e 'require "pp";pp eval(ARGF.read)'<cr>
 
 " mkdir for the current buffer
-nnoremap <leader>dm :!mkdir -p `dirname %`<cr>
+nnoremap <leader>dm :!mkdir -p %:h<cr><cr>
 
 
 """""""""""
@@ -274,5 +272,8 @@ endfunction
 " Syntax
 """"""""
 
-" rspec syntax
+" rspec
 au BufRead,BufNewFile *_spec.rb set filetype=rspec
+
+" sass
+au BufRead,BufNewFile *.scss set filetype=scss
