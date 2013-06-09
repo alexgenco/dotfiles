@@ -277,3 +277,13 @@ au BufRead,BufNewFile *_spec.rb set filetype=rspec
 
 " sass
 au BufRead,BufNewFile *.scss set filetype=scss
+
+
+""""""""""""""""
+" Local Settings
+""""""""""""""""
+
+" load local vimrc
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
