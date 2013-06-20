@@ -167,10 +167,14 @@ let g:ctrlp_max_height = 20
 let g:ctrlp_custom_ignore = '\.pyc$'
 
 " ack current word
-nnoremap <Leader>ff :Ack!<CR>
+"nnoremap <Leader>ff :Ack!<CR>
 
 " custom ack
-nnoremap <Leader>a :Ack! ''<left>
+"nnoremap <Leader>a :Ack! ''<left>
+
+" use ack for :grep
+set grepprg=ack\ -H\ --nocolor\ --nogroup\ --column\ $*
+set grepformat=%f:%l:%c:%m
 
 " make Y go to end of line
 nnoremap Y y$
