@@ -41,7 +41,6 @@ set linebreak
 
 " more context while scrolling
 set scrolloff=3
-set sidescrolloff=15
 set sidescroll=1
 
 " automatically read files changed outside vim
@@ -166,12 +165,6 @@ let g:ctrlp_working_path_mode = ''
 let g:ctrlp_max_height = 20
 let g:ctrlp_custom_ignore = '\.pyc$'
 
-" ack current word
-"nnoremap <Leader>ff :Ack!<CR>
-
-" custom ack
-"nnoremap <Leader>a :Ack! ''<left>
-
 " use ack for :grep
 set grepprg=ack\ -H\ --nocolor\ --nogroup\ --column\ $*
 set grepformat=%f:%l:%c:%m
@@ -199,32 +192,37 @@ map <Leader>R :call RunNearestSpec()<CR>
 map <Leader>t :call RunAllSpecs()<CR>
 
 " switch to last buffer
-nnoremap <leader>m <c-^>
+"nnoremap <leader>m <c-^>
+nnoremap <leader>m :echo("don't be lazy! use \<C-^\>")<cr>
 
 " check shell
-nnoremap <leader>z :!<cr>
+"nnoremap <leader>z :!<cr>
+nnoremap <leader>z :echo("don't be lazy! use \<C-z\> and `fg`")<cr>
 
 " show cursorcol for lining things up, etc.
 nnoremap <leader>\| :set cursorcolumn<CR>
 
-" run haskell file
-autocmd FileType haskell nnoremap <buffer> <leader>r :!clear && runhaskell -i./src %<cr>
-
-" run python file
-autocmd FileType python set sw=4 sts=4 et
-autocmd FileType python nnoremap <buffer> <leader>r :call RunPythonFile()<cr>
-
 " pretty print ruby object
 vnoremap <leader>pp !ruby -e 'require "pp";pp eval(ARGF.read)'<cr>
-
-" mkdir for the current buffer
-nnoremap <leader>dm :!mkdir -p %:h<cr><cr>
 
 
 """""""""""
 " Functions
 """""""""""
 
+" Make parent directories of new file before save
+function! s:MkdirIfNeeded(file, buf)
+  if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+    let dir=fnamemodify(a:file, ':h')
+    if !isdirectory(dir)
+      call mkdir(dir, 'p')
+    endif
+  endif
+endfunction
+augroup BWCCreateDir
+  autocmd!
+  autocmd BufWritePre * :call s:MkdirIfNeeded(expand('<afile>'), +expand('<abuf>'))
+augroup END
 
 " from :h ins-completion
 function! CleverTab()
@@ -261,15 +259,6 @@ function! GitBlame()
   exec ":".line
 endfunction
 nnoremap <Leader>gb :GitBlame<CR>
-
-function! RunPythonFile()
-  let fname = expand("%:t")
-  if match(fname, "_test.py$")
-    exec "!clear && python -m unittest tests.".expand("%:t:r")
-  elseif match(fname, ".py$")
-    exec "!clear && python %"
-  endif
-endfunction
 
 
 """"""""
