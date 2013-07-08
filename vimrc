@@ -96,7 +96,7 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " ignore filetypes
-set wildignore+=*/.git/*,*/tmp/*,*/*.orig
+set wildignore+=*/.git/*,*/tmp/*,*/*.orig,*/.sass-cache/*
 
 " prevent tabs from becoming tabstops for some reason
 au BufReadPost * set expandtab
