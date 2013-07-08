@@ -17,7 +17,8 @@ set backspace=indent,eol,start
 
 " always show the statusline
 set laststatus=2
-set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+" (disabled to allow vim-airline statusline)
+"set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
 " necessary to show unicode glyphs
 set encoding=utf-8
