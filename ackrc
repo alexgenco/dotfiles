@@ -1,0 +1,7 @@
+--ignore-dir=log
+--ignore-dir=.sass-cache
+--ignore-dir=.git
+
+# http://stackoverflow.com/questions/4748529/how-can-i-get-ack-to-ignore-orig-files
+--type-set=DUMB=.orig
+--noDUMB
