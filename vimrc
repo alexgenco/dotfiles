@@ -34,8 +34,8 @@ highlight! Search cterm=underline
 highlight! IncSearch cterm=underline
 
 " line endings
-"set list
-"set listchars=tab:▸\ ,eol:¬,trail:·
+set listchars=tab:▸\ ,eol:¬,trail:·
+set list
 set nowrap
 set linebreak
 
@@ -120,7 +120,7 @@ set winheight=30
 """""""""""""
 
 let g:solarized_termcolors = 256
-let g:solarized_visibility = "high"
+let g:solarized_visibility = "low"
 let g:solarized_contrast   = "high"
 set t_Co=256
 set background=dark
