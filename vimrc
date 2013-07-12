@@ -35,7 +35,7 @@ highlight! Search cterm=underline
 highlight! IncSearch cterm=underline
 
 " line endings
-set listchars=tab:▸\ ,eol:¬,trail:·
+set listchars=tab:▸·,trail:·
 set list
 set nowrap
 set linebreak
