@@ -38,7 +38,8 @@ set linebreak
 
 " More context while scrolling
 set scrolloff=8
-set sidescroll=1
+set sidescrolloff=8
+set sidescroll=0
 
 " Automatically read files changed outside vim
 set autoread
@@ -49,15 +50,11 @@ set tabpagemax=100
 " Prevent automatically adding newlines to end of file
 set binary
 
-" Fast scrolling
-set ttyfast
-set scrolljump=5
-
 " Tab completion
 set ofu=syntaxcomplete#Complete
 set wildmode=longest,list
 set complete=.,b,u,]
-set completeopt=menu,preview
+set completeopt=longest,menuone
 set wildmenu
 
 " Mode lines
@@ -113,9 +110,6 @@ set winheight=30
 
 " Let buffers exist in the background
 set hidden
-
-" Abbreviate messages
-set shortmess=at
 
 
 """""""""""""
