@@ -40,6 +40,7 @@ set linebreak
 set scrolloff=8
 set sidescrolloff=8
 set sidescroll=0
+set scrolljump=5
 
 " Automatically read files changed outside vim
 set autoread
