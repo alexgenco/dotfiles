@@ -15,106 +15,106 @@ syntax enable
 filetype plugin indent on
 set backspace=indent,eol,start
 
-" always show the statusline
+" Always show the statusline
 set laststatus=2
 
-" necessary to show unicode glyphs
+" Necessary to show unicode glyphs
 set encoding=utf-8
 
-" line numbers
+" Line numbers
 set number
 
-" search
+" Search
 set ignorecase
 set smartcase
 set incsearch
 set hlsearch
 
-" line endings
+" Line endings
 set listchars=tab:▸·,trail:·
 set list
 set nowrap
 set linebreak
 
-" more context while scrolling
+" More context while scrolling
 set scrolloff=8
 set sidescroll=1
 
-" automatically read files changed outside vim
+" Automatically read files changed outside vim
 set autoread
 
-" allow 100 tabs at once
+" Allow 100 tabs at once
 set tabpagemax=100
 
-" prevent automatically adding newlines to end of file
+" Prevent automatically adding newlines to end of file
 set binary
 
-" fast scrolling
+" Fast scrolling
 set ttyfast
 set scrolljump=5
 
-" tab completion
+" Tab completion
 set ofu=syntaxcomplete#Complete
 set wildmode=longest,list
 set complete=.,b,u,]
-set completeopt=menu
+set completeopt=menu,preview
 set wildmenu
 
-" mode lines
+" Mode lines
 set modelines=5
 
-" indentation
+" Indentation
 set autoindent
 set smartindent
 
-" tabs
+" Tabs
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 set expandtab
 
-" turn off bells
+" Turn off bells
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 
-" set terminal title
+" Set terminal title
 set title
 
-" no swap files
+" No swap files
 set noswapfile
 
-" persistent undo
+" Persistent undo
 set undofile
 set undodir=~/.vim/undo
 
-" store temporary files in a central spot
+" Store temporary files in a central spot
 set backup
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
-" ignore filetypes
+" Ignore filetypes
 set wildignore+=*/.git/*,*/tmp/*,*/*.orig,*/.sass-cache/*,*.o,*.hi
 
-" prevent tabs from becoming tabstops for some reason
+" Prevent tabs from becoming tabstops for some reason
 au BufReadPost * set expandtab
 
-" prevent O delay
+" Prevent O delay
 set timeout timeoutlen=3000 ttimeoutlen=100
 
-" fold based on indent, disabled by default
+" Fold based on indent, disabled by default
 set foldmethod=indent
 set nofoldenable
 
-" minimum width
+" Minimum width
 set winwidth=100
 
-" minimum height
+" Minimum height
 set winheight=30
 
-" let buffers exist in the background
+" Let buffers exist in the background
 set hidden
 
-" abbreviate messages
+" Abbreviate messages
 set shortmess=at
 
 
@@ -155,7 +155,7 @@ augroup END
 
 let mapleader = ","
 
-" because I always mess these up
+" Because I always mess these up
 command! W w
 command! Q q
 nnoremap K k
@@ -164,31 +164,31 @@ nnoremap K k
 set splitbelow
 set splitright
 
-" use ack for :grep
+" Use ack for :grep
 set grepprg=ack\ -H\ --nocolor\ --nogroup\ --column\ $*
 set grepformat=%f:%l:%c:%m
 
-" make Y go to end of line
+" Make Y go to end of line
 nnoremap Y y$
 
-" inline do ... end
-vnoremap in J V:s/\s\+do\s\+/ { <CR> V:s/\s\+end\s*/ }<CR>:noh<CR>
+" Inline do ... end
+vnoremap in J V:s/\s\+do\s\+/ { <cr> V:s/\s\+end\s*/ }<cr>:noh<cr>
 
-" copy to system clipboard
+" Copy to system clipboard
 vnoremap <leader>c "*y
 
-" shortcut to edit .vimrc
-nnoremap <Leader>vv :tabedit $MYVIMRC<CR>
-nnoremap <silent> <Leader>vs :source $MYVIMRC<CR>:nohlsearch<Bar>:echo<CR>""
+" Shortcut to edit .vimrc
+nnoremap <leader>vv :tabedit $MYVIMRC<cr>
+nnoremap <silent> <leader>vs :source $MYVIMRC<cr>:nohlsearch<bar>:echo<cr>""
 
-" turn off highlighting
-nnoremap <silent> <Space> :nohlsearch<CR>
+" Turn off highlighting
+nnoremap <silent> <space> :nohlsearch<cr>
 
-" run tests
+" Run tests
 let g:rspec_command = "!clear && rspec {spec}"
-map <Leader>r :call RunCurrentSpecFile()<CR>
-map <Leader>R :call RunNearestSpec()<CR>
-map <Leader>t :call RunAllSpecs()<CR>
+map <leader>r :call RunCurrentSpecFile()<cr>
+map <leader>R :call RunNearestSpec()<cr>
+map <leader>t :call RunAllSpecs()<cr>
 
 
 """""""""""
@@ -204,20 +204,20 @@ function! s:MkdirIfNeeded(file, buf)
     endif
   endif
 endfunction
-augroup BWCCreateDir
+augroup BWCcreateDir
   autocmd!
   autocmd BufWritePre * :call s:MkdirIfNeeded(expand('<afile>'), +expand('<abuf>'))
 augroup END
 
-" from :h ins-completion
+" From :h ins-completion
 function! CleverTab()
-  if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
-    return "\<Tab>"
+  if strpart(getline('.'), 0, col('.')-1) =~ '^\s*$'
+    return "\<tab>"
   else
     return "\<C-N>"
   endif
 endfunction
-inoremap <Tab> <C-R>=CleverTab()<CR>
+inoremap <tab> <C-R>=CleverTab()<cr>
 
 " https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
 function! RenameFile()
@@ -231,8 +231,7 @@ function! RenameFile()
 endfunction
 map <leader>n :call RenameFile()<cr>
 
-" open git blame in new buffer
-command! GitBlame :call GitBlame()
+" Open git blame in new buffer
 function! GitBlame()
   let line = line(".")
   let ftype = &ft
@@ -244,14 +243,14 @@ function! GitBlame()
   exec ":set filetype=".ftype
   exec ":".line
 endfunction
-nnoremap <Leader>gb :GitBlame<CR>
+nnoremap <leader>gb :call GitBlame()<cr>
 
 
 """"""""
 " Syntax
 """"""""
 
-" rspec
+" Rspec
 au BufRead,BufNewFile *_spec.rb set filetype=rspec
 
 
@@ -259,7 +258,7 @@ au BufRead,BufNewFile *_spec.rb set filetype=rspec
 " Local Settings
 """"""""""""""""
 
-" load local vimrc
+" Load local vimrc
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
