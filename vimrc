@@ -161,7 +161,6 @@ set splitright
 
 " Use ack for :grep
 set grepprg=ack\ -H\ --nocolor\ --nogroup\ --column\ $*
-set grepformat=%f:%l:%c:%m
 
 " Make Y go to end of line
 nnoremap Y y$
