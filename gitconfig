@@ -4,7 +4,7 @@
 [alias]
   st = status
   co = checkout
-  ci = commit
+  ci = commit -v
 	b = branch
 	chp = cherry-pick
 	prb = pull --rebase
