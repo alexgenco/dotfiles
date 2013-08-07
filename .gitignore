@@ -1,5 +1,6 @@
-push.log
-undo
-vim/undo/*
-vim/.netrwhist
-vim/.VimballRecord
+/push.log
+/undo
+/vim/undo/*
+/vim/.netrwhist
+/vim/.VimballRecord
+/vim/bundle

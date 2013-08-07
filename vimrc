@@ -1,12 +1,4 @@
 """"""""""
-" Pathogen
-""""""""""
-
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
-
-
-""""""""""
 " Settings
 """"""""""
 
@@ -113,19 +105,22 @@ set winheight=30
 set hidden
 
 
-"""""""""""""
-" Colorscheme
-"""""""""""""
+"""""""""
+" Bundles
+"""""""""
 
-" Move this into ~/.vimrc.local
-"
-"set t_Co=256
-"set background=dark
-"
-"let g:solarized_termcolors = 256
-"let g:solarized_visibility = "low"
-"
-"color solarized
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'kien/ctrlp.vim'
+Bundle 'bling/vim-airline'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'michaeljsmith/vim-indent-object'
+Bundle 'thoughtbot/vim-rspec'
+
+filetype on
 
 
 """"""""""
