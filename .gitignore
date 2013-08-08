@@ -1,5 +1,6 @@
 /push.log
 /undo
 /vim/undo/*
+/vim/doc/tags
 /vim/.netrwhist
 /vim/.VimballRecord
