@@ -119,6 +119,7 @@ Bundle 'bling/vim-airline'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'thoughtbot/vim-rspec'
+Bundle 'Keithbsmiley/rspec.vim'
 
 filetype on
 
