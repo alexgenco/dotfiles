@@ -116,10 +116,11 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'kien/ctrlp.vim'
 Bundle 'bling/vim-airline'
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'thoughtbot/vim-rspec'
 Bundle 'Keithbsmiley/rspec.vim'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'rking/vim-detailed'
 
 filetype on
 
