@@ -1,3 +1,21 @@
+"""""""""
+" Bundles
+"""""""""
+
+filetype off
+set runtimepath+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'kien/ctrlp.vim'
+Bundle 'bling/vim-airline'
+Bundle 'michaeljsmith/vim-indent-object'
+Bundle 'thoughtbot/vim-rspec'
+Bundle 'Keithbsmiley/rspec.vim'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'rking/vim-detailed'
+
+
 """"""""""
 " Settings
 """"""""""
@@ -103,26 +121,6 @@ set winheight=30
 
 " Let buffers exist in the background
 set hidden
-
-
-"""""""""
-" Bundles
-"""""""""
-
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-Bundle 'gmarik/vundle'
-Bundle 'kien/ctrlp.vim'
-Bundle 'bling/vim-airline'
-Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'thoughtbot/vim-rspec'
-Bundle 'Keithbsmiley/rspec.vim'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'rking/vim-detailed'
-
-filetype on
 
 
 """"""""""
