@@ -2,7 +2,9 @@
 " Bundles
 """""""""
 
+set nocompatible
 filetype off
+
 set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -20,7 +22,6 @@ Bundle 'rking/vim-detailed'
 " Settings
 """"""""""
 
-set nocompatible
 syntax enable
 filetype plugin indent on
 set backspace=indent,eol,start
