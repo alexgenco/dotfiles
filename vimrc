@@ -163,14 +163,14 @@ set grepprg=ack\ -H\ --nocolor\ --nogroup\ --column\ $*
 nnoremap Y y$
 
 " Inline do ... end
-vnoremap in J V:s/\s\+do\s\+/ { <cr> V:s/\s\+end\s*/ }<cr>:noh<cr>
+vnoremap in J V:s/\s\+do\s\+/ { <cr> V:s/\s\+end\s*/ }<cr>:nohlsearch<cr>
 
 " Copy to system clipboard
 vnoremap <leader>c "*y
 
 " Shortcut to edit .vimrc
 nnoremap <leader>vv :tabedit $MYVIMRC<cr>
-nnoremap <silent> <leader>vs :source $MYVIMRC<cr>:nohlsearch<bar>:echo<cr>""
+nnoremap <silent> <leader>vs :source $MYVIMRC<cr>:nohlsearch<cr>
 
 " Turn off highlighting
 nnoremap <silent> <space> :nohlsearch<cr>
