@@ -71,6 +71,10 @@ set wildmenu
 
 " Mode lines
 set modelines=5
+set modeline
+
+" Increase command history
+set history=1000
 
 " Indentation
 set autoindent
