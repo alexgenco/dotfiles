@@ -10,9 +10,9 @@ function __jobs_info {
 if [ -e ~/.git-completion ]; then
   source ~/.git-completion
   GIT_PS1_SHOWDIRTYSTATE="true"
-  PS1='\[\e[1;37m\]\u:\W$(__git_ps1 "(%s)")$(__jobs_info)\$\[\e[0m\] '
+  PS1='\u:\W$(__git_ps1 "(%s)")$(__jobs_info)\$ '
 else
-  PS1='\[\e[1;37m\]\u:\W$(__jobs_info)\$\[\e[0m\] '
+  PS1='\u:\W$(__jobs_info)\$ '
 fi
 
 export CLICOLOR=1
