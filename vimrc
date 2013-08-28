@@ -248,6 +248,14 @@ nnoremap <leader>gb :call GitBlame()<cr>
 au BufRead,BufNewFile *_spec.rb set filetype=rspec
 
 
+"""""""""""""
+" Colorscheme
+"""""""""""""
+
+colorscheme lucius
+LuciusBlackLowContrast
+
+
 """"""""""""""""
 " Local Settings
 """"""""""""""""
