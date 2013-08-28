@@ -13,6 +13,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'thoughtbot/vim-rspec'
 Bundle 'Keithbsmiley/rspec.vim'
+Bundle 'jonathanfilip/vim-lucius'
 
 
 """"""""""
@@ -123,15 +124,6 @@ set winheight=30
 
 " Let buffers exist in the background
 set hidden
-
-
-"""""""""""""
-" Colorscheme
-"""""""""""""
-
-set t_Co=256
-set background=dark
-colorscheme desert
 
 
 """"""""""
