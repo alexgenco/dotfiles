@@ -10,12 +10,9 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 Bundle 'kien/ctrlp.vim'
-Bundle 'bling/vim-airline'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'thoughtbot/vim-rspec'
 Bundle 'Keithbsmiley/rspec.vim'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'rking/vim-detailed'
 
 
 """"""""""
@@ -33,7 +30,7 @@ set laststatus=2
 set encoding=utf-8
 
 " Line numbers
-set number
+set nonumber
 
 " Search
 set ignorecase
@@ -126,6 +123,15 @@ set winheight=30
 
 " Let buffers exist in the background
 set hidden
+
+
+"""""""""""""
+" Colorscheme
+"""""""""""""
+
+set t_Co=256
+set background=dark
+colorscheme desert
 
 
 """"""""""
