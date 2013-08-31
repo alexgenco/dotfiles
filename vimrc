@@ -86,7 +86,6 @@ set expandtab
 
 " Turn off bells
 set noerrorbells visualbell t_vb=
-autocmd GUIEnter * set visualbell t_vb=
 
 " Set terminal title
 set title
@@ -125,23 +124,15 @@ set winheight=30
 " Let buffers exist in the background
 set hidden
 
+" Open new split panes to right and bottom
+set splitbelow
+set splitright
 
-""""""""""
-" Autocmds
-""""""""""
+" Use ack for :grep
+set grepprg=ack\ -H\ --nocolor\ --nogroup\ --column\ $*
 
-augroup vimrcEx
-  " Clear all autocmds in the group
-  autocmd!
-
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it for commit messages, when the position is invalid, or when
-  " inside an event handler (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
-augroup END
+" Status line
+set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-10(%4l\ %P%)
 
 
 """""""""""""
@@ -154,13 +145,6 @@ let mapleader = ","
 command! W w
 command! Q q
 nnoremap K k
-
-" Open new split panes to right and bottom
-set splitbelow
-set splitright
-
-" Use ack for :grep
-set grepprg=ack\ -H\ --nocolor\ --nogroup\ --column\ $*
 
 " Make Y go to end of line
 nnoremap Y y$
@@ -180,30 +164,21 @@ nnoremap <silent> <space> :nohlsearch<cr>
 
 " Run tests
 let g:rspec_command = "!clear && rspec {spec}"
-map <leader>r :call RunCurrentSpecFile()<cr>
-map <leader>R :call RunNearestSpec()<cr>
-map <leader>t :call RunAllSpecs()<cr>
+nnoremap <leader>r :call RunCurrentSpecFile()<cr>
+nnoremap <leader>R :call RunNearestSpec()<cr>
+nnoremap <leader>t :call RunAllSpecs()<cr>
+
+" Custom function mappings (see Functions section)
+inoremap <tab> <C-R>=CleverTab()<cr>
+nnoremap <leader>n :call RenameFile()<cr>
+nnoremap <leader>gb :call GitBlame()<cr>
 
 
 """""""""""
 " Functions
 """""""""""
 
-" Make parent directories of new file before save
-function! s:MkdirIfNeeded(file, buf)
-  if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
-    let dir=fnamemodify(a:file, ':h')
-    if !isdirectory(dir)
-      call mkdir(dir, 'p')
-    endif
-  endif
-endfunction
-augroup BWCcreateDir
-  autocmd!
-  autocmd BufWritePre * :call s:MkdirIfNeeded(expand('<afile>'), +expand('<abuf>'))
-augroup END
-
-" From :h ins-completion
+" Autocomplete unless on an empty line (from :h ins-completion)
 function! CleverTab()
   if strpart(getline('.'), 0, col('.')-1) =~ '^\s*$'
     return "\<tab>"
@@ -211,7 +186,6 @@ function! CleverTab()
     return "\<C-N>"
   endif
 endfunction
-inoremap <tab> <C-R>=CleverTab()<cr>
 
 " https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
 function! RenameFile()
@@ -223,9 +197,8 @@ function! RenameFile()
     redraw!
   endif
 endfunction
-map <leader>n :call RenameFile()<cr>
 
-" Open git blame in new buffer
+" Open git blame in new tab
 function! GitBlame()
   let line = line(".")
   let ftype = &ft
@@ -237,7 +210,16 @@ function! GitBlame()
   exec ":set filetype=".ftype
   exec ":".line
 endfunction
-nnoremap <leader>gb :call GitBlame()<cr>
+
+" Make parent directories of new file before save
+function! MkdirIfNeeded(file, buf)
+  if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+    let dir=fnamemodify(a:file, ':h')
+    if !isdirectory(dir)
+      call mkdir(dir, 'p')
+    endif
+  endif
+endfunction
 
 
 """"""""
@@ -246,6 +228,31 @@ nnoremap <leader>gb :call GitBlame()<cr>
 
 " Rspec
 au BufRead,BufNewFile *_spec.rb set filetype=rspec
+
+
+""""""""""
+" Autocmds
+""""""""""
+
+augroup vimrcEx
+  " Clear all autocmds in the group
+  autocmd!
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it for commit messages, when the position is invalid, or when
+  " inside an event handler (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+  " Create parent directories when saving a new file
+  autocmd BufWritePre *
+    \ call MkdirIfNeeded(expand('<afile>'), +expand('<abuf>'))
+
+  " Turn off visual bell
+  autocmd GUIEnter * set visualbell t_vb=
+augroup END
 
 
 """""""""""""
@@ -257,10 +264,9 @@ LuciusBlackLowContrast
 
 
 """"""""""""""""
-" Local Settings
+" Local settings
 """"""""""""""""
 
-" Load local vimrc
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
