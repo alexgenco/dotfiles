@@ -131,6 +131,9 @@ set grepprg=ack\ -H\ --nocolor\ --nogroup\ --column\ $*
 set laststatus=2
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-10(%4l\ %P%)
 
+" Mouse support
+set mouse=a
+
 
 """""""""""""
 " Keybindings
