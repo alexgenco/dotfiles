@@ -23,9 +23,6 @@ syntax enable
 filetype plugin indent on
 set backspace=indent,eol,start
 
-" Always show the statusline
-set laststatus=2
-
 " Necessary to show unicode glyphs
 set encoding=utf-8
 
@@ -131,6 +128,7 @@ set splitright
 set grepprg=ack\ -H\ --nocolor\ --nogroup\ --column\ $*
 
 " Status line
+set laststatus=2
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-10(%4l\ %P%)
 
 
