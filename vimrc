@@ -229,6 +229,9 @@ endfunction
 " Rspec
 au BufRead,BufNewFile *_spec.rb set filetype=rspec
 
+" Rabl
+au BufRead,BufNewFile *.rabl set filetype=ruby
+
 
 """"""""""
 " Autocmds
