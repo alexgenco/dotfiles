@@ -9,7 +9,7 @@ set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
-Bundle 'kien/ctrlp.vim'
+Bundle 'git://git.wincent.com/command-t.git'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'thoughtbot/vim-rspec'
 Bundle 'Keithbsmiley/rspec.vim'
@@ -169,6 +169,10 @@ nnoremap <leader>t :call RunAllSpecs()<cr>
 inoremap <tab> <C-R>=CleverTab()<cr>
 nnoremap <leader>n :call RenameFile()<cr>
 nnoremap <leader>gb :call GitBlame()<cr>
+
+" Command-T
+nnoremap <c-p> :CommandTFlush<cr>\|:CommandT<cr>
+let g:CommandTCancelMap=['<esc>','<c-c>']
 
 
 """""""""""
