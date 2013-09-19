@@ -129,7 +129,7 @@ set grepprg=ack\ -H\ --nocolor\ --nogroup\ --column\ $*
 
 " Status line
 set laststatus=2
-set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-10(%4l\ %P%)
+set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-10(%4l:%c\ %P%)
 
 
 """""""""""""
