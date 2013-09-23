@@ -259,7 +259,7 @@ augroup END
 " Colorscheme
 """""""""""""
 
-colorscheme default
+colorscheme desert
 
 
 """"""""""""""""
