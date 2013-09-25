@@ -12,7 +12,6 @@ Bundle 'gmarik/vundle'
 Bundle 'kien/ctrlp.vim'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'thoughtbot/vim-rspec'
-Bundle 'Keithbsmiley/rspec.vim'
 
 
 """"""""""
@@ -28,6 +27,9 @@ set encoding=utf-8
 
 " Line numbers
 set nonumber
+
+" Matchit plugin
+runtime macros/matchit.vim
 
 " Search
 set ignorecase
@@ -219,17 +221,6 @@ function! MkdirIfNeeded(file, buf)
 endfunction
 
 
-""""""""
-" Syntax
-""""""""
-
-" Rspec
-au BufRead,BufNewFile *_spec.rb set filetype=rspec
-
-" Rabl
-au BufRead,BufNewFile *.rabl set filetype=ruby
-
-
 """"""""""
 " Autocmds
 """"""""""
@@ -238,6 +229,16 @@ augroup vimrcEx
   " Clear all autocmds in the group
   autocmd!
 
+  " Syntax
+  autocmd BufNewFile,BufRead *.coffee set filetype=coffee
+
+  " Path and suffix settings for gf
+  autocmd Filetype ruby setlocal suffixesadd+=.rb path+=lib,spec
+  autocmd Filetype javascript,coffee setlocal suffixesadd+=.js,.coffee
+
+  " Create parent directories when saving a new file
+  autocmd BufWritePre * call MkdirIfNeeded(expand('<afile>'), +expand('<abuf>'))
+
   " When editing a file, always jump to the last known cursor position.
   " Don't do it for commit messages, when the position is invalid, or when
   " inside an event handler (happens when dropping a file on gvim).
@@ -245,13 +246,6 @@ augroup vimrcEx
     \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
-
-  " Create parent directories when saving a new file
-  autocmd BufWritePre *
-    \ call MkdirIfNeeded(expand('<afile>'), +expand('<abuf>'))
-
-  " Turn off visual bell
-  autocmd GUIEnter * set visualbell t_vb=
 augroup END
 
 
