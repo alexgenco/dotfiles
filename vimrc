@@ -253,7 +253,7 @@ augroup END
 " Colorscheme
 """""""""""""
 
-colorscheme rick
+colorscheme desert
 
 
 """"""""""""""""
