@@ -12,6 +12,7 @@ Bundle 'gmarik/vundle'
 Bundle 'kien/ctrlp.vim'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'thoughtbot/vim-rspec'
+Bundle 'noahfrederick/vim-noctu'
 
 
 """"""""""
@@ -253,7 +254,7 @@ augroup END
 " Colorscheme
 """""""""""""
 
-colorscheme desert
+colorscheme noctu
 
 
 """"""""""""""""
