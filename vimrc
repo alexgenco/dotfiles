@@ -26,7 +26,7 @@ set backspace=indent,eol,start
 set encoding=utf-8
 
 " Line numbers
-set nonumber
+set number
 
 " Matchit plugin
 runtime macros/matchit.vim
@@ -131,7 +131,7 @@ set grepprg=ack\ -H\ --nocolor\ --nogroup\ --column\ $*
 
 " Status line
 set laststatus=2
-set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-10(%4l:%c\ %P%)
+set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-8(%4l:%c%)
 
 
 """""""""""""
