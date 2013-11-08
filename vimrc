@@ -63,6 +63,7 @@ set ofu=syntaxcomplete#Complete
 set wildmode=longest,list
 set complete=.,b,u,]
 set completeopt=longest,menuone
+set infercase
 set wildmenu
 
 " Mode lines
