@@ -63,7 +63,6 @@ set ofu=syntaxcomplete#Complete
 set wildmode=longest,list
 set complete=.,b,u,]
 set completeopt=longest,menuone
-set infercase
 set wildmenu
 
 " Mode lines
@@ -169,7 +168,6 @@ nnoremap <leader>R :call RunNearestSpec()<cr>
 nnoremap <leader>t :call RunAllSpecs()<cr>
 
 " Custom function mappings (see Functions section)
-inoremap <tab> <C-R>=CleverTab()<cr>
 nnoremap <leader>n :call RenameFile()<cr>
 nnoremap <leader>gb :call GitBlame()<cr>
 
@@ -177,15 +175,6 @@ nnoremap <leader>gb :call GitBlame()<cr>
 """""""""""
 " Functions
 """""""""""
-
-" Autocomplete unless on an empty line (from :h ins-completion)
-function! CleverTab()
-  if strpart(getline('.'), 0, col('.')-1) =~ '^\s*$'
-    return "\<tab>"
-  else
-    return "\<C-N>"
-  endif
-endfunction
 
 " https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
 function! RenameFile()
@@ -232,6 +221,7 @@ augroup vimrcEx
 
   " Syntax
   autocmd BufNewFile,BufRead *.coffee set filetype=coffee
+  autocmd BufRead,BufNewFile *.rs,*.rc set filetype=rust
 
   " Path and suffix settings for gf
   autocmd Filetype ruby setlocal suffixesadd+=.rb path+=lib,spec
