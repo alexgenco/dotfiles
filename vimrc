@@ -8,10 +8,11 @@ filetype off
 set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
-Bundle 'kien/ctrlp.vim'
-Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'thoughtbot/vim-rspec'
+Bundle "gmarik/vundle"
+Bundle "kien/ctrlp.vim"
+Bundle "michaeljsmith/vim-indent-object"
+Bundle "thoughtbot/vim-rspec"
+Bundle "wikitopian/hardmode"
 
 
 """"""""""
@@ -133,12 +134,14 @@ set grepprg=ack\ -H\ --nocolor\ --nogroup\ --column\ $*
 set laststatus=2
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-8(%4l:%c%)
 
+" Encryption
+set cryptmethod=blowfish
 
 """""""""""""
 " Keybindings
 """""""""""""
 
-let mapleader = ","
+let mapleader = "\\"
 
 " Because I always mess these up
 command! W w
@@ -161,11 +164,15 @@ nnoremap <silent> <leader>vs :source $MYVIMRC<cr>:nohlsearch<cr>
 " Turn off highlighting
 nnoremap <silent> <space> :nohlsearch<cr>
 
+" Ctrl p
+let g:ctrlp_map = "<leader>ff"
+
 " Run tests
 let g:rspec_command = "!clear && rspec {spec}"
-nnoremap <leader>r :call RunCurrentSpecFile()<cr>
-nnoremap <leader>R :call RunNearestSpec()<cr>
-nnoremap <leader>t :call RunAllSpecs()<cr>
+nnoremap <leader>rb :call RunCurrentSpecFile()<cr>
+nnoremap <leader>rf :call RunNearestSpec()<cr>
+nnoremap <leader>ra :call RunAllSpecs()<cr>
+nnoremap <leader>rl :call RunLastSpec()<cr>
 
 " Custom function mappings (see Functions section)
 nnoremap <leader>n :call RenameFile()<cr>
@@ -178,11 +185,11 @@ nnoremap <leader>gb :call GitBlame()<cr>
 
 " https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
 function! RenameFile()
-  let old_name = expand('%')
-  let new_name = input('New file name: ', expand('%'), 'file')
-  if new_name != '' && new_name != old_name
-    exec ':saveas ' . new_name
-    exec ':silent !rm ' . old_name
+  let old_name = expand("%")
+  let new_name = input("New file name: ", expand("%"), "file")
+  if new_name != "" && new_name != old_name
+    exec ":saveas " . new_name
+    exec ":silent !rm " . old_name
     redraw!
   endif
 endfunction
@@ -202,10 +209,10 @@ endfunction
 
 " Make parent directories of new file before save
 function! MkdirIfNeeded(file, buf)
-  if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
-    let dir=fnamemodify(a:file, ':h')
+  if empty(getbufvar(a:buf, "&buftype")) && a:file!~#"\v^\w+\:\/"
+    let dir=fnamemodify(a:file, ":h")
     if !isdirectory(dir)
-      call mkdir(dir, 'p')
+      call mkdir(dir, "p")
     endif
   endif
 endfunction
@@ -228,13 +235,13 @@ augroup vimrcEx
   autocmd Filetype javascript,coffee setlocal suffixesadd+=.js,.coffee
 
   " Create parent directories when saving a new file
-  autocmd BufWritePre * call MkdirIfNeeded(expand('<afile>'), +expand('<abuf>'))
+  autocmd BufWritePre * call MkdirIfNeeded(expand("<afile>"), +expand("<abuf>"))
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it for commit messages, when the position is invalid, or when
   " inside an event handler (happens when dropping a file on gvim).
   autocmd BufReadPost *
-    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+    \ if &ft != "gitcommit" && line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
 augroup END
