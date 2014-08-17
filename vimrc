@@ -39,10 +39,15 @@ set incsearch
 set hlsearch
 
 " Line endings
-set listchars=tab:▸·,trail:·
+set listchars=tab:▸·,trail:·,extends:»
 set list
-set nowrap
+set wrap
 set linebreak
+let &showbreak = '> '
+
+" Move by visual line
+nnoremap k gk
+nnoremap j gj
 
 " More context while scrolling
 set scrolloff=8
@@ -114,12 +119,6 @@ set timeout timeoutlen=3000 ttimeoutlen=100
 set foldmethod=indent
 set nofoldenable
 
-" Minimum width
-set winwidth=100
-
-" Minimum height
-set winheight=30
-
 " Let buffers exist in the background
 set hidden
 
@@ -133,9 +132,6 @@ set grepprg=ack\ -H\ --nocolor\ --nogroup\ --column\ $*
 " Status line
 set laststatus=2
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-8(%4l:%c%)
-
-" Encryption
-set cryptmethod=blowfish
 
 """""""""""""
 " Keybindings
