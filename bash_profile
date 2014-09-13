@@ -29,6 +29,3 @@ export PROMPT_COMMAND='history -a'
 shopt -s histappend
 
 test -f ~/.bash_profile.local && source ~/.bash_profile.local
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
