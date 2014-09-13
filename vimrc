@@ -247,7 +247,7 @@ augroup END
 " Colorscheme
 """""""""""""
 
-colorscheme desert
+colorscheme Tomorrow-Night-Bright
 
 
 """"""""""""""""
