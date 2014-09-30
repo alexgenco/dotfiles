@@ -11,8 +11,11 @@ call vundle#rc()
 Bundle "gmarik/vundle"
 Bundle "kien/ctrlp.vim"
 Bundle "michaeljsmith/vim-indent-object"
-Bundle "thoughtbot/vim-rspec"
+"Bundle "thoughtbot/vim-rspec"
+Bundle "skalnik/vim-vroom"
 Bundle "wikitopian/hardmode"
+Bundle "altercation/vim-colors-solarized"
+Bundle "wting/rust.vim"
 
 
 """"""""""
@@ -107,7 +110,7 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " Ignore filetypes
-set wildignore+=*/.git/*,*/tmp/*,*/*.orig,*/.sass-cache/*,*.o,*.hi,*.pyc,*/node_modules/*
+set wildignore+=*/.git/*,*/tmp/*,*/*.orig,*/.sass-cache/*,*.o,*.hi,*.pyc,*/node_modules/*,*/target/*
 
 " Prevent tabs from becoming tabstops for some reason
 au BufReadPost * set expandtab
@@ -164,11 +167,14 @@ nnoremap <silent> <space> :nohlsearch<cr>
 let g:ctrlp_map = "<leader>ff"
 
 " Run tests
-let g:rspec_command = "!clear && rspec {spec}"
-nnoremap <leader>rb :call RunCurrentSpecFile()<cr>
-nnoremap <leader>rf :call RunNearestSpec()<cr>
-nnoremap <leader>ra :call RunAllSpecs()<cr>
-nnoremap <leader>rl :call RunLastSpec()<cr>
+"let g:rspec_command = "!clear && rspec {spec}"
+"nnoremap <leader>rb :call RunCurrentSpecFile()<cr>
+"nnoremap <leader>rf :call RunNearestSpec()<cr>
+"nnoremap <leader>ra :call RunAllSpecs()<cr>
+"nnoremap <leader>rl :call RunLastSpec()<cr>
+let g:vroom_map_keys = 0
+nnoremap <leader>rb :VroomRunTestFile<cr>
+nnoremap <leader>rf :VroomRunNearestTest<cr>
 
 " Custom function mappings (see Functions section)
 nnoremap <leader>n :call RenameFile()<cr>
@@ -247,7 +253,9 @@ augroup END
 " Colorscheme
 """""""""""""
 
-colorscheme Tomorrow-Night-Bright
+let g:solarized_termcolors=256
+set background=dark
+colorscheme solarized
 
 
 """"""""""""""""
