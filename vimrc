@@ -5,18 +5,19 @@
 set nocompatible
 filetype off
 
-set runtimepath+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle "gmarik/vundle"
-Bundle "kien/ctrlp.vim"
-Bundle "michaeljsmith/vim-indent-object"
-"Bundle "thoughtbot/vim-rspec"
-Bundle "skalnik/vim-vroom"
-Bundle "wikitopian/hardmode"
-Bundle "altercation/vim-colors-solarized"
-Bundle "wting/rust.vim"
+Plugin 'gmarik/Vundle.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'michaeljsmith/vim-indent-object'
+"Plugin 'thoughtbot/vim-rspec'
+Plugin 'skalnik/vim-vroom'
+Plugin 'wikitopian/hardmode'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'wting/rust.vim'
 
+call vundle#end()
 
 """"""""""
 " Settings
