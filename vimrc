@@ -9,11 +9,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'michaeljsmith/vim-indent-object'
-"Plugin 'thoughtbot/vim-rspec'
-Plugin 'skalnik/vim-vroom'
-Plugin 'wikitopian/hardmode'
+Plugin 'thoughtbot/vim-rspec'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'wting/rust.vim'
 
@@ -47,7 +43,8 @@ set listchars=tab:▸·,trail:·,extends:»
 set list
 set wrap
 set linebreak
-let &showbreak = '> '
+let &showbreak = '↳ '
+set breakindent
 
 " Move by visual line
 nnoremap k gk
@@ -111,7 +108,7 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " Ignore filetypes
-set wildignore+=*/.git/*,*/tmp/*,*/*.orig,*/.sass-cache/*,*.o,*.hi,*.pyc,*/node_modules/*,*/target/*
+set wildignore+=*/.git/*,*/tmp/*,*/*.orig,*/.sass-cache/*,*.o,*.hi,*.pyc,*/node_modules/*,*/target/*,vendor/*
 
 " Prevent tabs from becoming tabstops for some reason
 au BufReadPost * set expandtab
@@ -131,7 +128,7 @@ set splitbelow
 set splitright
 
 " Use ack for :grep
-set grepprg=ack\ -H\ --nocolor\ --nogroup\ --column\ $*
+set grepprg=git\ grep\ -n\ $*
 
 " Status line
 set laststatus=2
@@ -168,14 +165,11 @@ nnoremap <silent> <space> :nohlsearch<cr>
 let g:ctrlp_map = "<leader>ff"
 
 " Run tests
-"let g:rspec_command = "!clear && rspec {spec}"
-"nnoremap <leader>rb :call RunCurrentSpecFile()<cr>
-"nnoremap <leader>rf :call RunNearestSpec()<cr>
-"nnoremap <leader>ra :call RunAllSpecs()<cr>
-"nnoremap <leader>rl :call RunLastSpec()<cr>
-let g:vroom_map_keys = 0
-nnoremap <leader>rb :VroomRunTestFile<cr>
-nnoremap <leader>rf :VroomRunNearestTest<cr>
+let g:rspec_command = "!clear && bundle exec rspec {spec}"
+nnoremap <leader>rb :call RunCurrentSpecFile()<cr>
+nnoremap <leader>rf :call RunNearestSpec()<cr>
+nnoremap <leader>ra :call RunAllSpecs()<cr>
+nnoremap <leader>rl :call RunLastSpec()<cr>
 
 " Custom function mappings (see Functions section)
 nnoremap <leader>n :call RenameFile()<cr>

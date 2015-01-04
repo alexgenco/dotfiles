@@ -1,5 +1,3 @@
-export PATH=$PATH:~/bin
-
 test -e ~/.bash_aliases && source ~/.bash_aliases
 
 function __jobs_info {
@@ -29,3 +27,6 @@ export PROMPT_COMMAND='history -a'
 shopt -s histappend
 
 test -f ~/.bash_profile.local && source ~/.bash_profile.local
+
+export PATH="$HOME/.rbenv/bin:$HOME/bin:/usr/local/bin:$PATH"
+eval "$(rbenv init -)"
