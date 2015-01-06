@@ -44,7 +44,10 @@ set list
 set wrap
 set linebreak
 let &showbreak = '↳ '
-set breakindent
+
+if exists("&breakindent")
+  set breakindent
+endif
 
 " Move by visual line
 nnoremap k gk
