@@ -13,8 +13,6 @@
 	ui = true
 [github]
 	user = alexgenco
-[core]
-	excludesfile = /Users/agenco/.gitignore_global
 [grep]
 	extendRegexp = true
 	lineNumber = true
