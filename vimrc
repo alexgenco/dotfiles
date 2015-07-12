@@ -113,9 +113,6 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 " Ignore filetypes
 set wildignore+=*/.git/*,*/tmp/*,*/*.orig,*/.sass-cache/*,*.o,*.hi,*.pyc,*/node_modules/*,*/target/*,vendor/*
 
-" Prevent tabs from becoming tabstops for some reason
-au BufReadPost * set expandtab
-
 " Prevent O delay
 set timeout timeoutlen=3000 ttimeoutlen=100
 
@@ -136,6 +133,9 @@ set grepprg=git\ grep\ -n\ $*
 " Status line
 set laststatus=2
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-8(%4l:%c%)
+
+" Move cursor beyond end of line in visual block mode
+set virtualedit=block
 
 """""""""""""
 " Keybindings
@@ -221,6 +221,9 @@ endfunction
 """"""""""
 " Autocmds
 """"""""""
+
+" Prevent tabs from becoming tabstops for some reason
+au BufReadPost * set expandtab
 
 augroup vimrcEx
   " Clear all autocmds in the group
