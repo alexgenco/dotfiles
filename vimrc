@@ -8,8 +8,8 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'thoughtbot/vim-rspec'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'wting/rust.vim'
+Plugin 'flazz/vim-colorschemes'
 
 call vundle#end()
 
@@ -59,9 +59,6 @@ set scrolljump=5
 
 " Automatically read files changed outside vim
 set autoread
-
-" Allow 100 tabs at once
-set tabpagemax=100
 
 " Prevent automatically adding newlines to end of file
 set binary
@@ -125,7 +122,7 @@ set hidden
 set splitbelow
 set splitright
 
-" Use ack for :grep
+" Use git for :grep
 set grepprg=git\ grep\ -n\ $*
 
 " Status line
@@ -141,29 +138,8 @@ set virtualedit=block
 
 let mapleader = "\\"
 
-" Because I always mess these up
-command! W w
-command! Q q
-nnoremap K k
-
 " Make Y go to end of line
 nnoremap Y y$
-
-" Inline do ... end
-vnoremap in J V:s/\s\+do\s\+/ { <cr> V:s/\s\+end\s*/ }<cr>:nohlsearch<cr>
-
-" Copy to system clipboard
-vnoremap <leader>c "*y
-
-" Shortcut to edit .vimrc
-nnoremap <leader>vv :tabedit $MYVIMRC<cr>
-nnoremap <silent> <leader>vs :source $MYVIMRC<cr>:nohlsearch<cr>
-
-" Turn off highlighting
-nnoremap <silent> <space> :nohlsearch<cr>
-
-" Ctrl p
-let g:ctrlp_map = "<leader>ff"
 
 " Run tests
 let g:rspec_command = "!clear && bundle exec rspec {spec}"
@@ -172,37 +148,9 @@ nnoremap <leader>rf :call RunNearestSpec()<cr>
 nnoremap <leader>ra :call RunAllSpecs()<cr>
 nnoremap <leader>rl :call RunLastSpec()<cr>
 
-" Custom function mappings (see Functions section)
-nnoremap <leader>n :call RenameFile()<cr>
-nnoremap <leader>gb :call GitBlame()<cr>
-
 " }}}
 
 " Functions {{{
-
-" https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
-function! RenameFile()
-  let old_name = expand("%")
-  let new_name = input("New file name: ", expand("%"), "file")
-  if new_name != "" && new_name != old_name
-    exec ":saveas " . new_name
-    exec ":silent !rm " . old_name
-    redraw!
-  endif
-endfunction
-
-" Open git blame in new tab
-function! GitBlame()
-  let line = line(".")
-  let ftype = &ft
-  tabnew
-  r!git --no-pager blame #
-  set buftype=nofile
-  set bufhidden=hide
-  g/^$/d
-  exec ":set filetype=".ftype
-  exec ":".line
-endfunction
 
 " Make parent directories of new file before save
 function! MkdirIfNeeded(file, buf)
@@ -249,8 +197,7 @@ augroup END
 
 " Colorscheme {{{
 
-set background=dark
-colorscheme desert
+colorscheme github
 
 " }}}
 
