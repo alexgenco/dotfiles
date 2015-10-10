@@ -1,6 +1,4 @@
-"""""""""
-" Bundles
-"""""""""
+" Bundles {{{
 
 set nocompatible
 filetype off
@@ -15,9 +13,9 @@ Plugin 'wting/rust.vim'
 
 call vundle#end()
 
-""""""""""
-" Settings
-""""""""""
+" }}}
+
+" Settings {{{
 
 syntax enable
 filetype plugin indent on
@@ -76,7 +74,7 @@ set completeopt=longest,menuone
 set wildmenu
 
 " Mode lines
-set modelines=5
+set modelines=1
 set modeline
 
 " Increase command history
@@ -137,9 +135,9 @@ set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-8(%4l:%c%)
 " Move cursor beyond end of line in visual block mode
 set virtualedit=block
 
-"""""""""""""
-" Keybindings
-"""""""""""""
+" }}}
+
+" Keybindings {{{
 
 let mapleader = "\\"
 
@@ -178,10 +176,9 @@ nnoremap <leader>rl :call RunLastSpec()<cr>
 nnoremap <leader>n :call RenameFile()<cr>
 nnoremap <leader>gb :call GitBlame()<cr>
 
+" }}}
 
-"""""""""""
-" Functions
-"""""""""""
+" Functions {{{
 
 " https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
 function! RenameFile()
@@ -217,10 +214,9 @@ function! MkdirIfNeeded(file, buf)
   endif
 endfunction
 
+" }}}
 
-""""""""""
-" Autocmds
-""""""""""
+" Autocmds {{{
 
 " Prevent tabs from becoming tabstops for some reason
 au BufReadPost * set expandtab
@@ -249,19 +245,21 @@ augroup vimrcEx
     \ endif
 augroup END
 
+" }}}
 
-"""""""""""""
-" Colorscheme
-"""""""""""""
+" Colorscheme {{{
 
 set background=dark
 colorscheme desert
 
+" }}}
 
-""""""""""""""""
-" Local settings
-""""""""""""""""
+" Local settings {{{
 
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
+
+" }}}
+
+" vim:foldmethod=marker:foldlevel=0:foldenable
