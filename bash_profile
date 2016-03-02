@@ -25,6 +25,8 @@ export HISTTIMEFORMAT="%D %T "
 export HISTIGNORE="&:ls:exit"
 export PROMPT_COMMAND='history -a'
 shopt -s histappend
+# Save multi-line commands as one command
+shopt -s cmdhist
 
 test -f ~/.bash_profile.local && source ~/.bash_profile.local
 
