@@ -1,8 +1,3 @@
-dot files yall
+Installation requires [GNU stow](https://www.gnu.org/software/stow/):
 
-
-        $ git clone git@github.com:alexgenco/dotfiles.git
-        $ cd dotfiles
-        $ git submodule init && git submodule update
-
-ln -s that shit
+`brew install stow && rake symlink`

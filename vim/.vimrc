@@ -197,7 +197,7 @@ augroup END
 
 " Colorscheme {{{
 
-colorscheme github
+colorscheme desert
 
 " }}}
 

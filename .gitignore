@@ -1,6 +1,6 @@
-/push.log
-/undo
-/vim/undo
-/vim/doc
-/vim/.netrwhist
-/vim/.VimballRecord
+/vim/.vim/undo
+/vim/.vim/doc
+/vim/.vim/.netrwhist
+/vim/.vim/.VimballRecord
+/vim/.vim/.init.vim-rplugin~
+/vim/.vim/shada
