@@ -1,10 +1,15 @@
+require "shellwords"
+
 desc "Symlink all files into $HOME"
 task :symlink do
-  require "shellwords"
-  home = Dir.home.shellescape
-
   Dir.glob("*/") do |dir|
-    dir = dir.chomp("/").shellescape
-    sh "stow -t #{home} #{dir}"
+    sh "stow -t $HOME #{dir.shellescape}"
+  end
+end
+
+desc "Remove all symlinks from $HOME"
+task :unlink do
+  Dir.glob("*/") do |dir|
+    sh "stow -t $HOME -D #{dir.shellescape}"
   end
 end
