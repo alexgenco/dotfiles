@@ -1,20 +1,18 @@
 [user]
-	email = alexgenco@gmail.com
-	name = Alex Genco
+  email = alexgenco@gmail.com
+  name = Alex Genco
 [alias]
   st = status
   co = checkout
   ci = commit -v
-	b = branch
-	chp = cherry-pick
-	prb = pull --rebase
+  br = branch
   dc = diff --cached
 [color]
-	ui = true
+  ui = true
 [github]
-	user = alexgenco
+  user = alexgenco
 [grep]
-	extendRegexp = true
-	lineNumber = true
+  extendRegexp = true
+  lineNumber = true
 [push]
-	default = simple
+  default = simple
