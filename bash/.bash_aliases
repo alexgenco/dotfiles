@@ -3,5 +3,6 @@ alias be='bundle exec'
 alias ta='tmux attach'
 alias g='git'
 
-# local aliases
-[[ -f ~/.bash_aliases.local ]] && source ~/.bash_aliases.local
+if [ -f ~/.bash_aliases.local ]; then
+  source ~/.bash_aliases.local
+fi
