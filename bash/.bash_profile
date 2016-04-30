@@ -12,7 +12,10 @@ export PROMPT_COMMAND='history -a'
 shopt -s histappend
 shopt -s cmdhist
 
-export PATH="$HOME/.rbenv/bin:$HOME/bin:$HOME/.cargo/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 if [ -e ~/.git-completion ]; then
