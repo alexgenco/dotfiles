@@ -12,6 +12,7 @@ Plugin 'wting/rust.vim'
 Plugin 'flazz/vim-colorschemes'
 call vundle#end()
 
+
 " Settings
 "
 syntax enable
@@ -120,6 +121,9 @@ set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-8(%4l:%c%)
 " move cursor beyond end of line in visual block mode
 set virtualedit=block
 
+" don't move cursor to start of line on jumps
+set nostartofline
+
 
 " Keybindings
 "
@@ -134,6 +138,7 @@ nnoremap <leader>rb :call RunCurrentSpecFile()<cr>
 nnoremap <leader>rf :call RunNearestSpec()<cr>
 nnoremap <leader>ra :call RunAllSpecs()<cr>
 nnoremap <leader>rl :call RunLastSpec()<cr>
+
 
 " Functions
 "
