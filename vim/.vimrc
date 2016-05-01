@@ -9,7 +9,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'wting/rust.vim'
-Plugin 'flazz/vim-colorschemes'
 call vundle#end()
 
 
