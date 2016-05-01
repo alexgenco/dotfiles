@@ -3,3 +3,18 @@
 "\C-n": history-search-forward
 "\e[A":history-search-backward
 "\e[B":history-search-forward
+
+# list all completion matches
+set show-all-if-ambiguous on
+
+# add a trailing slash when autocompleting directory symlinks
+set mark-symlinked-directories on
+
+# show all autocomplete results at once
+set page-completions off
+
+# prompt for > 200 completion items
+set completion-query-items 200
+
+# show extra file information when completing
+set visible-stats on
