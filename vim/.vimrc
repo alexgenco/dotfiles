@@ -9,6 +9,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'wting/rust.vim'
+Plugin 'xero/sourcerer.vim'
 call vundle#end()
 
 
@@ -123,6 +124,9 @@ set virtualedit=block
 " don't move cursor to start of line on jumps
 set nostartofline
 
+" don't redraw during macros, etc.
+set lazyredraw
+
 
 " Keybindings
 "
@@ -180,7 +184,7 @@ augroup END
 
 " Colorscheme
 "
-colorscheme desert
+colorscheme sourcerer
 
 
 " Local Settings
