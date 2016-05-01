@@ -16,3 +16,5 @@
   lineNumber = true
 [push]
   default = simple
+[diff]
+  tool = vimdiff
