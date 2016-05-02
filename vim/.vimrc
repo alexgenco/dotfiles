@@ -1,24 +1,21 @@
 set nocompatible
+syntax enable
+filetype plugin indent on
 
-" Bundles
+
+" Plugins
 "
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'wting/rust.vim'
-Plugin 'xero/sourcerer.vim'
-call vundle#end()
+call plug#begin('~/.vim/plugged')
+Plug 'thoughtbot/vim-rspec'
+Plug 'wting/rust.vim'
+Plug 'xero/sourcerer.vim'
+call plug#end()
 
 
 " Settings
 "
-syntax enable
-filetype plugin indent on
-set backspace=indent,eol,start
 set encoding=utf-8
+set backspace=indent,eol,start
 
 " line numbers
 set number
@@ -94,11 +91,8 @@ set backup
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
-" ignore filetypes
-set wildignore+=*/.git/*,*/tmp/*,*/*.orig,*/.sass-cache/*,*.o,*.hi,*.pyc,*/node_modules/*,*/target/*,vendor/*
-
 " prevent O delay
-set timeout timeoutlen=3000 ttimeoutlen=100
+set timeout timeoutlen=3001 ttimeoutlen=100
 
 " fold based on indent, disabled by default
 set foldmethod=indent
@@ -126,6 +120,9 @@ set nostartofline
 
 " don't redraw during macros, etc.
 set lazyredraw
+
+" always report changes
+set report=0
 
 
 " Keybindings
