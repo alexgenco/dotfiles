@@ -18,10 +18,6 @@ export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
-if [ -e ~/.git-completion ]; then
-  source ~/.git-completion
-fi
-
 if [ -e ~/.bash_aliases ]; then
   source ~/.bash_aliases
 fi
