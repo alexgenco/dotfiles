@@ -8,12 +8,14 @@ export HISTSIZE=10000
 export HISTTIMEFORMAT="%D %T "
 export HISTIGNORE="&:ls:exit"
 export PROMPT_COMMAND='history -a'
+export GOPATH="$HOME/.go"
 
 shopt -s histappend
 shopt -s cmdhist
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.go/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
