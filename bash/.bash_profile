@@ -7,7 +7,7 @@ export HISTCONTROL=erasedups
 export HISTSIZE=10000
 export HISTTIMEFORMAT="%D %T "
 export HISTIGNORE="&:ls:exit"
-export PROMPT_COMMAND='history -a'
+export PROMPT_COMMAND='history -a; if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
 export GOPATH="$HOME/.go"
 
 shopt -s histappend

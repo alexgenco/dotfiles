@@ -5,3 +5,5 @@
 /vim/.vim/.VimballRecord
 /nvim/.config/nvim/.init.vim-rplugin~
 /nvim/.config/nvim/shada
+/bash/.logs/*
+!/bash/.logs/.gitkeep
