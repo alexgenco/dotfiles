@@ -9,6 +9,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'thoughtbot/vim-rspec'
 Plug 'wting/rust.vim'
 Plug 'xero/sourcerer.vim'
+Plug 'jlanzarotta/bufexplorer'
 call plug#end()
 
 
@@ -138,6 +139,9 @@ nnoremap <leader>rb :call RunCurrentSpecFile()<cr>
 nnoremap <leader>rf :call RunNearestSpec()<cr>
 nnoremap <leader>ra :call RunAllSpecs()<cr>
 nnoremap <leader>rl :call RunLastSpec()<cr>
+
+" grep for the word under the cursor
+nnoremap <leader>gw :grep <cword><cr>
 
 
 " Functions
