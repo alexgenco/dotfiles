@@ -9,15 +9,17 @@ export HISTTIMEFORMAT="%D %T "
 export HISTIGNORE="&:ls:exit"
 export PROMPT_COMMAND='history -a; if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
 export GOPATH="$HOME/.go"
-
-shopt -s histappend
-shopt -s cmdhist
+export PIP_REQUIRE_VIRTUALENV=true
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.go/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
+
+shopt -s histappend
+shopt -s cmdhist
+
 eval "$(rbenv init -)"
 
 if [ -e ~/.bash_aliases ]; then
