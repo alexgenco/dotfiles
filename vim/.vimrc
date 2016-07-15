@@ -8,7 +8,6 @@ filetype plugin indent on
 call plug#begin('~/.vim/plugged')
 Plug 'thoughtbot/vim-rspec'
 Plug 'wting/rust.vim'
-Plug 'xero/sourcerer.vim'
 Plug 'jlanzarotta/bufexplorer'
 call plug#end()
 
@@ -141,7 +140,7 @@ nnoremap <leader>ra :call RunAllSpecs()<cr>
 nnoremap <leader>rl :call RunLastSpec()<cr>
 
 " grep for the word under the cursor
-nnoremap <leader>gw :grep <cword><cr>
+nnoremap <leader>gw :silent grep <cword> \| cwin \| redraw!<cr>
 
 
 " Functions
@@ -185,7 +184,7 @@ augroup END
 
 " Colorscheme
 "
-colorscheme sourcerer
+colorscheme desert
 
 
 " Local Settings
