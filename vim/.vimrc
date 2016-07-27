@@ -6,9 +6,8 @@ filetype plugin indent on
 " Plugins
 "
 call plug#begin('~/.vim/plugged')
-Plug 'thoughtbot/vim-rspec'
-Plug 'wting/rust.vim'
 Plug 'jlanzarotta/bufexplorer'
+Plug 'janko-m/vim-test'
 call plug#end()
 
 
@@ -133,11 +132,10 @@ let mapleader = "\\"
 nnoremap Y y$
 
 " run tests
-let g:rspec_command = "!clear && bundle exec rspec {spec}"
-nnoremap <leader>rb :call RunCurrentSpecFile()<cr>
-nnoremap <leader>rf :call RunNearestSpec()<cr>
-nnoremap <leader>ra :call RunAllSpecs()<cr>
-nnoremap <leader>rl :call RunLastSpec()<cr>
+nmap <silent> <leader>rf :TestNearest<CR>
+nmap <silent> <leader>rb :TestFile<CR>
+nmap <silent> <leader>ra :TestSuite<CR>
+nmap <silent> <leader>rl :TestLast<CR>
 
 " grep for the word under the cursor
 nnoremap <leader>gw :silent grep <cword> \| cwin \| redraw!<cr>
