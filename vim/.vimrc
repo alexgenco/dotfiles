@@ -91,7 +91,7 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " prevent O delay
-set timeout timeoutlen=3001 ttimeoutlen=100
+set timeout timeoutlen=3000 ttimeoutlen=100
 
 " fold based on indent, disabled by default
 set foldmethod=indent
