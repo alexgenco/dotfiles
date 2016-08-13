@@ -7,7 +7,7 @@ export HISTCONTROL=erasedups
 export HISTSIZE=10000
 export HISTTIMEFORMAT="%D %T "
 export HISTIGNORE="&:ls:exit"
-export PROMPT_COMMAND='history -a; if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi &> /dev/null'
+export PROMPT_COMMAND='history -a; if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log 2>&1; fi'
 export GOPATH="$HOME/.go"
 export PIP_REQUIRE_VIRTUALENV=true
 
