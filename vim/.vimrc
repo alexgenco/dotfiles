@@ -161,7 +161,6 @@ endfunction
 "
 " prevent tabs from becoming tabstops for some reason
 au BufReadPost * set expandtab
-au BufNewFile,BufRead *.go setlocal noet nolist ts=4 sw=4 sts=4
 
 augroup vimrcEx
   " clear all autocmds in the group
