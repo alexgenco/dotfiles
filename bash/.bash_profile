@@ -1,13 +1,13 @@
 PS1='\[\033[4m\]\u@\h:\w\[\033[0m\]$ '
 
 export CLICOLOR=1
-export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx # Dark background
+export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export EDITOR=vim
 export HISTCONTROL=erasedups
 export HISTSIZE=10000
 export HISTTIMEFORMAT="%D %T "
 export HISTIGNORE="&:ls:exit"
-export PROMPT_COMMAND='history -a; if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log 2>&1; fi'
+export PROMPT_COMMAND="history -a; history -c; history -r"
 export GOPATH="$HOME/.go"
 export PIP_REQUIRE_VIRTUALENV=true
 
