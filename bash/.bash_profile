@@ -1,13 +1,13 @@
-PS1='\[\033[4m\]\u@\h:\w\[\033[0m\]$ '
+PS1='\[\033[4m\]\u@\h:\W\[\033[0m\]$ '
 
 export CLICOLOR=1
-export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
+export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 export EDITOR=vim
 export HISTCONTROL=erasedups
+export HISTFILESIZE=10000
 export HISTSIZE=10000
 export HISTTIMEFORMAT="%D %T "
 export HISTIGNORE="&:ls:exit"
-export PROMPT_COMMAND="history -a; history -c; history -r"
 export GOPATH="$HOME/.go"
 export PIP_REQUIRE_VIRTUALENV=true
 
