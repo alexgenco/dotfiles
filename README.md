@@ -1,3 +1,5 @@
-Installation requires [GNU stow](https://www.gnu.org/software/stow/):
+## Installation
 
-`brew install stow && rake install`
+On OSX this will install dependencies using homebrew. Otherwise you'll have to install them manually.
+
+`rake install`

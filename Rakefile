@@ -1,7 +1,35 @@
+require "open-uri"
+require "rbconfig"
 require "shellwords"
 
+def dep(exec)
+  %x(command -v #{exec})
+  $?.success? || yield
+end
+
+desc "Install OSX dependencies"
+task :osx_deps do
+  if RbConfig::CONFIG["host_os"] =~ /(darwin|mac os)/
+    dep("brew") do
+      open("https://raw.githubusercontent.com/Homebrew/install/master/install") do |io|
+        Dir.chdir(Dir.pwd) { eval(io.read) }
+      end
+    end
+
+    dep("rbenv") do
+      sh "brew install rbenv"
+    end
+
+    dep("stow") do
+      sh "brew install stow"
+    end
+  else
+    warn "Not installing dependencies on non-OSX. You may need to install them manually."
+  end
+end
+
 desc "Symlink all files into $HOME and install vim plugins"
-task :install do
+task :install => :osx_deps do
   Dir.glob("*/") do |dir|
     sh "stow -t $HOME #{dir.shellescape}"
   end
