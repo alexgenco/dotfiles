@@ -29,3 +29,8 @@ fi
 if [ -f ~/.bash_profile.local ]; then
   source ~/.bash_profile.local
 fi
+
+if [ -f ~/.virtualenv/bin/activate ]; then
+  export VIRTUAL_ENV_DISABLE_PROMPT=1
+  source ~/.virtualenv/bin/activate
+fi
