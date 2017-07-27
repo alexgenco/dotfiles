@@ -3,8 +3,7 @@ require "rbconfig"
 require "shellwords"
 
 def dep(exec)
-  %x(command -v #{exec})
-  $?.success? || yield
+  system("command -v #{exec} > /dev/null") || yield
 end
 
 desc "Install OSX dependencies"
@@ -34,7 +33,7 @@ task :install => :osx_deps do
     sh "stow -t $HOME #{dir.shellescape}"
   end
 
-  sh "vim +PlugInstall +qa!"
+  sh "vim -E +PlugInstall +qa! > /dev/null"
 end
 
 desc "Remove all symlinks from $HOME and uninstall vim plugins"
