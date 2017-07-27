@@ -8,6 +8,7 @@ export HISTFILESIZE=10000
 export HISTSIZE=10000
 export HISTTIMEFORMAT="%D %T "
 export HISTIGNORE="&:ls:exit"
+export GOPATH="$HOME/go"
 export PIP_REQUIRE_VIRTUALENV=true
 
 export PATH="/usr/local/sbin:$PATH"

@@ -8,6 +8,7 @@ filetype plugin indent on
 call plug#begin('~/.vim/plugged')
 Plug 'jlanzarotta/bufexplorer'
 Plug 'janko-m/vim-test'
+Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 call plug#end()
 
 
@@ -134,6 +135,10 @@ let g:netrw_banner=0    " disable annoying banner
 let g:netrw_altv=1      " open splits to the right
 let g:netrw_liststyle=3 " tree view
 let g:netrw_list_hide=netrw_gitignore#Hide()
+
+" vim-go settings
+let g:go_fmt_command = "goimports"
+let g:go_highlight_trailing_whitespace_error = 0
 
 
 " Keybindings
