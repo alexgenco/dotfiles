@@ -183,7 +183,7 @@ augroup vimrcEx
   " syntax
   autocmd BufRead,BufNewFile *.rs,*.rc set filetype=rust
   autocmd BufNewFile,BufRead *.go setlocal noet nolist ts=4 sw=4 sts=4
-  autocmd BufNewFile,BufRead *.txt setlocal tw=80
+  autocmd BufNewFile,BufRead *.txt setlocal tw=80 fo=ant wm=0
 
   " path and suffix settings for gf
   autocmd Filetype ruby setlocal suffixesadd+=.rb path+=lib,spec
