@@ -9,6 +9,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'jlanzarotta/bufexplorer'
 Plug 'janko-m/vim-test'
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 call plug#end()
 
 
@@ -143,19 +144,23 @@ let g:go_highlight_trailing_whitespace_error = 0
 
 " Keybindings
 "
-let mapleader = "\\"
+let mapleader = ","
 
 " make Y go to end of line
 nnoremap Y y$
 
 " run tests
-nmap <silent> <leader>rf :TestNearest<CR>
-nmap <silent> <leader>rb :TestFile<CR>
-nmap <silent> <leader>ra :TestSuite<CR>
-nmap <silent> <leader>rl :TestLast<CR>
+nmap <silent> <leader>rf :TestNearest<cr>
+nmap <silent> <leader>rb :TestFile<cr>
+nmap <silent> <leader>ra :TestSuite<cr>
+nmap <silent> <leader>rl :TestLast<cr>
 
 " grep for the word under the cursor
 nnoremap <leader>gw :silent grep <cword> \| cwin \| redraw!<cr>
+
+" fzf
+nnoremap <leader>ff :call fzf#run(
+      \ {'source': 'git ls-files', 'sink': 'e', 'options': ['--reverse']})<cr>
 
 
 " Functions
