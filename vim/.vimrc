@@ -145,7 +145,7 @@ let g:go_highlight_trailing_whitespace_error = 0
 
 " Keybindings
 "
-let mapleader = ","
+let mapleader = "\\"
 
 " make Y go to end of line
 nnoremap Y y$
