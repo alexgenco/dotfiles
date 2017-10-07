@@ -6,10 +6,10 @@ filetype plugin indent on
 " Plugins
 "
 call plug#begin('~/.vim/plugged')
-Plug 'jlanzarotta/bufexplorer'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'janko-m/vim-test'
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'jparise/vim-graphql'
 call plug#end()
 
@@ -136,7 +136,10 @@ set path+=**
 let g:netrw_banner=0    " disable annoying banner
 let g:netrw_altv=1      " open splits to the right
 let g:netrw_liststyle=3 " tree view
-let g:netrw_list_hide=netrw_gitignore#Hide()
+
+if exists("*netrw_gitignore#Hide")
+  let g:netrw_list_hide=netrw_gitignore#Hide()
+endif
 
 " vim-go settings
 let g:go_fmt_command = "goimports"
@@ -157,11 +160,11 @@ nmap <silent> <leader>ra :TestSuite<cr>
 nmap <silent> <leader>rl :TestLast<cr>
 
 " grep for the word under the cursor
-nnoremap <leader>gw :silent grep <cword> \| cwin \| redraw!<cr>
+nmap <leader>gw :silent grep <cword> \| cwin \| redraw!<cr>
 
 " fzf
-nnoremap <leader>ff :call fzf#run(
-      \ {'source': 'git ls-files', 'sink': 'e', 'options': ['--reverse']})<cr>
+nmap <leader>ff :GFiles -o -c --exclude-standard<cr>
+nmap <leader>be :Buffers<cr>
 
 
 " Functions

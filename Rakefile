@@ -22,6 +22,10 @@ task :osx_deps do
     dep("stow") do
       sh "brew install stow"
     end
+
+    dep("fzf") do
+      sh "brew install fzf"
+    end
   else
     warn "Not installing dependencies on non-OSX. You may need to install them manually."
   end
