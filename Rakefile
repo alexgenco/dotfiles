@@ -38,8 +38,6 @@ task :install => :osx_deps do
   Dir.glob("*/") do |dir|
     sh "stow -t #{HOME} #{dir.shellescape}"
   end
-
-  sh "vim +PlugInstall +qa!"
 end
 
 desc "Remove all symlinks from $HOME and uninstall vim plugins"
