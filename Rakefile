@@ -2,6 +2,8 @@ require "open-uri"
 require "rbconfig"
 require "shellwords"
 
+HOME = Dir.home.shellescape
+
 def dep(exec)
   system("command -v #{exec} > /dev/null") || yield
 end
@@ -34,17 +36,18 @@ end
 desc "Symlink all files into $HOME and install vim plugins"
 task :install => :osx_deps do
   Dir.glob("*/") do |dir|
-    sh "stow -t $HOME #{dir.shellescape}"
+    sh "stow -t #{HOME} #{dir.shellescape}"
   end
 
   sh "vim -E +PlugInstall +qa! > /dev/null"
+  sh "vim -c 'silent GoInstallBinaries' +qa!"
 end
 
 desc "Remove all symlinks from $HOME and uninstall vim plugins"
 task :uninstall do
   Dir.glob("*/") do |dir|
-    sh "stow -t $HOME -D #{dir.shellescape}"
+    sh "stow -t #{HOME} -D #{dir.shellescape}"
   end
 
-  sh "rm -vrf $HOME/.vim/plugged"
+  sh "rm -vrf #{HOME}/.vim/plugged"
 end
