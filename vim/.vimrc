@@ -7,6 +7,7 @@ filetype plugin indent on
 "
 call plug#begin('~/.vim/plugged')
 Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'janko-m/vim-test'
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
