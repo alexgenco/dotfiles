@@ -39,8 +39,7 @@ task :install => :osx_deps do
     sh "stow -t #{HOME} #{dir.shellescape}"
   end
 
-  sh "vim -E +PlugInstall +qa! > /dev/null"
-  sh "vim -c 'silent GoInstallBinaries' +qa!"
+  sh "vim +PlugInstall +qa!"
 end
 
 desc "Remove all symlinks from $HOME and uninstall vim plugins"
