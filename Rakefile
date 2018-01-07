@@ -38,6 +38,7 @@ task :install => :osx_deps do
   end
 
   sh "vim -E +PlugInstall +qa! > /dev/null"
+  sh "vim -c 'silent GoUpdateBinaries' +qa! > /dev/null"
 end
 
 desc "Remove all symlinks from $HOME and uninstall vim plugins"
