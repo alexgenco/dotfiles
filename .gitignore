@@ -1,5 +1,6 @@
 /vim/.vim/undo
 /vim/.vim/doc
+/vim/.vim/autoload/plug.vim
 /vim/.vim/plugged
 /vim/.vim/.netrwhist
 /vim/.vim/.VimballRecord
