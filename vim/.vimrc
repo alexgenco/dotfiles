@@ -20,6 +20,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'janko-m/vim-test'
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 Plug 'jparise/vim-graphql'
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 
@@ -196,7 +197,6 @@ augroup vimrcEx
 
   autocmd BufNewFile,BufRead *.rs,*.rc set filetype=rust
   autocmd BufNewFile,BufRead *.go setlocal noet nolist ts=4 sw=4 sts=4
-  autocmd BufNewFile,BufRead *.txt setlocal nonu spell spl=en_us tw=80 fo=ant wm=0
 
   autocmd Filetype ruby setlocal suffixesadd+=.rb path+=lib,spec
   autocmd Filetype go setlocal suffixesadd+=.go
@@ -207,9 +207,9 @@ augroup vimrcEx
 
   " jump to the last known cursor position
   autocmd BufReadPost *
-    \ if &ft != "gitcommit" && line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
+        \ if &ft != "gitcommit" && line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal g`\"" |
+        \ endif
 augroup END
 
 
