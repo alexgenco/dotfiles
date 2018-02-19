@@ -33,3 +33,13 @@ if [ -f ~/.virtualenv/bin/activate ]; then
   export VIRTUAL_ENV_DISABLE_PROMPT=1
   source ~/.virtualenv/bin/activate
 fi
+
+if [ -d /home/linuxbrew/.linuxbrew ]; then
+  export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+  export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
+  export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
+elif [ -d $HOME/.linuxbrew ]; then
+  export PATH="$HOME/.linuxbrew/bin:$PATH"
+  export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+  export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+fi
