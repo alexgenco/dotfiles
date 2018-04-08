@@ -21,6 +21,7 @@ Plug 'janko-m/vim-test'
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 Plug 'jparise/vim-graphql'
 Plug 'rust-lang/rust.vim'
+Plug 'benmills/vimux'
 call plug#end()
 
 
@@ -104,7 +105,7 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " prevent O delay
-set timeout timeoutlen=3000 ttimeoutlen=100
+set timeout timeoutlen=1000 ttimeoutlen=0
 
 " fold based on indent, disabled by default
 set foldmethod=indent
@@ -143,17 +144,23 @@ set mouse=
 set path+=**
 
 " netrw settings
-let g:netrw_banner=0    " disable annoying banner
+let g:netrw_banner=0    " disable banner
 let g:netrw_altv=1      " open splits to the right
 let g:netrw_liststyle=3 " tree view
+
+" vim-test settings
+if exists("$TMUX")
+  let test#strategy = "vimux"
+else
+  let test#strategy = "basic"
+end
 
 if exists("*netrw_gitignore#Hide")
   let g:netrw_list_hide=netrw_gitignore#Hide()
 endif
 
-" vim-go settings
-let g:go_fmt_command = "goimports"
-let g:go_highlight_trailing_whitespace_error = 0
+" ruby settings
+let g:ruby_indent_block_style = "do"
 
 
 " Keybindings
@@ -173,19 +180,29 @@ nmap <silent> <leader>rl :TestLast<cr>
 nmap <leader>gw :silent grep <cword> \| cwin \| redraw!<cr>
 
 " fzf
-nmap <leader>ff :GFiles -o -c --exclude-standard<cr>
+nmap <leader>ff :call FuzzyFind()<cr>
 nmap <leader>be :Buffers<cr>
 
 
 " Functions
 "
 " make parent directories of new file before save
-function! MkdirIfNeeded(file, buf)
+function! MkdirIfNeeded(file, buf) abort
   if empty(getbufvar(a:buf, "&buftype")) && a:file!~#"\v^\w+\:\/"
     let dir=fnamemodify(a:file, ":h")
     if !isdirectory(dir)
       call mkdir(dir, "p")
     endif
+  endif
+endfunction
+
+function! FuzzyFind() abort
+  silent! call system("git rev-parse --is-work-tree")
+
+  if v:shell_error
+    Files
+  else
+    GFiles -o -c --exclude-standard
   endif
 endfunction
 
