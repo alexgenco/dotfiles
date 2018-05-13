@@ -1,4 +1,7 @@
-set nocompatible
+if &compatible
+  set nocompatible
+endif
+
 syntax enable
 filetype plugin indent on
 
