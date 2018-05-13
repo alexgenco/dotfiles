@@ -10,22 +10,38 @@ filetype plugin indent on
 "
 
 " Install vim-plug
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+"if empty(glob('~/.vim/autoload/plug.vim'))
+"  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+"        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+"endif
+"
+"call plug#begin('~/.vim/plugged')
+"Plug '/usr/local/opt/fzf'
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+"Plug 'junegunn/fzf.vim'
+"Plug 'janko-m/vim-test'
+"Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
+"Plug 'jparise/vim-graphql'
+"Plug 'rust-lang/rust.vim'
+"Plug 'benmills/vimux'
+"call plug#end()
 
-call plug#begin('~/.vim/plugged')
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
-Plug 'janko-m/vim-test'
-Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
-Plug 'jparise/vim-graphql'
-Plug 'rust-lang/rust.vim'
-Plug 'benmills/vimux'
-call plug#end()
+packadd minpac
+call minpac#init()
+call minpac#add('k-takata/minpac', {'type': 'opt'})
+
+call minpac#add('benmills/vimux')
+call minpac#add('junegunn/fzf.vim')
+call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' })
+call minpac#add('fatih/vim-go', {'type': 'opt', 'do': 'GoInstallBinaries'})
+call minpac#add('jparise/vim-graphql', {'type': 'opt'})
+call minpac#add('rust-lang/rust.vim', {'type': 'opt'})
+"minpac#add('fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' })
+"minpac#add('/usr/local/opt/fzf')
+"minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+"minpac#add('junegunn/fzf.vim'
+"minpac#add('janko-m/vim-test'
 
 
 " Settings
