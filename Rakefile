@@ -28,6 +28,10 @@ task :osx_deps do
     dep("fzf") do
       sh "brew install fzf"
     end
+
+    dep("htop") do
+      sh "brew install --HEAD htop"
+    end
   else
     warn "Not installing dependencies on non-OSX. You may need to install them manually."
   end
