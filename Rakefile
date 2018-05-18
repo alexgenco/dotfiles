@@ -30,7 +30,7 @@ task :osx_deps do
     end
 
     dep("htop") do
-      sh "brew install --HEAD htop"
+      sh "brew install htop"
     end
   else
     warn "Not installing dependencies on non-OSX. You may need to install them manually."
