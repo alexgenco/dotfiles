@@ -151,11 +151,23 @@ let g:netrw_altv=1      " open splits to the right
 let g:netrw_liststyle=3 " tree view
 
 " vim-test settings
-if exists("$TMUX")
-  let test#strategy = "vimux"
+if has("nvim")
+  let test#strategy = "neovim"
 else
-  let test#strategy = "basic"
-end
+  function! s:PersistentTerminal(cmd) abort
+    if !exists("g:test#vimterminal_buffer") || !bufexists(g:test#vimterminal_buffer)
+      let g:test#vimterminal_buffer = term_start(
+            \ ["/bin/bash", "--login"],
+            \ {"term_finish": "close", "term_rows": 25})
+      wincmd p
+    endif
+
+    call term_sendkeys(g:test#vimterminal_buffer, a:cmd . "\<cr>")
+  endfunction
+
+  let test#custom_strategies = {"pt": function("s:PersistentTerminal")}
+  let test#strategy = "pt"
+endif
 
 if exists("*netrw_gitignore#Hide")
   let g:netrw_list_hide=netrw_gitignore#Hide()
@@ -223,6 +235,11 @@ augroup vimrcEx
 
   " create parent directories when saving a new file
   autocmd BufWritePre * call MkdirIfNeeded(expand("<afile>"), +expand("<abuf>"))
+
+  if exists("##TerminalOpen")
+    " don't show line numbers in terminal buffers
+    autocmd TerminalOpen * setlocal nonumber
+  endif
 
   " jump to the last known cursor position
   autocmd BufReadPost *
