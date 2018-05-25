@@ -2,7 +2,7 @@ PS1='\[\033[4m\]\u@\h:\W\[\033[0m\]$ '
 
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
-export EDITOR=nvim
+export EDITOR=vim
 export HISTCONTROL=erasedups
 export HISTFILESIZE=10000
 export HISTSIZE=10000
