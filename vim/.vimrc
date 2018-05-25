@@ -2,8 +2,13 @@ if &compatible
   set nocompatible
 endif
 
-syntax enable
-filetype plugin indent on
+if has('autocmd')
+  filetype plugin indent on
+endif
+
+if has('syntax') && !exists('g:syntax_on')
+  syntax enable
+endif
 
 
 " Plugins
@@ -26,7 +31,6 @@ Plug 'rust-lang/rust.vim'
 Plug 'benmills/vimux'
 call plug#end()
 
-
 " Settings
 "
 set encoding=utf-8
@@ -46,10 +50,22 @@ set listchars=tab:▸·,trail:·,extends:»
 set list
 set wrap
 set linebreak
-let &showbreak = '↳ '
+
+if exists("&showbreak")
+  let &showbreak = '↳ '
+endif
+
+" delete comment character when joining commented lines
+if v:version > 703 || v:version == 703 && has("patch541")
+  set formatoptions+=j
+endif
 
 if exists("&breakindent")
   set breakindent
+endif
+
+if has("path_extra")
+  setglobal tags-=./tags tags-=./tags; tags^=./tags;
 endif
 
 " move by visual line
@@ -87,15 +103,24 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 set expandtab
+set smarttab
 
 " turn off bells
 set noerrorbells visualbell t_vb=
+
+" allow color schemes to do bright colors without forcing bold
+if &t_Co == 8 && $TERM !~# '^linux\|^Eterm'
+  set t_Co=16
+endif
 
 " set terminal title
 set title
 
 " no swap files
 set noswapfile
+
+" don't include options in session
+set sessionoptions-=options
 
 " persistent undo
 set undofile
@@ -106,8 +131,11 @@ set backup
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
-" prevent O delay
-set timeout timeoutlen=1000 ttimeoutlen=0
+" set key mapping timeouts
+if !has('nvim') && &ttimeoutlen == -1
+  set ttimeout
+  set ttimeoutlen=10
+endif
 
 " fold based on indent, disabled by default
 set foldmethod=indent
@@ -126,6 +154,10 @@ set grepprg=git\ grep\ -n\ $*
 " status line
 set laststatus=2
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-8(%4l:%c%)
+set ruler
+
+" display as much of last line as possible
+set display+=lastline
 
 " move cursor beyond end of line in visual block mode
 set virtualedit=block
@@ -145,28 +177,21 @@ set mouse=
 " search in subfolders with :find
 set path+=**
 
+" load matchit.vim, but only if the user hasn't installed a newer version.
+if !exists("g:loaded_matchit") && findfile("plugin/matchit.vim", &rtp) ==# ""
+  runtime! macros/matchit.vim
+endif
+
 " netrw settings
 let g:netrw_banner=0    " disable banner
 let g:netrw_altv=1      " open splits to the right
 let g:netrw_liststyle=3 " tree view
 
 " vim-test settings
-if has("nvim")
-  let test#strategy = "neovim"
+if exists("$TMUX")
+  let test#strategy = "vimux"
 else
-  function! s:PersistentTerminal(cmd) abort
-    if !exists("g:test#vimterminal_buffer") || !bufexists(g:test#vimterminal_buffer)
-      let g:test#vimterminal_buffer = term_start(
-            \ ["/bin/bash", "--login"],
-            \ {"term_finish": "close", "term_rows": 25})
-      wincmd p
-    endif
-
-    call term_sendkeys(g:test#vimterminal_buffer, a:cmd . "\<cr>")
-  endfunction
-
-  let test#custom_strategies = {"pt": function("s:PersistentTerminal")}
-  let test#strategy = "pt"
+  let test#strategy = "basic"
 endif
 
 if exists("*netrw_gitignore#Hide")
@@ -175,27 +200,32 @@ endif
 
 " ruby settings
 let g:ruby_indent_block_style = "do"
+let g:ruby_no_expensive=1
+
+" rust settings
+let g:rustfmt_autosave=1
+let g:rustfmt_fail_silently=1
 
 
 " Keybindings
 "
-let mapleader = "\\"
+let mapleader = ","
 
 " make Y go to end of line
 nnoremap Y y$
 
 " run tests
-nmap <silent> <leader>rf :TestNearest<cr>
-nmap <silent> <leader>rb :TestFile<cr>
-nmap <silent> <leader>ra :TestSuite<cr>
-nmap <silent> <leader>rl :TestLast<cr>
+nnoremap <silent> <leader>rf :TestNearest<cr>
+nnoremap <silent> <leader>rb :TestFile<cr>
+nnoremap <silent> <leader>ra :TestSuite<cr>
+nnoremap <silent> <leader>rl :TestLast<cr>
 
 " grep for the word under the cursor
-nmap <leader>gw :silent grep <cword> \| cwin \| redraw!<cr>
+nnoremap <leader>gw :silent grep <cword> \| cwin \| redraw!<cr>
 
 " fzf
-nmap <leader>ff :call FuzzyFind()<cr>
-nmap <leader>be :Buffers<cr>
+nnoremap <leader>ff :call FuzzyFind()<cr>
+nnoremap <leader>be :Buffers<cr>
 
 
 " Functions
