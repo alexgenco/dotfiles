@@ -206,6 +206,9 @@ let g:ruby_no_expensive=1
 let g:rustfmt_autosave=1
 let g:rustfmt_fail_silently=1
 
+" fix incorrect sh non-POSIX highlighting
+let g:is_posix=1
+
 
 " Keybindings
 "
