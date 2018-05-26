@@ -256,12 +256,12 @@ endfunction
 augroup vimrcEx
   autocmd!
 
-  autocmd BufNewFile,BufRead *.rs,*.rc set filetype=rust
-  autocmd BufNewFile,BufRead *.go setlocal noet nolist ts=4 sw=4 sts=4
+  autocmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
 
-  autocmd Filetype ruby setlocal suffixesadd+=.rb path+=lib,spec
-  autocmd Filetype go setlocal suffixesadd+=.go
-  autocmd Filetype rust setlocal suffixesadd+=.rs
+  autocmd Filetype ruby* setlocal suffixesadd+=.rb path+=lib,spec
+  autocmd Filetype ruby.rspec setlocal makeprg=bin/rspec | compiler rspec
+  autocmd Filetype go setlocal suffixesadd+=.go | compiler go
+  autocmd Filetype rust setlocal suffixesadd+=.rs | compiler cargo
 
   " create parent directories when saving a new file
   autocmd BufWritePre * call MkdirIfNeeded(expand("<afile>"), +expand("<abuf>"))
