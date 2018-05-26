@@ -7,8 +7,10 @@
 
 set -euf -o pipefail
 
-if [ "$(docker ps -qa --filter=name=devbox)" ]; then
-  sh -xc "docker attach devbox"
+name="${NAME:-devbox}"
+
+if [ "$(docker ps -qa --filter=name="$name")" ]; then
+  sh -xc "docker attach '$name'"
 else
   volumes=""
 
@@ -19,5 +21,5 @@ else
   done
 
   sh -xc "docker pull alexgenco/devbox:latest"
-  sh -xc "docker run --rm --name=devbox $volumes -it devbox:latest"
+  sh -xc "docker run --detach-keys='ctrl-a,d' --rm --name='$name' $volumes -it devbox:latest"
 fi
