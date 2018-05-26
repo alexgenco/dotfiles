@@ -18,7 +18,7 @@ endif
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  autocmd VimEnter * PlugInstall --sync | normal q | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -209,7 +209,7 @@ let g:rustfmt_fail_silently=1
 
 " Keybindings
 "
-let mapleader = ","
+let mapleader = "\\"
 
 " make Y go to end of line
 nnoremap Y y$
@@ -224,7 +224,7 @@ nnoremap <silent> <leader>rl :TestLast<cr>
 nnoremap <leader>gw :silent grep <cword> \| cwin \| redraw!<cr>
 
 " fzf
-nnoremap <leader>ff :call FuzzyFind()<cr>
+nnoremap <leader>ff :call _FuzzyFind()<cr>
 nnoremap <leader>be :Buffers<cr>
 
 
@@ -240,7 +240,7 @@ function! MkdirIfNeeded(file, buf) abort
   endif
 endfunction
 
-function! FuzzyFind() abort
+function! _FuzzyFind() abort
   silent! call system("git rev-parse --is-work-tree")
 
   if v:shell_error
