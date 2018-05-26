@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+# (w)or(k) o(n) projects in a docker container. Directories passed as arguments
+# will be mounted to the home directory of the docker image.
+#
+# Usage: wkn [DIRECTORY...]
+
+set -euf -o pipefail
+
+if [ "$(docker ps -qa --filter=name=devbox)" ]; then
+  sh -xc "docker attach devbox"
+else
+  volumes=""
+
+  for dirname in "$@"; do
+    dirpath="$(cd "$dirname" && pwd)"
+    basename=$(basename "$dirpath")
+    volumes="$volumes -v '$dirpath':'/home/dev/$basename'"
+  done
+
+  sh -xc "docker pull alexgenco/devbox:latest"
+  sh -xc "docker run --rm --name=devbox $volumes -it devbox:latest"
+fi
