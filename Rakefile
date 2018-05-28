@@ -60,6 +60,10 @@ task :deps do
     sh "git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf"
     sh "~/.fzf/install"
   end
+
+  dep("ruby", "~/.rbenv/bin/rbenv versions | grep -q -F 2.5.1") do
+    sh "~/.rbenv/bin/rbenv install 2.5.1"
+  end
 end
 
 desc "Symlink all files into $HOME and install vim plugins"
