@@ -44,9 +44,7 @@ task :deps do
       sh "sudo apt-get install htop"
     end
   else
-    warn "Don't know how to install dependencies on this platform. " \
-      "You may need to install them manually."
-    next
+    abort "Don't know how to install on this platform."
   end
 
   dep("rbenv", "test -d ~/.rbenv") do
