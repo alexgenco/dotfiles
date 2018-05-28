@@ -51,12 +51,15 @@ task :deps do
     next
   end
 
-  dep("rbenv") do
+  dep("rbenv", "test -d ~/.rbenv") do
     sh "git clone https://github.com/sstephenson/rbenv.git ~/.rbenv"
+  end
+
+  dep("ruby-build", "test -d ~/.rbenv/plugins/ruby-build") do
     sh "git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build"
   end
 
-  dep("fzf") do
+  dep("fzf", "test -f ~/.fzf/bin/fzf") do
     sh "git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf"
     sh "~/.fzf/install --bin"
   end
