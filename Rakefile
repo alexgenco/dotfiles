@@ -58,7 +58,7 @@ task :deps do
 
   dep("fzf") do
     sh "git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf"
-    sh "~/.fzf/install"
+    sh "~/.fzf/install --bin"
   end
 
   dep("ruby", "~/.rbenv/bin/rbenv versions | grep -q -F 2.5.1") do
