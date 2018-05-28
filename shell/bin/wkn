@@ -17,7 +17,7 @@ name="${NAME:-devbox}"
 if [ "$(docker ps -qa --filter=name="$name")" ]; then
   sh -xc "docker attach '$name'"
 else
-  volumes=""
+  volumes="-v '$HOME/.ssh':/home/dev/.ssh"
 
   for dirname in "$@"; do
     dirpath="$(cd "$dirname" && pwd)"
