@@ -67,6 +67,10 @@ task :deps do
   dep("ruby", "~/.rbenv/bin/rbenv versions | grep -q -F 2.5.1") do
     sh "~/.rbenv/bin/rbenv install 2.5.1"
   end
+
+  dep("bundler") do
+    sh "~/.rbenv/shims/gem install bundler"
+  end
 end
 
 desc "Symlink all files into $HOME and install vim plugins"
