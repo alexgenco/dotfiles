@@ -2,6 +2,8 @@ require "open-uri"
 require "rbconfig"
 require "shellwords"
 
+Dir.chdir File.expand_path(__dir__)
+
 def dep(exec, shell = "command -v #{exec} > /dev/null")
   system(*shell) || yield($?.exitstatus)
 end
