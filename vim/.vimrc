@@ -37,7 +37,7 @@ set encoding=utf-8
 set backspace=indent,eol,start
 
 " line numbers
-set number
+set nonumber
 
 " search
 set ignorecase
@@ -191,7 +191,7 @@ let g:netrw_liststyle=3 " tree view
 if exists("$TMUX")
   let test#strategy = "vimux"
 else
-  let test#strategy = "basic"
+  let test#strategy = "make"
 endif
 
 if exists("*netrw_gitignore#Hide")
