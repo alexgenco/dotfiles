@@ -69,18 +69,27 @@ task :deps do
   end
 end
 
-desc "Symlink all files into $HOME and install vim plugins"
-task :install => :deps do
+desc "Symlink all files into $HOME"
+task :link do
   Dir.glob("*/") do |dir|
     sh "stow -t ~ #{dir.shellescape}"
   end
 end
 
-desc "Remove all symlinks from $HOME and uninstall vim plugins"
-task :uninstall do
+desc "Remove symlinks from $HOME"
+task :unlink do
   Dir.glob("*/") do |dir|
     sh "stow -t ~ -D #{dir.shellescape}"
   end
+end
 
+desc "Cleanup installed vim plugins"
+task :cleanup do
   sh "rm -vrf ~/.vim/plugged"
 end
+
+desc "Install dependencies and dotfiles"
+task install: [:deps, :link]
+
+desc "Uninstall dotfiles and cleanup"
+task uninstall: [:unlink, :cleanup]
