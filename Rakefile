@@ -8,6 +8,13 @@ def dep(exec, shell = "command -v #{exec} > /dev/null")
   system(*shell) || yield($?.exitstatus)
 end
 
+def target_dirs(env)
+  env.fetch("only", "*")
+    .split(",")
+    .flat_map { |dir| Dir.glob(dir) }
+    .uniq
+end
+
 desc "Install OSX dependencies"
 task :deps do
   case RbConfig::CONFIG["host_os"]
@@ -71,16 +78,16 @@ task :deps do
   end
 end
 
-desc "Symlink all files into $HOME"
+desc "Symlink files into $HOME"
 task :link do
-  Dir.glob("*/") do |dir|
+  target_dirs(ENV).each do |dir|
     sh "stow -t ~ #{dir.shellescape}"
   end
 end
 
 desc "Remove symlinks from $HOME"
 task :unlink do
-  Dir.glob("*/") do |dir|
+  target_dirs(ENV).each do |dir|
     sh "stow -t ~ -D #{dir.shellescape}"
   end
 end
