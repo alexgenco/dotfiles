@@ -37,7 +37,7 @@ set encoding=utf-8
 set backspace=indent,eol,start
 
 " line numbers
-set nonumber
+set number
 
 " search
 set ignorecase
