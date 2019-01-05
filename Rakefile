@@ -69,8 +69,8 @@ task :deps do
     sh "~/.fzf/install --bin"
   end
 
-  dep("ruby", "~/.rbenv/bin/rbenv versions | grep -q -F 2.5.1") do
-    sh "~/.rbenv/bin/rbenv install 2.5.1"
+  dep("ruby", "~/.rbenv/bin/rbenv versions | grep -q -F 2.6.0") do
+    sh "~/.rbenv/bin/rbenv install 2.6.0"
   end
 
   dep("bundler") do
