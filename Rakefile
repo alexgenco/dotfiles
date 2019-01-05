@@ -9,7 +9,7 @@ def dep(exec, shell = "command -v #{exec} > /dev/null")
 end
 
 def target_dirs(env)
-  env.fetch("only", "*")
+  env.fetch("only", "*/")
     .split(",")
     .flat_map { |dir| Dir.glob(dir) }
     .uniq
