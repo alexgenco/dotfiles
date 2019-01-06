@@ -36,21 +36,35 @@ task :deps do
     dep("htop") do
       sh "brew install htop"
     end
+
+    dep("tmux") do
+      sh "brew install tmux"
+    end
   when /linux/
     dep("apt-get", ["sudo", "apt-get", "update"]) do |status|
       exit status
     end
 
     dep("git") do
-      sh "sudo apt-get install git-core"
+      sh "sudo apt-get -y install git-core"
     end
 
     dep("stow") do
-      sh "sudo apt-get install stow"
+      sh "sudo apt-get -y install stow"
     end
 
     dep("htop") do
-      sh "sudo apt-get install htop"
+      sh "sudo apt-get -y install htop"
+    end
+
+    dep("tmux") do
+      sh "sudo apt-get -y install libevent-dev libncurses5-dev"
+      sh "curl -L https://github.com/tmux/tmux/releases/download/2.8/tmux-2.8.tar.gz | " \
+        "sudo tar xvz -C /usr/local/src"
+
+      Dir.chdir("/usr/local/src/tmux-2.8") do
+        sh "sudo bash -c './configure && make && make install'"
+      end
     end
   else
     abort "Don't know how to install on this platform."
