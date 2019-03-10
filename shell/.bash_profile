@@ -1,5 +1,3 @@
-PS1='\[\033[4m\]\u@\h:\W\[\033[0m\]$ '
-
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 export EDITOR=vim
@@ -18,6 +16,20 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 
 shopt -s histappend
 shopt -s cmdhist
+
+PROMPT_DIRTRIM=2
+
+if [ -f ~/.git-prompt.sh ]; then
+  . ~/.git-prompt.sh
+
+  export GIT_PS1_SHOWDIRTYSTATE=1
+  export GIT_PS1_SHOWUNTRACKEDFILES=1
+  export GIT_PS1_SHOWCOLORHINTS=1
+else
+  alias __git_ps1=:
+fi
+
+export PS1='\[\e[4m\]$(date +"%H:%M:%S") \w$(__git_ps1 " (%s)") $\[\e[0m\] '
 
 eval "$(rbenv init -)"
 
