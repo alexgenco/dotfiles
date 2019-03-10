@@ -22,13 +22,13 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+Plug 'benmills/vimux'
+Plug 'elixir-editors/vim-elixir'
+Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
+Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-Plug 'janko-m/vim-test'
-Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
-Plug 'jparise/vim-graphql'
 Plug 'rust-lang/rust.vim'
-Plug 'benmills/vimux'
 call plug#end()
 
 " Settings
