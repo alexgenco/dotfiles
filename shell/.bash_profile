@@ -29,7 +29,7 @@ else
   alias __git_ps1=:
 fi
 
-export PS1='\[\e[4m\]$(date +"%H:%M:%S") \w$(__git_ps1 " (%s)") $\[\e[0m\] '
+export PS1='\[\e[2m\]$(date +"%H:%M:%S") \w$(__git_ps1) $\[\e[0m\] '
 
 eval "$(rbenv init -)"
 
