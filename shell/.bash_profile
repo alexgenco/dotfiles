@@ -24,7 +24,6 @@ if [ -f ~/.git-prompt.sh ]; then
 
   GIT_PS1_SHOWDIRTYSTATE=1
   GIT_PS1_SHOWUNTRACKEDFILES=1
-  GIT_PS1_SHOWCOLORHINTS=1
 else
   alias __git_ps1=:
 fi
