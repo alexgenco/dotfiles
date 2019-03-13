@@ -5,7 +5,7 @@ require "shellwords"
 Dir.chdir File.expand_path(__dir__)
 
 def dep(exec, shell = "command -v #{exec} > /dev/null")
-  system(*shell) || yield($?.exitstatus)
+  system(shell) || yield($?.exitstatus)
 end
 
 def target_dirs(env)
@@ -41,7 +41,7 @@ task :deps do
       sh "brew install tmux"
     end
   when /linux/
-    dep("apt-get", ["sudo", "apt-get", "update"]) do |status|
+    dep("apt-get", "sudo apt-get update") do |status|
       exit status
     end
 
