@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+rev="${1:-HEAD}"
+sub="$(git log -n1 --format=format:%s "$rev")"
+opt="--fixup"
+
+case "$sub" in fixup!*)
+  opt="--reuse-message"
+esac
+
+exec git commit "$opt"="$rev"
