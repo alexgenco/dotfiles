@@ -70,11 +70,11 @@ task :deps do
     abort "Don't know how to install on this platform."
   end
 
-  dep("rbenv", "test -d ~/.rbenv") do
+  dep("rbenv", "test -d ~/.rbenv && git -C ~/.rbenv pull") do
     sh "git clone https://github.com/sstephenson/rbenv.git ~/.rbenv"
   end
 
-  dep("ruby-build", "test -d ~/.rbenv/plugins/ruby-build") do
+  dep("ruby-build", "test -d ~/.rbenv/plugins/ruby-build && git -C ~/.rbenv/plugins/ruby-build pull") do
     sh "git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build"
   end
 
@@ -84,7 +84,7 @@ task :deps do
   end
 
   dep("ruby", "~/.rbenv/bin/rbenv versions | grep -q -F 2.6.0") do
-    sh "~/.rbenv/bin/rbenv install 2.6.0"
+    sh "~/.rbenv/bin/rbenv install 2.6.0 && ~/.rbenv/bin/rbenv global 2.6.0"
   end
 
   dep("bundler") do
