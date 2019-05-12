@@ -19,9 +19,6 @@ shopt -s cmdhist
 
 PROMPT_DIRTRIM=2
 
-__git_ps1() { :; }
-export -f __git_ps1
-
 if [ -f ~/.git-prompt.sh ]; then
   . ~/.git-prompt.sh
 
@@ -29,7 +26,7 @@ if [ -f ~/.git-prompt.sh ]; then
   GIT_PS1_SHOWUNTRACKEDFILES=1
 fi
 
-export PS1='\[\e[2m\e[4m\]$(date +"%H:%M:%S") \w$(__git_ps1) $\[\e[0m\] '
+export PS1='\[\e[2m\e[4m\]$(date +"%H:%M:%S") \w$(__git_ps1 2>/dev/null) $\[\e[0m\] '
 
 eval "$(rbenv init -)"
 
