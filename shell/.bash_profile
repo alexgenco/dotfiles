@@ -19,13 +19,14 @@ shopt -s cmdhist
 
 PROMPT_DIRTRIM=2
 
+__git_ps1() { :; }
+export -f __git_ps1
+
 if [ -f ~/.git-prompt.sh ]; then
   . ~/.git-prompt.sh
 
   GIT_PS1_SHOWDIRTYSTATE=1
   GIT_PS1_SHOWUNTRACKEDFILES=1
-else
-  alias __git_ps1=:
 fi
 
 export PS1='\[\e[2m\e[4m\]$(date +"%H:%M:%S") \w$(__git_ps1) $\[\e[0m\] '
