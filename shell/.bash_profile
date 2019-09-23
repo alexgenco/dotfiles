@@ -11,6 +11,7 @@ export PIP_REQUIRE_VIRTUALENV=true
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 
