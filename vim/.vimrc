@@ -29,6 +29,7 @@ Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'rust-lang/rust.vim'
+Plug 'https://github.com/Alok/notational-fzf-vim'
 call plug#end()
 
 " Settings
@@ -209,6 +210,9 @@ let g:rustfmt_fail_silently=1
 " fix incorrect sh non-POSIX highlighting
 let g:is_posix=1
 
+" notational-fzf-vim settings
+let g:nv_search_paths = ["~/.wiki"]
+
 
 " Keybindings
 "
@@ -229,6 +233,9 @@ nnoremap <leader>gw :silent grep <cword> \| cwin \| redraw!<cr>
 " fzf
 nnoremap <leader>ff :call _FuzzyFind()<cr>
 nnoremap <leader>be :Buffers<cr>
+
+" notational-fzf-vim
+nnoremap <leader>n :NV!<cr>
 
 
 " Functions
