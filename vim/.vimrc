@@ -29,7 +29,6 @@ Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'rust-lang/rust.vim'
-Plug 'https://github.com/Alok/notational-fzf-vim'
 call plug#end()
 
 " Settings
@@ -191,6 +190,10 @@ let g:netrw_liststyle=3 " tree view
 " vim-test settings
 if exists("$TMUX")
   let test#strategy = "vimux"
+elseif has("nvim")
+  let test#strategy = "neovim"
+elseif exists("*term_start")
+  let test#strategy = "vimterminal"
 else
   let test#strategy = "make"
 endif
@@ -210,22 +213,19 @@ let g:rustfmt_fail_silently=1
 " fix incorrect sh non-POSIX highlighting
 let g:is_posix=1
 
-" notational-fzf-vim settings
-let g:nv_search_paths = ["~/.wiki"]
-
 
 " Keybindings
 "
-let mapleader = "\\"
+let mapleader = ","
 
 " make Y go to end of line
 nnoremap Y y$
 
 " run tests
-nnoremap <silent> <leader>rf :TestNearest<cr>
-nnoremap <silent> <leader>rb :TestFile<cr>
-nnoremap <silent> <leader>ra :TestSuite<cr>
-nnoremap <silent> <leader>rl :TestLast<cr>
+nmap <silent> <leader><c-t> :TestNearest<cr>
+nmap <silent> <leader><c-f> :TestFile<cr>
+nmap <silent> <leader><c-s> :TestSuite<cr>
+nmap <silent> <leader><c-l> :TestLast<cr>
 
 " grep for the word under the cursor
 nnoremap <leader>gw :silent grep <cword> \| cwin \| redraw!<cr>
@@ -233,9 +233,6 @@ nnoremap <leader>gw :silent grep <cword> \| cwin \| redraw!<cr>
 " fzf
 nnoremap <leader>ff :call _FuzzyFind()<cr>
 nnoremap <leader>be :Buffers<cr>
-
-" notational-fzf-vim
-nnoremap <leader>n :NV!<cr>
 
 
 " Functions

@@ -5,8 +5,10 @@
 /vim/.vim/plugged
 /vim/.vim/.netrwhist
 /vim/.vim/.VimballRecord
+/vim/.vim-tmp/*
 /nvim/.config/nvim/.init.vim-rplugin~
 /nvim/.config/nvim/shada
 /nvim/.config/nvim/.netrwhist
 /shell/.logs/*
 !/shell/.logs/.gitkeep
+!/vim/.vim-tmp/.gitkeep
