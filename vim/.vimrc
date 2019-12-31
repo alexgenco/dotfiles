@@ -29,7 +29,6 @@ Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'rust-lang/rust.vim'
-Plug 'NerdyPepper/vim-colors-plain', { 'branch': 'duotone' }
 call plug#end()
 
 " Settings
@@ -289,8 +288,7 @@ augroup END
 
 " Colorscheme
 "
-set background=dark
-colorscheme plain
+colorscheme default
 
 " Local Settings
 "
