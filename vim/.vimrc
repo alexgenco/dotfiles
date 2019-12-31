@@ -24,11 +24,12 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'benmills/vimux'
 Plug 'elixir-editors/vim-elixir'
-Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
+Plug 'fatih/vim-go'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'rust-lang/rust.vim'
+Plug 'NerdyPepper/vim-colors-plain', { 'branch': 'duotone' }
 call plug#end()
 
 " Settings
@@ -222,10 +223,10 @@ let mapleader = ","
 nnoremap Y y$
 
 " run tests
-nmap <silent> <leader><c-t> :TestNearest<cr>
-nmap <silent> <leader><c-f> :TestFile<cr>
-nmap <silent> <leader><c-s> :TestSuite<cr>
-nmap <silent> <leader><c-l> :TestLast<cr>
+nmap <silent> t<c-t> :TestNearest<cr>
+nmap <silent> t<c-f> :TestFile<cr>
+nmap <silent> t<c-s> :TestSuite<cr>
+nmap <silent> t<c-l> :TestLast<cr>
 
 " grep for the word under the cursor
 nnoremap <leader>gw :silent grep <cword> \| cwin \| redraw!<cr>
@@ -288,7 +289,8 @@ augroup END
 
 " Colorscheme
 "
-colorscheme default
+set background=dark
+colorscheme plain
 
 " Local Settings
 "
