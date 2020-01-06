@@ -90,6 +90,10 @@ task :deps do
   dep("bundler") do
     sh "~/.rbenv/shims/gem install bundler"
   end
+
+  dep("vim plugins", "vim -e +PlugInstall +PlugClean +qa!") do
+    warn "Failed to install vim plugins"
+  end
 end
 
 desc "Symlink files into $HOME"
