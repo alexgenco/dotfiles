@@ -43,3 +43,7 @@ if [ -f ~/.virtualenv/bin/activate ]; then
   export VIRTUAL_ENV_DISABLE_PROMPT=1
   source ~/.virtualenv/bin/activate
 fi
+
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
+fi

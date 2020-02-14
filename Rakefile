@@ -40,6 +40,10 @@ task :deps do
     dep("tmux") do
       sh "brew install tmux"
     end
+
+    dep("bash completion", "test -f $(brew --prefix)/etc/bash_completion") do
+      sh "brew install bash-completion"
+    end
   when /linux/
     dep("apt-get", "sudo apt-get update") do |status|
       exit status
