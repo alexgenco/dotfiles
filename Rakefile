@@ -5,14 +5,19 @@ require "shellwords"
 Dir.chdir File.expand_path(__dir__)
 
 def dep(exec, shell = "command -v #{exec} > /dev/null")
-  system(shell) || yield($?.exitstatus)
+  sh(shell) do |ok, status|
+    if !ok
+      block_given? ? yield : exit(status.exitstatus)
+    end
+  end
 end
 
-def target_dirs(env)
-  env.fetch("only", "*/")
+def target_dirs(&block)
+  ENV.fetch("only", "*/")
     .split(",")
     .flat_map { |dir| Dir.glob(dir) }
     .uniq
+    .each(&block)
 end
 
 desc "Install OSX dependencies"
@@ -45,9 +50,7 @@ task :deps do
       sh "brew install bash-completion"
     end
   when /linux/
-    dep("apt-get", "sudo apt-get update") do |status|
-      exit status
-    end
+    dep("apt-get", "sudo apt-get update")
 
     dep("git") do
       sh "sudo apt-get -y install git-core"
@@ -102,14 +105,14 @@ end
 
 desc "Symlink files into $HOME"
 task :link do
-  target_dirs(ENV).each do |dir|
+  target_dirs do |dir|
     sh "stow -t ~ #{dir.shellescape}"
   end
 end
 
 desc "Remove symlinks from $HOME"
 task :unlink do
-  target_dirs(ENV).each do |dir|
+  target_dirs do |dir|
     sh "stow -t ~ -D #{dir.shellescape}"
   end
 end
