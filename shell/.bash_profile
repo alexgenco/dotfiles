@@ -8,6 +8,7 @@ export HISTTIMEFORMAT="%D %T "
 export HISTIGNORE="&:ls:exit"
 export GOPATH="$HOME/go"
 export PIP_REQUIRE_VIRTUALENV=true
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
