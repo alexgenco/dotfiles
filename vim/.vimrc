@@ -30,6 +30,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'andreypopp/vim-colors-plain'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'Joorem/vim-haproxy'
 call plug#end()
 
 " Settings
