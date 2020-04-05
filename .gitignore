@@ -9,6 +9,7 @@
 /nvim/.config/nvim/.init.vim-rplugin~
 /nvim/.config/nvim/shada
 /nvim/.config/nvim/.netrwhist
+/shell/.config/kitty/local.conf
 /shell/.logs/*
 !/shell/.logs/.gitkeep
 !/vim/.vim-tmp/.gitkeep

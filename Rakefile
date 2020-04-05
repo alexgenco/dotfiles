@@ -49,6 +49,10 @@ task :deps do
     dep("bash completion", "test -f $(brew --prefix)/etc/bash_completion") do
       sh "brew install bash-completion"
     end
+
+    dep("kitty") do
+      sh "brew cask install kitty"
+    end
   when /linux/
     dep("apt-get", "sudo apt-get update")
 
