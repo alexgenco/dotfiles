@@ -20,13 +20,13 @@ def target_dirs(&block)
     .each(&block)
 end
 
-desc "Install OSX dependencies"
+desc "Install dependencies"
 task :deps do
   case RbConfig::CONFIG["host_os"]
   when /(darwin|mac os)/
     dep("brew") do
-      open("https://raw.githubusercontent.com/Homebrew/install/master/install") do |io|
-        Dir.chdir(Dir.pwd) { eval(io.read) }
+      open("https://raw.githubusercontent.com/Homebrew/install/master/install.sh") do |io|
+        sh "bash", "-c", io.read
       end
     end
 

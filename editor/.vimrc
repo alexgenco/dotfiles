@@ -225,16 +225,16 @@ let mapleader = ","
 nnoremap Y y$
 
 " run tests
-nmap <silent> t<c-t> :TestNearest<cr>
-nmap <silent> t<c-f> :TestFile<cr>
-nmap <silent> t<c-s> :TestSuite<cr>
-nmap <silent> t<c-l> :TestLast<cr>
+nmap <silent> <leader>t :TestFile<cr>
+nmap <silent> <leader>T :TestNearest<cr>
+nmap <silent> <leader><c-t> :TestLast<cr>
+nmap <silent> <leader><m-T> :TestSuite<cr>
 
 " grep for the word under the cursor
 nnoremap <leader>gw :silent grep <cword> \| cwin \| redraw!<cr>
 
 " fzf
-nnoremap <leader>ff :call _FuzzyFind()<cr>
+nnoremap <leader>f :call _FuzzyFind()<cr>
 nnoremap <leader>be :Buffers<cr>
 
 
