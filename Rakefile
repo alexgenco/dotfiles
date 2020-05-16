@@ -1,3 +1,4 @@
+require "fileutils"
 require "open-uri"
 require "rbconfig"
 require "shellwords"
@@ -6,7 +7,7 @@ Dir.chdir File.expand_path(__dir__)
 
 def dep(exec, shell = "command -v #{exec} > /dev/null")
   sh(shell) do |ok, status|
-    if !ok
+    if !ok || ENV.fetch("force", "").split(",").include?(exec)
       block_given? ? yield : exit(status.exitstatus)
     end
   end
@@ -44,6 +45,14 @@ task :deps do
 
     dep("tmux") do
       sh "brew install tmux"
+    end
+
+    dep("xcode-select", "xcode-select --print-path > /dev/null") do
+      sh "xcode-select --install"
+    end
+
+    dep("nvim") do
+      sh "brew install --HEAD neovim"
     end
 
     dep("bash completion", "test -f $(brew --prefix)/etc/bash_completion") do
@@ -131,3 +140,5 @@ task install: [:deps, :link]
 
 desc "Uninstall dotfiles and cleanup"
 task uninstall: [:unlink, :cleanup]
+
+task default: :install
