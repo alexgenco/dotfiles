@@ -15,6 +15,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
 
 shopt -s histappend
 shopt -s cmdhist

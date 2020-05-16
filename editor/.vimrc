@@ -22,16 +22,11 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'benmills/vimux'
-Plug 'elixir-editors/vim-elixir'
-Plug 'fatih/vim-go'
-Plug 'janko-m/vim-test'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
-Plug 'rust-lang/rust.vim'
 Plug 'andreypopp/vim-colors-plain'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'Joorem/vim-haproxy'
+Plug 'benmills/vimux'
+Plug 'janko-m/vim-test'
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --bin'}
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 " Settings
@@ -209,10 +204,6 @@ endif
 let g:ruby_indent_block_style = "do"
 let g:ruby_no_expensive=1
 
-" rust settings
-let g:rustfmt_autosave=1
-let g:rustfmt_fail_silently=1
-
 " fix incorrect sh non-POSIX highlighting
 let g:is_posix=1
 
@@ -228,14 +219,14 @@ nnoremap Y y$
 nmap <silent> <leader>t :TestFile<cr>
 nmap <silent> <leader>T :TestNearest<cr>
 nmap <silent> <leader><c-t> :TestLast<cr>
-nmap <silent> <leader><m-T> :TestSuite<cr>
+nmap <silent> <leader><c-shift-t> :TestSuite<cr>
 
 " grep for the word under the cursor
-nnoremap <leader>gw :silent grep <cword> \| cwin \| redraw!<cr>
+nnoremap <leader>g :silent grep <cword> \| cwin \| redraw!<cr>
 
 " fzf
-nnoremap <leader>f :call _FuzzyFind()<cr>
-nnoremap <leader>be :Buffers<cr>
+nnoremap <leader>f :call FuzzyFind()<cr>
+nnoremap <leader>b :Buffers<cr>
 
 
 " Functions
@@ -250,7 +241,7 @@ function! MkdirIfNeeded(file, buf) abort
   endif
 endfunction
 
-function! _FuzzyFind() abort
+function! FuzzyFind() abort
   silent! call system("git rev-parse --is-work-tree")
 
   if v:shell_error
@@ -265,13 +256,6 @@ endfunction
 "
 augroup vimrcEx
   autocmd!
-
-  autocmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
-
-  autocmd Filetype ruby* setlocal suffixesadd+=.rb path+=lib,spec
-  autocmd Filetype ruby.rspec setlocal makeprg=bin/rspec | compiler rspec
-  autocmd Filetype go setlocal suffixesadd+=.go | compiler go
-  autocmd Filetype rust setlocal suffixesadd+=.rs | compiler cargo
 
   " create parent directories when saving a new file
   autocmd BufWritePre * call MkdirIfNeeded(expand("<afile>"), +expand("<abuf>"))
