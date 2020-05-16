@@ -27,6 +27,9 @@ Plug 'benmills/vimux'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --bin'}
 Plug 'junegunn/fzf.vim'
+
+"https://github.com/junegunn/vim-plug/wiki/tips#conditional-activation
+Plug 'neovim/nvim-lsp', has('nvim-0.5.0') ? {} : {'on': []}
 call plug#end()
 
 " Settings
