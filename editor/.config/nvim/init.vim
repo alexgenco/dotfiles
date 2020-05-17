@@ -5,18 +5,20 @@ source ~/.vimrc
 
 set inccommand=nosplit
 
-augroup vimrcEx
-  autocmd TermOpen * setlocal nonumber
-augroup END
+autocmd vimrcEx TermOpen * setlocal nonumber
 
 " setup lsp
 if has('nvim-0.5.0')
-silent! lua << EOF
-local lsp = require'nvim_lsp'
+  silent! lua require'nvim_lsp'.rust_analyzer.setup{}
+  silent! lua require'nvim_lsp'.gopls.setup{}
 
-lsp.rust_analyzer.setup({})
-lsp.gopls.setup({})
-EOF
+  function CleanFormat() abort
+    mkview!
+    lua vim.lsp.buf.formatting()
+    silent! loadview
+    write
+  endfunction
+
+  nmap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<cr>
+  nmap <silent> <leader><c-f> <cmd>call CleanFormat()<cr>
 endif
-
-nmap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<cr>
