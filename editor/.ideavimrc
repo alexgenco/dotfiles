@@ -1,0 +1,4 @@
+set visualbell
+
+nnoremap g; :action Back<CR>
+nnoremap g, :action Forward<CR>
