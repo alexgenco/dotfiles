@@ -33,3 +33,5 @@
   whitespace = red reverse
 [rebase]
 	autosquash = true
+[init]
+	defaultBranch = main
