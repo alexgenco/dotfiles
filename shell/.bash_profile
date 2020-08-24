@@ -1,6 +1,6 @@
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
-export EDITOR=vim
+export EDITOR=nvim
 export HISTCONTROL=erasedups
 export HISTFILESIZE=10000
 export HISTSIZE=10000

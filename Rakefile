@@ -111,8 +111,8 @@ task :deps do
     sh "~/.rbenv/shims/gem install bundler"
   end
 
-  dep("vim plugins", "vim -e +PlugInstall +PlugClean +qa!") do
-    warn "Failed to install vim plugins"
+  dep("vim plugins", "nvim -e +PlugInstall +PlugClean +qa!") do
+    warn "Failed to install nvim plugins"
   end
 end
 
