@@ -10,6 +10,7 @@
 /editor/.config/nvim/shada
 /editor/.config/nvim/.netrwhist
 /shell/.config/kitty/local.conf
+/shell/.config/kitty/themes
 /shell/.logs/*
 !/shell/.logs/.gitkeep
 !/editor/.vim-tmp/.gitkeep
