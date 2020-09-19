@@ -27,6 +27,7 @@ Plug 'benmills/vimux'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --bin'}
 Plug 'junegunn/fzf.vim'
+Plug 'neovim/nvim-lspconfig'
 call plug#end()
 
 " Settings
@@ -273,9 +274,20 @@ augroup vimrcEx
 augroup END
 
 
+" LSP Settings
+"
+lua <<EOF
+local lsp = require('nvim_lsp')
+
+lsp.rust_analyzer.setup{}
+lsp.gopls.setup{}
+EOF
+
+
 " Colorscheme
 "
 colorscheme plain
+
 
 " Local Settings
 "
