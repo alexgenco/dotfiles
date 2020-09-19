@@ -283,6 +283,8 @@ lsp.rust_analyzer.setup{}
 lsp.gopls.setup{}
 EOF
 
+autocmd Filetype rust,go setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
 
 " Colorscheme
 "
