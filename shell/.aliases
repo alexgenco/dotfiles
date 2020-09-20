@@ -1,0 +1,10 @@
+alias la='ls -lath'
+alias be='bundle exec'
+alias g=git
+alias gs='git status'
+alias vim=nvim
+alias vi=nvim
+
+if [ -f ~/.aliases.local ]; then
+  source ~/.aliases.local
+fi

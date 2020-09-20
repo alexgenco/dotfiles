@@ -28,3 +28,7 @@ fi
 
 setopt prompt_subst
 export PROMPT='%U%{%F{00}%}%D{%H:%M:%S} %3~$(__git_ps1 2>/dev/null) %#%f%u '
+
+if [ -f ~/.aliases ]; then
+  source ~/.aliases
+fi

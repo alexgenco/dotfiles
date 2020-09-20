@@ -33,8 +33,8 @@ export PS1='\[\e[2m\e[4m\]$(date +"%H:%M:%S") \w$(__git_ps1 2>/dev/null) $\[\e[0
 
 eval "$(rbenv init -)"
 
-if [ -e ~/.bash_aliases ]; then
-  source ~/.bash_aliases
+if [ -e ~/.aliases ]; then
+  source ~/.aliases
 fi
 
 if [ -f ~/.bash_profile.local ]; then
