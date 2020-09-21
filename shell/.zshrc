@@ -3,8 +3,8 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 export EDITOR=nvim
 export GOPATH="$HOME/go"
 
-export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin"
 
@@ -18,6 +18,10 @@ setopt HIST_SAVE_NO_DUPS
 setopt HIST_BEEP
 
 bindkey -e
+
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
 
 if [ -f ~/.git-prompt.sh ]; then
   source ~/.git-prompt.sh
