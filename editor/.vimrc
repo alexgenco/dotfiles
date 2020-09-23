@@ -27,7 +27,11 @@ Plug 'benmills/vimux'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --bin'}
 Plug 'junegunn/fzf.vim'
-Plug 'neovim/nvim-lspconfig'
+
+if has('nvim-0.5')
+  Plug 'neovim/nvim-lspconfig'
+endif
+
 call plug#end()
 
 " Settings
@@ -272,18 +276,6 @@ augroup vimrcEx
         \   exe "normal g`\"" |
         \ endif
 augroup END
-
-
-" LSP Settings
-"
-lua <<EOF
-local lsp = require('nvim_lsp')
-
-lsp.rust_analyzer.setup{}
-lsp.gopls.setup{}
-EOF
-
-autocmd Filetype rust,go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 
 " Colorscheme
