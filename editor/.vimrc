@@ -30,6 +30,7 @@ Plug 'junegunn/fzf.vim'
 
 if has('nvim-0.5')
   Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-lua/completion-nvim'
 endif
 
 call plug#end()
@@ -47,6 +48,9 @@ set ignorecase
 set smartcase
 set incsearch
 set hlsearch
+
+" prevent completion messages
+set shortmess+=c
 
 " line endings
 set listchars=tab:▸·,trail:·,extends:»
@@ -91,7 +95,7 @@ set binary
 set ofu=syntaxcomplete#Complete
 set wildmode=longest,list
 set complete=.,b,u,]
-set completeopt=longest,menuone
+set completeopt=longest,menuone,noinsert,noselect
 set wildmenu
 
 " increase command history
