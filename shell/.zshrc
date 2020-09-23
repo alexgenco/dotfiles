@@ -31,7 +31,7 @@ if [ -f ~/.git-prompt.sh ]; then
 fi
 
 setopt prompt_subst
-export PROMPT='%U%{%F{00}%}%D{%H:%M:%S} %3~$(__git_ps1 2>/dev/null) %#%f%u '
+export PROMPT='%B%U%D{%H:%M:%S} %3~$(__git_ps1 2>/dev/null) %#%b%u '
 
 if [ -f ~/.aliases ]; then
   source ~/.aliases
