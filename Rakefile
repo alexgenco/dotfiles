@@ -139,6 +139,18 @@ task :deps do
   dep("vim plugins", "nvim -e +PlugInstall +PlugClean +qa!") do
     warn "Failed to install nvim plugins"
   end
+
+  dep("rustc") do
+    sh "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh < /dev/tty"
+  end
+
+  dep("go") do
+    sh "brew install go"
+  end
+
+  dep("gopls") do
+    sh "GO111MODULE=on go get golang.org/x/tools/gopls@latest"
+  end
 end
 
 desc "Symlink files into $HOME"
