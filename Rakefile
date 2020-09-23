@@ -21,6 +21,15 @@ def target_dirs(&block)
     .each(&block)
 end
 
+def local_bin(executable)
+  dir = File.join(Dir.home, ".local/bin")
+  exe = File.join(dir, executable)
+
+  FileUtils.mkdir_p(dir)
+  yield exe
+  FileUtils.chmod("+x", exe)
+end
+
 desc "Install dependencies"
 task :deps do
   case RbConfig::CONFIG["host_os"]
@@ -62,6 +71,14 @@ task :deps do
     dep("kitty") do
       sh "brew cask install kitty"
     end
+
+    dep("rust-analyzer") do
+      local_bin("rust-analyzer") do |path|
+        open("https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-mac") do |io|
+          IO.copy_stream(io, path)
+        end
+      end
+    end
   when /linux/
     dep("apt-get", "sudo apt-get update")
 
@@ -84,6 +101,14 @@ task :deps do
 
       Dir.chdir("/usr/local/src/tmux-2.8") do
         sh "sudo bash -c './configure && make && make install'"
+      end
+    end
+
+    dep("rust-analyzer") do
+      local_bin("rust-analyzer") do |path|
+        open("https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-linux") do |io|
+          IO.copy_stream(io, path)
+        end
       end
     end
   else
