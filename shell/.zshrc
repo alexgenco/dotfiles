@@ -37,3 +37,13 @@ PROMPT='%B%U%D{%H:%M:%S} %3~$(__git_ps1 2>/dev/null) %#%b%u '
 if [ -f ~/.aliases ]; then
   source ~/.aliases
 fi
+
+if [ -f ~/.local/etc/zshrc ]; then
+  source ~/.local/etc/zshrc
+fi
+
+if [ -f ~/.local/etc/aliases ]; then
+  source ~/.local/etc/aliases
+fi
+
+eval "$(rbenv init -)"

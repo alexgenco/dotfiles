@@ -11,6 +11,8 @@
 /editor/.config/nvim/.netrwhist
 /shell/.config/kitty/local.conf
 /shell/.config/kitty/themes
+/shell/.local/*
 /shell/.logs/*
+!/shell/.local/.gitkeep
 !/shell/.logs/.gitkeep
 !/editor/.vim-tmp/.gitkeep

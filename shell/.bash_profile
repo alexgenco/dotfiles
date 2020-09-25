@@ -33,12 +33,16 @@ export PS1='\[\e[2m\e[4m\]$(date +"%H:%M:%S") \w$(__git_ps1 2>/dev/null) $\[\e[0
 
 eval "$(rbenv init -)"
 
-if [ -e ~/.aliases ]; then
+if [ -f ~/.aliases ]; then
   source ~/.aliases
 fi
 
-if [ -f ~/.bash_profile.local ]; then
-  source ~/.bash_profile.local
+if [ -f ~/.local/etc/bash_profile ]; then
+  source ~/.local/etc/bash_profile
+fi
+
+if [ -f ~/.local/etc/aliases ]; then
+  source ~/.local/etc/aliases
 fi
 
 if [ -f ~/.virtualenv/bin/activate ]; then
