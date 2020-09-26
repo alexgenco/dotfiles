@@ -146,7 +146,8 @@ task :deps do
   end
 
   dep("rust", "command -v rustc > /dev/null") do
-    sh "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+    sh "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs " \
+      "| sh -s -- -y --no-modify-path -c rust-src"
   end
 
   dep("go") do
