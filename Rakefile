@@ -34,8 +34,8 @@ desc "Install dependencies"
 task :deps do
   case RbConfig::CONFIG["host_os"]
   when /(darwin|mac os)/
-    dep("keyboard", "defaults -currentHost read | grep '\\bKeyRepeat = 1'") do
-      sh "defaults -currentHost write -g InitialKeyRepeat -int 10"
+    dep("keyboard", "test `defaults -currentHost read -g KeyRepeat` = 1") do
+      sh "defaults -currentHost write -g InitialKeyRepeat -int 15"
       sh "defaults -currentHost write -g KeyRepeat -int 1"
     end
 
