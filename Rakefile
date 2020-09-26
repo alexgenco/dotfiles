@@ -40,7 +40,7 @@ task :deps do
     dep("keyboard", "test `defaults -currentHost read -g KeyRepeat` = 1") do
       sh "defaults -currentHost write -g InitialKeyRepeat -int 15"
       sh "defaults -currentHost write -g KeyRepeat -int 1"
-      sh "defaults -currentHost write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false"
+      sh "defaults -currentHost write -g ApplePressAndHoldEnabled -bool false"
     end
 
     dep("brew") do
