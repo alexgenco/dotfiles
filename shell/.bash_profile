@@ -18,8 +18,6 @@ fi
 
 export PS1='\[\e[2m\e[4m\]$(date +"%H:%M:%S") \w$(__git_ps1 2>/dev/null) $\[\e[0m\] '
 
-eval "$(rbenv init -)"
-
 if [ -f ~/.env ]; then
   source ~/.env
 fi
@@ -31,3 +29,5 @@ fi
 if [ -f ~/.local/etc/bashrc ]; then
   source ~/.local/etc/bashrc
 fi
+
+eval "$(rbenv init -)"
