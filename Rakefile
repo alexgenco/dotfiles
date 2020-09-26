@@ -34,6 +34,11 @@ desc "Install dependencies"
 task :deps do
   case RbConfig::CONFIG["host_os"]
   when /(darwin|mac os)/
+    dep("keyboard", "defaults -currentHost read | grep '\\bKeyRepeat = 1'") do
+      sh "defaults -currentHost write -g InitialKeyRepeat -int 10"
+      sh "defaults -currentHost write -g KeyRepeat -int 1"
+    end
+
     dep("brew") do
       open("https://raw.githubusercontent.com/Homebrew/install/master/install.sh") do |io|
         sh "bash", "-c", io.read
