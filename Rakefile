@@ -17,7 +17,7 @@ def dep(exec, shell = "command -v #{exec} > /dev/null")
 end
 
 def target_dirs(&block)
-  ENV.fetch("symlink", "*/")
+  ENV.fetch("dirs", "*/")
     .split(",")
     .flat_map { |dir| Dir.glob(dir) }
     .uniq
@@ -33,8 +33,8 @@ def local_bin(executable)
   FileUtils.chmod("+x", exe)
 end
 
-desc "Install dependencies"
-task :deps do
+desc "Setup dependencies"
+task :setup do
   case RbConfig::CONFIG["host_os"]
   when /(darwin|mac os)/
     dep("keyboard", "test `defaults -currentHost read -g KeyRepeat` = 1") do
@@ -183,7 +183,7 @@ task :cleanup do
 end
 
 desc "Install dependencies and dotfiles"
-task install: [:deps, :link]
+task install: [:setup, :link]
 
 desc "Uninstall dotfiles and cleanup"
 task uninstall: [:unlink, :cleanup]
