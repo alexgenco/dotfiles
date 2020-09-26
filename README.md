@@ -6,14 +6,20 @@ All dependencies:
 rake install
 ```
 
-Specific dependencies:
+Only symlink specific targets:
 
 ```shell
-rake install only=editor,shell
+rake install symlink=editor,shell
+```
+
+Only install specific dependencies (and no symlink):
+
+```shell
+rake install deps=git,tmux symlink=
 ```
 
 Force reinstall of a dependency:
 
 ```shell
-rake install force=ruby,tmux
+rake install deps=ruby force=ruby symlink=
 ```

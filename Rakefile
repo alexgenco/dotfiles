@@ -6,6 +6,9 @@ require "shellwords"
 Dir.chdir File.expand_path(__dir__)
 
 def dep(exec, shell = "command -v #{exec} > /dev/null")
+  deps = ENV.key?("deps") ? ENV["deps"].split(",") : [/.*/]
+  return if deps.none? { |pat| pat === exec }
+
   sh(shell) do |ok, status|
     if !ok || ENV.fetch("force", "").split(",").include?(exec)
       block_given? ? yield : exit(status.exitstatus)
@@ -14,7 +17,7 @@ def dep(exec, shell = "command -v #{exec} > /dev/null")
 end
 
 def target_dirs(&block)
-  ENV.fetch("only", "*/")
+  ENV.fetch("symlink", "*/")
     .split(",")
     .flat_map { |dir| Dir.glob(dir) }
     .uniq
