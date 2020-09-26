@@ -1,4 +1,4 @@
-alias la='ls -lath'
+alias la='ls -al'
 alias be='bundle exec'
 alias g=git
 alias gs='git status'
