@@ -140,8 +140,8 @@ task :deps do
     warn "Failed to install nvim plugins"
   end
 
-  dep("rustc") do
-    sh "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh < /dev/tty"
+  dep("rust", "command -v rustc > /dev/null") do
+    sh "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
   end
 
   dep("go") do
