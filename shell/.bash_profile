@@ -16,7 +16,7 @@ if [ -f ~/.git-prompt.sh ]; then
   GIT_PS1_SHOWUNTRACKEDFILES=1
 fi
 
-export PS1='\[\e[2m\e[4m\]$(date +"%H:%M:%S") \w$(__git_ps1 2>/dev/null) $\[\e[0m\] '
+export PS1='\[\e[1m\e[4m\]$(date +"%H:%M:%S") \w$(__git_ps1 2>/dev/null) $\[\e[0m\] '
 
 if [ -f ~/.env ]; then
   source ~/.env
