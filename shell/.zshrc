@@ -1,13 +1,3 @@
-export CLICOLOR=1
-export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
-export EDITOR=nvim
-export GOPATH="$HOME/go"
-
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH="$PATH:$GOPATH/bin"
-
 setopt EXTENDED_HISTORY
 setopt HIST_IGNORE_DUPS
 setopt HIST_REDUCE_BLANKS
@@ -34,6 +24,12 @@ fi
 setopt prompt_subst
 PROMPT='%B%U%D{%H:%M:%S} %3~$(__git_ps1 2>/dev/null) %#%b%u '
 
+eval "$(rbenv init - zsh)"
+
+if [ -f ~/.env ]; then
+  source ~/.env
+fi
+
 if [ -f ~/.aliases ]; then
   source ~/.aliases
 fi
@@ -41,9 +37,3 @@ fi
 if [ -f ~/.local/etc/zshrc ]; then
   source ~/.local/etc/zshrc
 fi
-
-if [ -f ~/.local/etc/aliases ]; then
-  source ~/.local/etc/aliases
-fi
-
-eval "$(rbenv init -)"

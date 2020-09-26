@@ -4,7 +4,3 @@ alias g=git
 alias gs='git status'
 alias vim=nvim
 alias vi=nvim
-
-if [ -f ~/.aliases.local ]; then
-  source ~/.aliases.local
-fi

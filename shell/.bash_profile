@@ -1,21 +1,8 @@
-export CLICOLOR=1
-export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
-export EDITOR=nvim
 export HISTCONTROL=erasedups
 export HISTFILESIZE=10000
 export HISTSIZE=10000
 export HISTTIMEFORMAT="%D %T "
 export HISTIGNORE="&:ls:exit"
-export GOPATH="$HOME/go"
-export PIP_REQUIRE_VIRTUALENV=true
-export BASH_SILENCE_DEPRECATION_WARNING=1
-
-export PATH="/usr/local/sbin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH="$PATH:$GOPATH/bin"
 
 shopt -s histappend
 shopt -s cmdhist
@@ -33,23 +20,14 @@ export PS1='\[\e[2m\e[4m\]$(date +"%H:%M:%S") \w$(__git_ps1 2>/dev/null) $\[\e[0
 
 eval "$(rbenv init -)"
 
+if [ -f ~/.env ]; then
+  source ~/.env
+fi
+
 if [ -f ~/.aliases ]; then
   source ~/.aliases
 fi
 
-if [ -f ~/.local/etc/bash_profile ]; then
-  source ~/.local/etc/bash_profile
-fi
-
-if [ -f ~/.local/etc/aliases ]; then
-  source ~/.local/etc/aliases
-fi
-
-if [ -f ~/.virtualenv/bin/activate ]; then
-  export VIRTUAL_ENV_DISABLE_PROMPT=1
-  source ~/.virtualenv/bin/activate
-fi
-
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
+if [ -f ~/.local/etc/bashrc ]; then
+  source ~/.local/etc/bashrc
 fi
