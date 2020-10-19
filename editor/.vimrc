@@ -284,6 +284,7 @@ augroup END
 
 " Colorscheme
 "
+set background=dark
 colorscheme plain
 
 
