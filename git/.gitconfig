@@ -37,3 +37,5 @@
 	defaultBranch = main
 [pull]
 	ff = only
+[core]
+	attributesfile = /Users/alex/.gitattributes
