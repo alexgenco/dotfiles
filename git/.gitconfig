@@ -16,7 +16,7 @@
   extendRegexp = true
   lineNumber = true
 [push]
-  default = simple
+  default = current
 [diff]
   tool = vimdiff
 [color "diff-highlight"]
@@ -39,3 +39,5 @@
 	ff = only
 [core]
 	attributesfile = /Users/alex/.gitattributes
+[url "git@github.com:"]
+	insteadOf = https://github.com/
