@@ -36,4 +36,8 @@ if [ -f ~/.local/etc/zshrc ]; then
   source ~/.local/etc/zshrc
 fi
 
+if [ -f ~/.local/etc/git-completion.zsh ]; then
+  source ~/.local/etc/git-completion.zsh
+fi
+
 eval "$(rbenv init - zsh)"
