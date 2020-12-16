@@ -11,6 +11,7 @@ SAVEHIST=10000
 bindkey -e
 
 autoload -U edit-command-line
+autoload -Uz compinit && compinit
 zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
@@ -36,8 +37,8 @@ if [ -f ~/.local/etc/zshrc ]; then
   source ~/.local/etc/zshrc
 fi
 
-if [ -f ~/.local/etc/git-completion.zsh ]; then
-  source ~/.local/etc/git-completion.zsh
+if [ -f ~/.local/etc/git-completion.bash ]; then
+  zstyle ':completion:*:*:git:*' script ~/.local/etc/git-completion.bash
 fi
 
 eval "$(rbenv init - zsh)"
