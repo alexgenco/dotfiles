@@ -228,7 +228,7 @@ nnoremap Y y$
 nmap <silent> <leader>t :TestFile<cr>
 nmap <silent> <leader>T :TestNearest<cr>
 nmap <silent> <leader><c-t> :TestLast<cr>
-nmap <silent> <leader><c-shift-t> :TestSuite<cr>
+nmap <silent> <leader>;t :TestSuite<cr>
 
 " grep for the word under the cursor
 nnoremap <leader>g :silent grep <cword> \| cwin \| redraw!<cr>
@@ -286,6 +286,10 @@ augroup END
 "
 set background=dark
 colorscheme plain
+
+" underline status line
+highlight StatusLine cterm=underline,bold
+highlight StatusLineNC cterm=underline
 
 
 " Local Settings
