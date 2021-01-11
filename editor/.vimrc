@@ -279,6 +279,10 @@ augroup vimrcEx
         \ if &ft != "gitcommit" && line("'\"") > 0 && line("'\"") <= line("$") |
         \   exe "normal g`\"" |
         \ endif
+
+  " set proper tab expansion for go
+  au BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
+
 augroup END
 
 

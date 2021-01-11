@@ -21,8 +21,20 @@ if has('nvim-0.5') && !exists('g:loaded_lsp')
 local lsp = require'lspconfig'
 local on_attach = require'completion'.on_attach
 
-lsp.rust_analyzer.setup{on_attach=on_attach}
 lsp.gopls.setup{on_attach=on_attach}
+lsp.rust_analyzer.setup({
+  on_attach = on_attach,
+  settings = {
+    ["rust-analyzer"] = {
+      cargo = {
+        loadOutDirsFromCheck = true
+      },
+      procMacro = {
+        enable = true
+      }
+    }
+  }
+})
 EOF
 
   augroup lsp
