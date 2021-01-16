@@ -25,12 +25,13 @@ call plug#begin('~/.vim/plugged')
 Plug 'andreypopp/vim-colors-plain'
 Plug 'benmills/vimux'
 Plug 'janko-m/vim-test'
-Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --bin'}
+Plug 'junegunn/fzf', {'do': ':call fzf#install()'}
 Plug 'junegunn/fzf.vim'
 
 if has('nvim-0.5')
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/completion-nvim'
+  Plug 'ojroques/nvim-lspfuzzy'
 endif
 
 call plug#end()

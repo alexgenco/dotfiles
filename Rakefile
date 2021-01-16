@@ -132,11 +132,6 @@ task :setup do
     sh "git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build"
   end
 
-  dep("fzf", "test -f ~/.fzf/bin/fzf") do
-    sh "git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf"
-    sh "~/.fzf/install --bin"
-  end
-
   dep("ruby", "~/.rbenv/bin/rbenv versions | grep -q -F 2.6.0") do
     sh "~/.rbenv/bin/rbenv install 2.6.0 && ~/.rbenv/bin/rbenv global 2.6.0"
   end
