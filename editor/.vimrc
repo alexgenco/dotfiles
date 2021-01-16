@@ -115,11 +115,6 @@ set smarttab
 " turn off bells
 set noerrorbells visualbell t_vb=
 
-" allow color schemes to do bright colors without forcing bold
-if &t_Co == 8 && $TERM !~# '^linux\|^Eterm'
-  set t_Co=16
-endif
-
 " set terminal title
 set title
 
@@ -152,8 +147,7 @@ set nofoldenable
 set hidden
 
 " open new split panes to right and bottom
-set splitbelow
-set splitright
+set splitbelow splitright
 
 " use git for :grep
 set grepprg=git\ grep\ -n\ $*
@@ -171,6 +165,9 @@ set virtualedit=block
 
 " don't move cursor to start of line on jumps
 set nostartofline
+
+" highlight cursor line
+set cursorline
 
 " don't redraw during macros, etc.
 set lazyredraw
@@ -194,6 +191,10 @@ let g:netrw_banner=0    " disable banner
 let g:netrw_altv=1      " open splits to the right
 let g:netrw_liststyle=3 " tree view
 
+if exists("*netrw_gitignore#Hide")
+  let g:netrw_list_hide=netrw_gitignore#Hide()
+endif
+
 " vim-test settings
 if exists("$TMUX")
   let test#strategy = "vimux"
@@ -205,8 +206,8 @@ else
   let test#strategy = "make"
 endif
 
-if exists("*netrw_gitignore#Hide")
-  let g:netrw_list_hide=netrw_gitignore#Hide()
+if exists("+termguicolors")
+  set termguicolors
 endif
 
 " ruby settings
@@ -228,10 +229,9 @@ nnoremap Y y$
 nmap <silent> <leader>t :TestFile<cr>
 nmap <silent> <leader>T :TestNearest<cr>
 nmap <silent> <leader><c-t> :TestLast<cr>
-nmap <silent> <leader>;t :TestSuite<cr>
 
 " grep for the word under the cursor
-nnoremap <leader>g :silent grep <cword> \| cwin \| redraw!<cr>
+nnoremap <leader>g <cmd>silent grep <cword> \| cwin \| redraw!<cr>
 
 " fzf
 nnoremap <leader>f :call FuzzyFind()<cr>
@@ -282,18 +282,12 @@ augroup vimrcEx
 
   " set proper tab expansion for go
   au BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
-
 augroup END
 
 
 " Colorscheme
 "
-set background=dark
 colorscheme plain
-
-" underline status line
-highlight StatusLine cterm=underline,bold
-highlight StatusLineNC cterm=underline
 
 
 " Local Settings
