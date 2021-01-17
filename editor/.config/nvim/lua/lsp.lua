@@ -4,11 +4,15 @@ local on_attach = function(client, bufnr)
   require'completion'.on_attach(client, bufnr)
 
   require'lspfuzzy'.setup {
-    methods = {'textDocument/codeAction', 'textDocument/references', 'textDocument/documentSymbol'}
+    methods = {
+      'textDocument/codeAction',
+      'textDocument/documentSymbol',
+      'textDocument/references',
+    }
   }
 
   local function map(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local opts = { noremap=true, silent=true }
+  local opts = {noremap=true, silent=true}
 
   map("",  '<leader>a',     '<cmd>lua vim.lsp.buf.code_action()<cr>',     opts)
   map("n", '<leader><c-f>', '<cmd>lua vim.lsp.buf.formatting()<cr>',      opts)
