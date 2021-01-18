@@ -156,6 +156,12 @@ task :setup do
   dep("gopls") do
     sh "GO111MODULE=on go get golang.org/x/tools/gopls@latest"
   end
+
+  dep("tmux terminfo", "infocmp tmux >/dev/null 2>&1") do
+    terminfo_file = File.expand_path("tmux/.terminfo/tmux.terminfo", __dir__)
+
+    sh "tic -x #{terminfo_file}"
+  end
 end
 
 desc "Symlink files into $HOME"
