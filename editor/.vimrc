@@ -207,6 +207,8 @@ else
   let test#strategy = "make"
 endif
 
+let g:test#preserve_screen = 0
+
 if exists("+termguicolors")
   set termguicolors
 endif

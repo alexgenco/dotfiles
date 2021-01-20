@@ -13,7 +13,6 @@ util.default_config = vim.tbl_extend(
         methods = {
           'textDocument/codeAction',
           'textDocument/documentSymbol',
-          'textDocument/references',
         }
       }
 
