@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+rev="${1:-HEAD}"
+
+if git show -s --format=%B "$rev" | grep -q '^fixup! '; then
+  opt="--reuse-message"
+else
+  opt="--fixup"
+fi
+
+exec git commit "$opt"="$rev" --edit
