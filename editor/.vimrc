@@ -27,12 +27,8 @@ Plug 'benmills/vimux'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', {'do': ':call fzf#install()'}
 Plug 'junegunn/fzf.vim'
-
-if has('nvim-0.5')
-  Plug 'neovim/nvim-lspconfig'
-  Plug 'nvim-lua/completion-nvim'
-  Plug 'ojroques/nvim-lspfuzzy'
-endif
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'antoinemadec/coc-fzf'
 
 call plug#end()
 
@@ -182,6 +178,10 @@ set mouse=
 " search in subfolders with :find
 set path+=**
 
+if exists("+termguicolors")
+  set termguicolors
+endif
+
 " load matchit.vim, but only if the user hasn't installed a newer version.
 if !exists("g:loaded_matchit") && findfile("plugin/matchit.vim", &rtp) ==# ""
   runtime! macros/matchit.vim
@@ -209,16 +209,16 @@ endif
 
 let g:test#preserve_screen = 0
 
-if exists("+termguicolors")
-  set termguicolors
-endif
-
 " ruby settings
 let g:ruby_indent_block_style = "do"
 let g:ruby_no_expensive=1
 
 " fix incorrect sh non-POSIX highlighting
 let g:is_posix=1
+
+" coc.nvim extensions
+let g:coc_global_extensions = ["coc-rust-analyzer", "coc-go", "coc-json"]
+let g:coc_disable_transparent_cursor = 1
 
 
 " Keybindings
@@ -241,6 +241,12 @@ let g:fzf_layout = {'down': '~38%'}
 nnoremap <leader>f :call FuzzyFind()<cr>
 nnoremap <leader>b :Buffers<cr>
 
+" coc.nvim mappings
+nnoremap <leader>a v<Plug>(coc-codeaction-selected)
+nnoremap <leader><c-f> <Plug>(coc-format)
+nnoremap <leader>r <Plug>(coc-references)
+nnoremap <c-]> <Plug>(coc-definition)
+nnoremap <c-k> :call <sid>show_documentation()<cr>
 
 " Functions
 "
