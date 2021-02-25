@@ -157,6 +157,10 @@ task :setup do
     sh "GO111MODULE=on go get golang.org/x/tools/gopls@latest"
   end
 
+  dep("node") do
+    sh "curl -sL install-node.now.sh/lts | bash"
+  end
+
   dep("tmux terminfo", "infocmp tmux >/dev/null 2>&1") do
     terminfo_file = File.expand_path("tmux/.terminfo/tmux.terminfo", __dir__)
 
