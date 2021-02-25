@@ -285,7 +285,7 @@ augroup vimrcEx
         \ endif
 
   " set proper tab expansion for go
-  au BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
+  au BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4 listchars=tab:\ \ ,trail:·,extends:»
 augroup END
 
 
