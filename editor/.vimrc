@@ -22,7 +22,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'andreypopp/vim-colors-plain'
+Plug 'Lokaltog/vim-monotone'
 Plug 'benmills/vimux'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', {'do': ':call fzf#install()'}
@@ -291,8 +291,11 @@ augroup END
 
 " Colorscheme
 "
-colorscheme plain
+" more monotone config values: https://github.com/Lokaltog/vim-monotone
+let g:monotone_emphasize_whitespace = 1
+let g:monotone_contrast_factor = 1.1
 
+color monotone
 
 " Local Settings
 "
