@@ -86,6 +86,9 @@ set sidescrolloff=8
 set sidescroll=0
 set scrolljump=5
 
+" always show sign column
+set signcolumn=yes
+
 " automatically read files changed outside vim
 set autoread
 
@@ -181,6 +184,9 @@ set mouse=
 
 " search in subfolders with :find
 set path+=**
+
+" faster update time (default is 4s)
+set updatetime=500
 
 " load matchit.vim, but only if the user hasn't installed a newer version.
 if !exists("g:loaded_matchit") && findfile("plugin/matchit.vim", &rtp) ==# ""
