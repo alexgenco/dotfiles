@@ -29,6 +29,7 @@ lsp.gopls.setup{}
 lsp.rust_analyzer.setup{
   settings = {
     ["rust-analyzer"] = {
+      cmd = { "~/.local/bin/rust-analyzer" },
       cargo = {
         loadOutDirsFromCheck = true
       },

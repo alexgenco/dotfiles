@@ -44,7 +44,7 @@ task :setup do
     end
 
     dep("brew") do
-      open("https://raw.githubusercontent.com/Homebrew/install/master/install.sh") do |io|
+      URI.open("https://raw.githubusercontent.com/Homebrew/install/master/install.sh") do |io|
         sh "bash", "-c", io.read
       end
     end
@@ -83,7 +83,7 @@ task :setup do
 
     dep("rust-analyzer") do
       local_bin("rust-analyzer") do |path|
-        open("https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-mac") do |io|
+        URI.open("https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-mac") do |io|
           IO.copy_stream(io, path)
         end
       end
@@ -115,7 +115,7 @@ task :setup do
 
     dep("rust-analyzer") do
       local_bin("rust-analyzer") do |path|
-        open("https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-linux") do |io|
+        URI.open("https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-linux") do |io|
           IO.copy_stream(io, path)
         end
       end
