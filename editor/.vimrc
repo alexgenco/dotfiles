@@ -22,7 +22,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'Lokaltog/vim-monotone'
+Plug 'fxn/vim-monochrome'
 Plug 'benmills/vimux'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', {'do': ':call fzf#install()'}
@@ -86,8 +86,8 @@ set sidescrolloff=8
 set sidescroll=0
 set scrolljump=5
 
-" always show sign column
-set signcolumn=yes
+" show signs in number column
+set signcolumn=number
 
 " automatically read files changed outside vim
 set autoread
@@ -297,11 +297,7 @@ augroup END
 
 " Colorscheme
 "
-" more monotone config values: https://github.com/Lokaltog/vim-monotone
-let g:monotone_emphasize_whitespace = 1
-let g:monotone_contrast_factor = 1.1
-
-color monotone
+color monochrome
 
 " Local Settings
 "
