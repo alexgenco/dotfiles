@@ -4,3 +4,12 @@ alias g=git
 alias gs='git status'
 alias vim=nvim
 alias vi=nvim
+
+# Ensure non-standard $TERM isn't forwarded to remote hosts
+function ssh() {
+  if [[ "$TERM" == *tmux* || "$TERM" == *kitty* ]]; then
+    TERM=xterm-256color command ssh "$@"
+  else
+    command ssh "$@"
+  fi
+}
