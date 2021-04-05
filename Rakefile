@@ -88,6 +88,10 @@ task :setup do
         end
       end
     end
+
+    dep("ripgrep", "command -v rg > /dev/null") do
+      sh "brew install ripgrep"
+    end
   when /linux/
     dep("apt-get", "sudo apt-get update")
 
@@ -119,6 +123,10 @@ task :setup do
           IO.copy_stream(io, path)
         end
       end
+    end
+
+    dep("ripgrep", "command -v rg > /dev/null") do
+      sh "sudo apt-get install ripgrep"
     end
   else
     abort "Don't know how to install on this platform."

@@ -154,8 +154,8 @@ set hidden
 " open new split panes to right and bottom
 set splitbelow splitright
 
-" use git for :grep
-set grepprg=git\ grep\ -n\ $*
+" use ripgrep for :grep
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 
 " status line
 set laststatus=2
