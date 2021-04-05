@@ -179,7 +179,7 @@ end
 desc "Symlink files into $HOME"
 task :link do
   target_dirs do |dir|
-    sh "stow -t ~ #{dir.shellescape}"
+    sh "stow -t ~ --ignore='.*\\.gitkeep' #{dir.shellescape}"
   end
 end
 

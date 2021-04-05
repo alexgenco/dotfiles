@@ -5,7 +5,7 @@
 /editor/.vim/plugged
 /editor/.vim/.netrwhist
 /editor/.vim/.VimballRecord
-/editor/.vim-tmp/*
+/editor/.cache/vim/*
 /editor/.config/nvim/.init.vim-rplugin~
 /editor/.config/nvim/shada
 /editor/.config/nvim/.netrwhist
@@ -17,4 +17,4 @@
 !/shell/.cache/.gitkeep
 !/shell/.local/.gitkeep
 !/shell/.logs/.gitkeep
-!/editor/.vim-tmp/.gitkeep
+!/editor/.cache/vim/.gitkeep

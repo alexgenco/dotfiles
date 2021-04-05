@@ -135,8 +135,8 @@ set undodir=~/.vim/undo
 
 " store temporary files in a central spot
 set backup
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupdir=~/.cache/vim,/var/cache,/tmp
+set directory=~/.cache/vim,/var/cache,/tmp
 
 " set key mapping timeouts
 if !has('nvim') && &ttimeoutlen == -1
@@ -308,6 +308,6 @@ color monochrome
 
 " Local Settings
 "
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
+if filereadable(expand("~/.local/etc/vimrc"))
+  source ~/.local/etc/vimrc
 endif
