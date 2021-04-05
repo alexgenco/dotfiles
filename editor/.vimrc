@@ -24,7 +24,8 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'fxn/vim-monochrome'
 Plug 'benmills/vimux'
-Plug 'janko-m/vim-test'
+"Plug 'vim-test/vim-test'
+Plug 'alexgenco/vim-test', {'branch': 'echo-command'}
 Plug 'junegunn/fzf', {'do': ':call fzf#install()'}
 Plug 'junegunn/fzf.vim'
 
@@ -202,6 +203,10 @@ if exists("*netrw_gitignore#Hide")
   let g:netrw_list_hide=netrw_gitignore#Hide()
 endif
 
+" vimux settings
+let g:VimuxOrientation = "h"
+let g:VimuxHeight = "50"
+
 " vim-test settings
 if exists("$TMUX")
   let test#strategy = "vimux"
@@ -213,7 +218,9 @@ else
   let test#strategy = "make"
 endif
 
-let g:test#preserve_screen = 0
+" https://github.com/vim-test/vim-test/pull/555
+let g:test#echo_command = 0
+let g:test#preserve_screen = 1
 
 if exists("+termguicolors")
   set termguicolors
