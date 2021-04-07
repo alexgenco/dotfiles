@@ -24,8 +24,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'fxn/vim-monochrome'
 Plug 'benmills/vimux'
-"Plug 'vim-test/vim-test'
-Plug 'alexgenco/vim-test', {'branch': 'echo-command'}
+Plug 'vim-test/vim-test'
 Plug 'junegunn/fzf', {'do': ':call fzf#install()'}
 Plug 'junegunn/fzf.vim'
 
