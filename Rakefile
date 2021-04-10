@@ -89,6 +89,10 @@ task :setup do
       end
     end
 
+    dep("go") do
+      sh "brew install go"
+    end
+
     dep("ripgrep", "command -v rg > /dev/null") do
       sh "brew install ripgrep"
     end
@@ -123,6 +127,11 @@ task :setup do
           IO.copy_stream(io, path)
         end
       end
+    end
+
+    dep("go") do
+      sh "curl -L https://golang.org/dl/go1.16.3.linux-amd64.tar.gz | " \
+        "sudo tar -C /usr/local -xzf go1.16.3.linux-amd64.tar.gz"
     end
 
     dep("ripgrep", "command -v rg > /dev/null") do
@@ -160,10 +169,6 @@ task :setup do
   dep("rust", "command -v rustc > /dev/null") do
     sh "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs " \
       "| sh -s -- -y --no-modify-path -c rust-src"
-  end
-
-  dep("go") do
-    sh "brew install go"
   end
 
   dep("gopls") do
