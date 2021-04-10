@@ -121,6 +121,10 @@ task :setup do
       end
     end
 
+    dep("nvim") do
+      sh "sudo apt-get install neovim"
+    end
+
     dep("rust-analyzer") do
       local_bin("rust-analyzer") do |path|
         URI.open("https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-linux") do |io|
@@ -172,11 +176,7 @@ task :setup do
   end
 
   dep("gopls") do
-    sh "GO111MODULE=on go get golang.org/x/tools/gopls@latest"
-  end
-
-  dep("node") do
-    sh "curl -sL install-node.now.sh/lts | bash"
+    sh "PATH=$PATH:/usr/local/go/bin GO111MODULE=on go get golang.org/x/tools/gopls@latest"
   end
 
   dep("tmux terminfo", "infocmp tmux >/dev/null 2>&1") do

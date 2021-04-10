@@ -86,7 +86,9 @@ set sidescroll=0
 set scrolljump=5
 
 " show signs in number column
-set signcolumn=number
+if has('&signcolumn')
+  set signcolumn=number
+endif
 
 " automatically read files changed outside vim
 set autoread
