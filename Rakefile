@@ -131,7 +131,7 @@ task :setup do
 
     dep("go") do
       sh "curl -L https://golang.org/dl/go1.16.3.linux-amd64.tar.gz | " \
-        "sudo tar -C /usr/local -xzf"
+        "sudo tar xvz -C /usr/local"
     end
 
     dep("ripgrep", "command -v rg > /dev/null") do
