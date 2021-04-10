@@ -33,7 +33,6 @@ if has('nvim-0.5')
   Plug 'nvim-lua/completion-nvim'
   Plug 'ojroques/nvim-lspfuzzy'
 endif
-
 call plug#end()
 
 " Settings
@@ -92,10 +91,7 @@ set signcolumn=number
 " automatically read files changed outside vim
 set autoread
 
-" prevent automatically adding newlines to end of file
-set binary
-
-" tab completion
+" completion
 set ofu=syntaxcomplete#Complete
 set wildmode=longest,list
 set complete=.,b,u,]

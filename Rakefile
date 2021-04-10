@@ -126,7 +126,12 @@ task :setup do
     end
 
     dep("ripgrep", "command -v rg > /dev/null") do
-      sh "sudo apt-get install ripgrep"
+      URI.open("https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep_12.1.1_amd64.deb") do |io|
+        IO.copy_stream(io, "/tmp/ripgrep.deb")
+        io.flush
+      end
+
+      sh "sudo dpkg -i /tmp/ripgrep.deb"
     end
   else
     abort "Don't know how to install on this platform."
