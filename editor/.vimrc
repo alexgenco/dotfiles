@@ -86,7 +86,7 @@ set sidescroll=0
 set scrolljump=5
 
 " show signs in number column
-if has('&signcolumn')
+if exists('&signcolumn')
   set signcolumn=number
 endif
 
