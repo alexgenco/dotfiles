@@ -265,12 +265,13 @@ function! MkdirIfNeeded(file, buf) abort
 endfunction
 
 function! FuzzyFind() abort
-  silent! call system("git rev-parse --is-work-tree")
+  let cwd = getcwd()
+  silent! call system("git -C " . cwd . " rev-parse --is-work-tree")
 
   if v:shell_error
-    Files
+    execute "Files " . cwd
   else
-    GFiles -o -c --exclude-standard
+    execute "GFiles -o -c --exclude-standard -- " . cwd
   endif
 endfunction
 
