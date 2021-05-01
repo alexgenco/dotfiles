@@ -16,6 +16,10 @@ if [ -f ~/.git-prompt.sh ]; then
   GIT_PS1_SHOWUNTRACKEDFILES=1
 fi
 
+if [ -f /usr/local/etc/profile.d/bash_completion.sh ]; then
+  source /usr/local/etc/profile.d/bash_completion.sh
+fi
+
 if [ -f ~/.local/etc/git-completion.bash ]; then
   source ~/.local/etc/git-completion.bash
 fi
