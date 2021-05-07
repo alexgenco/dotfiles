@@ -107,13 +107,6 @@ set history=1000
 set autoindent
 set smartindent
 
-" tabs
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
-set expandtab
-set smarttab
-
 " turn off bells
 set noerrorbells visualbell t_vb=
 
@@ -244,7 +237,7 @@ nmap <silent> <leader>T :TestNearest<cr>
 nmap <silent> <leader><c-t> :TestLast<cr>
 
 " grep for the word under the cursor
-nnoremap <leader>g <cmd>silent grep <cword> \| cwin \| redraw!<cr>
+nnoremap <leader>g <cmd>silent grep! <cword> \| cwin \| redraw!<cr>
 
 " fzf
 let g:fzf_layout = {'down': '~38%'}
@@ -295,8 +288,13 @@ augroup vimrcEx
         \   exe "normal g`\"" |
         \ endif
 
-  " set proper tab expansion for go
-  au BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4 listchars=tab:\ \ ,trail:·,extends:»
+  " set default tab expansion
+  au BufNewFile,BufReadPre *
+        \ setlocal expandtab smarttab tabstop=2 shiftwidth=2 softtabstop=2
+
+  " set tab expansion for go
+  au BufNewFile,BufReadPre *.go
+        \ setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=2
 augroup END
 
 
