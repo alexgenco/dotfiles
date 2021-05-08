@@ -53,7 +53,7 @@ set hlsearch
 set shortmess+=c
 
 " line endings
-set listchars=tab:·\ ,trail:·,extends:»
+set listchars=tab:·\ ,trail:·,extends:»,nbsp:⎵
 set list
 set wrap
 set linebreak
@@ -96,7 +96,7 @@ set autoread
 " completion
 set ofu=syntaxcomplete#Complete
 set wildmode=longest,list
-set complete=.,b,u,]
+set complete=.,b,u,t
 set completeopt=longest,menuone,noinsert,noselect
 set wildmenu
 
@@ -105,7 +105,15 @@ set history=1000
 
 " indentation
 set autoindent
-set smartindent
+set cindent
+
+" tabs
+set shiftround
+set shiftwidth=2
+set softtabstop=2
+set tabstop=4
+set expandtab
+set smarttab
 
 " turn off bells
 set noerrorbells visualbell t_vb=
@@ -288,13 +296,8 @@ augroup vimrcEx
         \   exe "normal g`\"" |
         \ endif
 
-  " set default tab expansion
-  au BufNewFile,BufReadPre *
-        \ setlocal expandtab smarttab tabstop=2 shiftwidth=2 softtabstop=2
-
   " set tab expansion for go
-  au BufNewFile,BufReadPre *.go
-        \ setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=2
+  au BufNewFile,BufReadPre *.go setlocal shiftwidth=4 noexpandtab
 augroup END
 
 
