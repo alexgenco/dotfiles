@@ -53,7 +53,7 @@ set hlsearch
 set shortmess+=c
 
 " line endings
-set listchars=tab:▸·,trail:·,extends:»
+set listchars=tab:·\ ,trail:·,extends:»
 set list
 set wrap
 set linebreak
