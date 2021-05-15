@@ -250,6 +250,7 @@ nnoremap <leader>g <cmd>silent grep! <cword> \| cwin \| redraw!<cr>
 " fzf
 let g:fzf_layout = {'down': '~38%'}
 nnoremap <leader>f :call FuzzyFind()<cr>
+nnoremap <leader>F :call FuzzyFind(getcwd())<cr>
 nnoremap <leader>b :Buffers<cr>
 
 
@@ -265,14 +266,13 @@ function! MkdirIfNeeded(file, buf) abort
   endif
 endfunction
 
-function! FuzzyFind() abort
-  let cwd = getcwd()
-  silent! call system("git -C " . cwd . " rev-parse --is-work-tree")
+function! FuzzyFind(...) abort
+  silent! call system("git rev-parse --is-inside-work-tree >/dev/null 2>&1")
 
   if v:shell_error
-    execute "Files " . cwd
+    execute "Files " . join(a:000)
   else
-    execute "GFiles -o -c --exclude-standard -- " . cwd
+    execute "GFiles -o -c --exclude-standard -- " . join(a:000)
   endif
 endfunction
 
