@@ -249,8 +249,8 @@ nnoremap <leader>g <cmd>silent grep! <cword> \| cwin \| redraw!<cr>
 
 " fzf
 let g:fzf_layout = {'down': '~38%'}
-nnoremap <leader>f :call FuzzyFind()<cr>
-nnoremap <leader>F :call FuzzyFind(getcwd())<cr>
+nnoremap <leader>f :call FuzzyFind(getcwd())<cr>
+nnoremap <leader>F :call FuzzyFind()<cr>
 nnoremap <leader>b :Buffers<cr>
 
 
