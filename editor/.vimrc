@@ -231,6 +231,9 @@ let g:ruby_no_expensive=1
 " fix incorrect sh non-POSIX highlighting
 let g:is_posix=1
 
+" fzf
+let g:fzf_layout = {'down': '~38%'}
+
 
 " Keybindings
 "
@@ -247,11 +250,10 @@ nmap <silent> <leader><c-t> :TestLast<cr>
 " grep for the word under the cursor
 nnoremap <leader>g <cmd>silent grep! <cword> \| cwin \| redraw!<cr>
 
-" fzf
-let g:fzf_layout = {'down': '~38%'}
-nnoremap <leader>f :call FuzzyFind(getcwd())<cr>
-nnoremap <leader>F :call FuzzyFind()<cr>
-nnoremap <leader>b :Buffers<cr>
+" fuzzy find
+nnoremap <leader>f <cmd>call FuzzyFind(getcwd())<cr>
+nnoremap <leader>F <cmd>call FuzzyFind()<cr>
+nnoremap <leader>b <cmd>Buffers<cr>
 
 
 " Functions
