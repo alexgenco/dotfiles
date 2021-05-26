@@ -25,13 +25,19 @@ call plug#begin('~/.vim/plugged')
 Plug 'fxn/vim-monochrome'
 Plug 'benmills/vimux'
 Plug 'vim-test/vim-test'
-Plug 'junegunn/fzf', {'do': ':call fzf#install()'}
-Plug 'junegunn/fzf.vim'
 
 if has('nvim-0.5')
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/completion-nvim'
   Plug 'ojroques/nvim-lspfuzzy'
+
+  " telescope + deps
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+else
+  Plug 'junegunn/fzf', {'do': ':call fzf#install()'}
+  Plug 'junegunn/fzf.vim'
 endif
 call plug#end()
 
@@ -247,13 +253,15 @@ nmap <silent> <leader>t :TestFile<cr>
 nmap <silent> <leader>T :TestNearest<cr>
 nmap <silent> <leader><c-t> :TestLast<cr>
 
-" grep for the word under the cursor
-nnoremap <leader>g <cmd>silent grep! <cword> \| cwin \| redraw!<cr>
+" fuzzy find for non-nvim 0.5+
+if exists(":FZF")
+  " grep for the word under the cursor
+  nnoremap <leader>g <cmd>silent grep! <cword> \| cwin \| redraw!<cr>
 
-" fuzzy find
-nnoremap <leader>f <cmd>call FuzzyFind(getcwd())<cr>
-nnoremap <leader>F <cmd>call FuzzyFind()<cr>
-nnoremap <leader>b <cmd>Buffers<cr>
+  nnoremap <leader>f <cmd>call FzfFiles(getcwd())<cr>
+  nnoremap <leader>F <cmd>call FzfFiles()<cr>
+  nnoremap <leader>b <cmd>Buffers<cr>
+endif
 
 
 " Functions
@@ -268,7 +276,7 @@ function! MkdirIfNeeded(file, buf) abort
   endif
 endfunction
 
-function! FuzzyFind(...) abort
+function! FzfFiles(...) abort
   silent! call system("git rev-parse --is-inside-work-tree >/dev/null 2>&1")
 
   if v:shell_error
