@@ -27,10 +27,10 @@ Plug 'benmills/vimux'
 Plug 'vim-test/vim-test'
 Plug 'junegunn/fzf', {'do': ':call fzf#install()'}
 Plug 'junegunn/fzf.vim'
+Plug 'hrsh7th/nvim-compe'
 
 if has('nvim-0.5')
   Plug 'neovim/nvim-lspconfig'
-  Plug 'nvim-lua/completion-nvim'
   Plug 'ojroques/nvim-lspfuzzy'
 endif
 call plug#end()
@@ -97,7 +97,7 @@ set autoread
 set ofu=syntaxcomplete#Complete
 set wildmode=longest,list
 set complete=.,b,u,t
-set completeopt=longest,menuone,noinsert,noselect
+set completeopt=menuone,noselect
 set wildmenu
 
 " increase command history
@@ -234,6 +234,22 @@ let g:is_posix=1
 " fzf
 let g:fzf_layout = {'down': '~38%'}
 
+" compe
+let g:compe = {
+      \ 'autocomplete': v:false,
+      \ 'preselect': 'enable',
+      \ 'documentation': v:true,
+      \ 'source': {
+      \   'path': v:true,
+      \   'buffer': v:true,
+      \   'tags': v:true,
+      \   }
+      \ }
+
+if has('nvim-0.5')
+  let g:compe.source.nvim_lsp = v:true
+endif
+
 
 " Keybindings
 "
@@ -254,6 +270,7 @@ nnoremap <leader>g <cmd>silent grep! <cword> \| cwin \| redraw!<cr>
 nnoremap <leader>f <cmd>call FuzzyFind(getcwd())<cr>
 nnoremap <leader>F <cmd>call FuzzyFind()<cr>
 nnoremap <leader>b <cmd>Buffers<cr>
+nnoremap <leader>h <cmd>Helptags<cr>
 
 
 " Functions
