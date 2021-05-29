@@ -238,21 +238,15 @@ let g:is_posix=1
 " fzf
 let g:fzf_layout = {'down': '~38%'}
 
-" compe
+" compe (this is overridden for LSP languages in init.lua)
 let g:compe = {
       \ 'autocomplete': v:false,
-      \ 'preselect': 'enable',
-      \ 'documentation': v:true,
       \ 'source': {
       \   'path': v:true,
       \   'buffer': v:true,
       \   'tags': v:true,
       \   }
       \ }
-
-if has('nvim-0.5')
-  let g:compe.source.nvim_lsp = v:true
-endif
 
 
 " Keybindings
