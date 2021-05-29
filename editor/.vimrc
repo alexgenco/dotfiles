@@ -27,9 +27,9 @@ Plug 'benmills/vimux'
 Plug 'vim-test/vim-test'
 Plug 'junegunn/fzf', {'do': ':call fzf#install()'}
 Plug 'junegunn/fzf.vim'
-Plug 'hrsh7th/nvim-compe'
 
 if has('nvim-0.5')
+  Plug 'hrsh7th/nvim-compe'
   Plug 'neovim/nvim-lspconfig'
   Plug 'ojroques/nvim-lspfuzzy'
 endif
@@ -187,6 +187,14 @@ set path+=**
 " faster update time (default is 4s)
 set updatetime=500
 
+if exists("+termguicolors")
+  set termguicolors
+endif
+
+if exists('+inccommand')
+  set inccommand=nosplit
+endif
+
 " load matchit.vim, but only if the user hasn't installed a newer version.
 if !exists("g:loaded_matchit") && findfile("plugin/matchit.vim", &rtp) ==# ""
   runtime! macros/matchit.vim
@@ -219,10 +227,6 @@ endif
 " https://github.com/vim-test/vim-test/pull/555
 let g:test#echo_command = 0
 let g:test#preserve_screen = 1
-
-if exists("+termguicolors")
-  set termguicolors
-endif
 
 " ruby settings
 let g:ruby_indent_block_style = "do"
