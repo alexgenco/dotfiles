@@ -83,9 +83,8 @@ task :setup do
 
     dep("rust-analyzer") do
       local_bin("rust-analyzer") do |path|
-        URI.open("https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-mac") do |io|
-          IO.copy_stream(io, path)
-        end
+        sh "curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-apple-darwin.gz | " \
+          "gunzip > #{path}"
       end
     end
 
@@ -127,9 +126,8 @@ task :setup do
 
     dep("rust-analyzer") do
       local_bin("rust-analyzer") do |path|
-        URI.open("https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-linux") do |io|
-          IO.copy_stream(io, path)
-        end
+        sh "curl https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-musl.gz | " \
+          "gunzip > #{path}"
       end
     end
 
