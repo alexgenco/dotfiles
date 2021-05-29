@@ -25,13 +25,13 @@ call plug#begin('~/.vim/plugged')
 Plug 'fxn/vim-monochrome'
 Plug 'benmills/vimux'
 Plug 'vim-test/vim-test'
-Plug 'junegunn/fzf', {'do': ':call fzf#install()'}
-Plug 'junegunn/fzf.vim'
 
 if has('nvim-0.5')
   Plug 'hrsh7th/nvim-compe'
   Plug 'neovim/nvim-lspconfig'
-  Plug 'ojroques/nvim-lspfuzzy'
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
 endif
 call plug#end()
 
@@ -261,14 +261,19 @@ nmap <silent> <leader>t :TestFile<cr>
 nmap <silent> <leader>T :TestNearest<cr>
 nmap <silent> <leader><c-t> :TestLast<cr>
 
-" grep for the word under the cursor
-nnoremap <leader>g <cmd>silent grep! <cword> \| cwin \| redraw!<cr>
-
-" fuzzy find
-nnoremap <leader>f <cmd>call FuzzyFind(getcwd())<cr>
-nnoremap <leader>F <cmd>call FuzzyFind()<cr>
-nnoremap <leader>b <cmd>Buffers<cr>
-nnoremap <leader>h <cmd>Helptags<cr>
+" telescope.nvim mappings (these will fail in Vim)
+nnoremap <leader>f <cmd>Telescope find_files find_command=rg,-i,--hidden,--files,-g,!.git<cr>
+nnoremap <leader>F <cmd>Telescope git_files show_untracked=true<cr>
+nnoremap <leader>b <cmd>Telescope buffers<cr>
+nnoremap <leader>h <cmd>Telescope help_tags<cr>
+nnoremap <leader>g <cmd>Telescope grep_string<cr>
+nnoremap <leader>G <cmd>Telescope live_grep<cr>
+nnoremap <leader>a <cmd>Telescope lsp_code_actions<cr>
+vnoremap <leader>a <cmd>Telescope lsp_range_code_actions<cr>
+nnoremap <leader>r <cmd>Telescope lsp_references<cr>
+nnoremap <leader>d <cmd>Telescope lsp_document_diagnostics<cr>
+nnoremap <leader>D <cmd>Telescope lsp_workspace_diagnostics<cr>
+nnoremap <c-]>     <cmd>Telescope lsp_definitions<cr>
 
 
 " Functions
@@ -280,16 +285,6 @@ function! MkdirIfNeeded(file, buf) abort
     if !isdirectory(dir)
       call mkdir(dir, "p")
     endif
-  endif
-endfunction
-
-function! FuzzyFind(...) abort
-  silent! call system("git rev-parse --is-inside-work-tree >/dev/null 2>&1")
-
-  if v:shell_error
-    execute "Files " . join(a:000)
-  else
-    execute "GFiles -o -c --exclude-standard -- " . join(a:000)
   endif
 endfunction
 
