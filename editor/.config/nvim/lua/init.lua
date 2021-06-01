@@ -4,6 +4,7 @@ local compe = require('compe')
 local telescope = require('telescope')
 local sorters = require('telescope.sorters')
 
+-- Override telescope defaults
 telescope.setup({
   defaults = {
     file_sorter = sorters.get_fzy_sorter,
@@ -20,8 +21,8 @@ util.default_config = vim.tbl_extend(
       local function map(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
       local opts = {noremap=true, silent=true}
 
-      map('n', '<leader><c-f>', '<cmd>lua vim.lsp.buf.formatting()<cr>',     opts)
-      map('n', 'K',             '<cmd>lua vim.lsp.buf.hover()<cr>',          opts)
+      map('n', '<leader><c-f>', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
+      map('n', 'K',             '<cmd>lua vim.lsp.buf.hover()<cr>',      opts)
 
       -- LSP-specific completion setup
       compe.setup({
