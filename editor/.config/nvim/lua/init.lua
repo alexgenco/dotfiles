@@ -2,6 +2,14 @@ local lsp = require('lspconfig')
 local util = lsp.util
 local compe = require('compe')
 local telescope = require('telescope')
+local sorters = require('telescope.sorters')
+
+telescope.setup({
+  defaults = {
+    file_sorter = sorters.get_fzy_sorter,
+    generic_sorter = sorters.get_fzy_sorter,
+  }
+})
 
 -- Set LSP defaults for all servers
 util.default_config = vim.tbl_extend(
