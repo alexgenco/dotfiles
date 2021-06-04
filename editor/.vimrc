@@ -75,10 +75,6 @@ if has("path_extra")
   setglobal tags-=./tags tags-=./tags; tags^=./tags;
 endif
 
-" move by visual line
-nnoremap k gk
-nnoremap j gj
-
 " more context while scrolling
 set scrolloff=8
 set sidescrolloff=8
@@ -157,7 +153,7 @@ set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 
 " status line
 set laststatus=2
-set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-8(%4l:%c%)
+set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-10(%3p%%\ %4l:%-2c%)
 set ruler
 
 " display as much of last line as possible
@@ -256,10 +252,14 @@ let mapleader = ","
 " make Y go to end of line
 nnoremap Y y$
 
+" move by visual line
+nnoremap k gk
+nnoremap j gj
+
 " run tests
-nmap <silent> <leader>t :TestFile<cr>
-nmap <silent> <leader>T :TestNearest<cr>
-nmap <silent> <leader><c-t> :TestLast<cr>
+nnoremap <silent> <leader>t :TestFile<cr>
+nnoremap <silent> <leader>T :TestNearest<cr>
+nnoremap <silent> <leader><c-t> :TestLast<cr>
 
 " telescope.nvim mappings (these will fail in Vim)
 nnoremap <leader>f <cmd>Telescope find_files find_command=rg,-i,--hidden,--files,-g,!.git<cr>
