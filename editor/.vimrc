@@ -273,6 +273,7 @@ vnoremap <leader>a <cmd>Telescope lsp_range_code_actions<cr>
 nnoremap <leader>r <cmd>Telescope lsp_references<cr>
 nnoremap <leader>d <cmd>Telescope lsp_document_diagnostics<cr>
 nnoremap <leader>D <cmd>Telescope lsp_workspace_diagnostics<cr>
+nnoremap <leader>: <cmd>Telescope command_history<cr>
 nnoremap <c-]>     <cmd>Telescope lsp_definitions<cr>
 
 

@@ -3,12 +3,19 @@ local util = lsp.util
 local compe = require('compe')
 local telescope = require('telescope')
 local sorters = require('telescope.sorters')
+local actions = require('telescope.actions')
 
 -- Override telescope defaults
 telescope.setup({
   defaults = {
     file_sorter = sorters.get_fzy_sorter,
     generic_sorter = sorters.get_fzy_sorter,
+    mappings = {
+      i = {
+        ["<c-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+        ["<c-space>"] = actions.toggle_selection,
+      }
+    }
   }
 })
 
