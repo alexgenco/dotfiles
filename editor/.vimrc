@@ -298,9 +298,9 @@ augroup vimrcEx
   " create parent directories when saving a new file
   autocmd BufWritePre * call MkdirIfNeeded(expand("<afile>"), +expand("<abuf>"))
 
-  if exists("##TerminalOpen")
-    " don't show line numbers in terminal buffers
-    autocmd TerminalOpen * setlocal nonumber
+  " don't show line numbers in nvim terminal buffers
+  if exists("##TermOpen")
+    autocmd TermOpen term://* setlocal nonumber | startinsert
   endif
 
   " jump to the last known cursor position
