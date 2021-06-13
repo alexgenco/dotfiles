@@ -12,6 +12,7 @@ telescope.setup({
     generic_sorter = sorters.get_fzy_sorter,
     mappings = {
       i = {
+        ["<c-u>"] = false, -- Allow <c-u> to clear current query
         ["<c-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
         ["<c-space>"] = actions.toggle_selection,
       }
@@ -30,6 +31,7 @@ util.default_config = vim.tbl_extend(
 
       map('n', '<leader><c-f>', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
       map('n', 'K',             '<cmd>lua vim.lsp.buf.hover()<cr>',      opts)
+      map('n', '<c-]>',         '<cmd>Telescope lsp_definitions<cr>',    opts)
 
       -- LSP-specific completion setup
       compe.setup({
@@ -51,9 +53,6 @@ lsp.rust_analyzer.setup{
       cmd = { '~/.local/bin/rust-analyzer' },
       cargo = {
         loadOutDirsFromCheck = true
-      },
-      procMacro = {
-        enable = true
       }
     }
   }

@@ -257,24 +257,24 @@ nnoremap k gk
 nnoremap j gj
 
 " run tests
-nnoremap <silent> <leader>t :TestFile<cr>
-nnoremap <silent> <leader>T :TestNearest<cr>
-nnoremap <silent> <leader><c-t> :TestLast<cr>
+nnoremap <silent> <leader>t     <cmd>TestFile<cr>
+nnoremap <silent> <leader>T     <cmd>TestNearest<cr>
+nnoremap <silent> <leader><c-t> <cmd>TestLast<cr>
+nnoremap <silent> <leader>v     <cmd>call EditDotfiles()<cr>
 
 " telescope.nvim mappings (these will fail in Vim)
-nnoremap <leader>f <cmd>Telescope find_files find_command=rg,-i,--hidden,--files,-g,!.git<cr>
-nnoremap <leader>F <cmd>Telescope git_files show_untracked=true<cr>
-nnoremap <leader>b <cmd>Telescope buffers<cr>
-nnoremap <leader>h <cmd>Telescope help_tags<cr>
-nnoremap <leader>g <cmd>Telescope grep_string<cr>
-nnoremap <leader>G <cmd>Telescope live_grep<cr>
-nnoremap <leader>a <cmd>Telescope lsp_code_actions<cr>
-vnoremap <leader>a <cmd>Telescope lsp_range_code_actions<cr>
-nnoremap <leader>r <cmd>Telescope lsp_references<cr>
-nnoremap <leader>d <cmd>Telescope lsp_document_diagnostics<cr>
-nnoremap <leader>D <cmd>Telescope lsp_workspace_diagnostics<cr>
-nnoremap <leader>: <cmd>Telescope command_history<cr>
-nnoremap <c-]>     <cmd>Telescope lsp_definitions<cr>
+nnoremap <silent> <leader>f <cmd>Telescope find_files find_command=rg,-i,--hidden,--files,-g,!.git<cr>
+nnoremap <silent> <leader>F <cmd>Telescope git_files show_untracked=true<cr>
+nnoremap <silent> <leader>b <cmd>Telescope buffers<cr>
+nnoremap <silent> <leader>h <cmd>Telescope help_tags<cr>
+nnoremap <silent> <leader>g <cmd>Telescope grep_string<cr>
+nnoremap <silent> <leader>G <cmd>Telescope live_grep<cr>
+nnoremap <silent> <leader>a <cmd>Telescope lsp_code_actions<cr>
+vnoremap <silent> <leader>a <cmd>Telescope lsp_range_code_actions<cr>
+nnoremap <silent> <leader>r <cmd>Telescope lsp_references<cr>
+nnoremap <silent> <leader>d <cmd>Telescope lsp_document_diagnostics<cr>
+nnoremap <silent> <leader>D <cmd>Telescope lsp_workspace_diagnostics<cr>
+nnoremap <silent> <leader>: <cmd>Telescope command_history<cr>
 
 
 " Functions
@@ -287,6 +287,13 @@ function! MkdirIfNeeded(file, buf) abort
       call mkdir(dir, "p")
     endif
   endif
+endfunction
+
+" open a tab for editing dotfiles, and reload after close
+function! EditDotfiles() abort
+  tabnew ~/.vimrc
+  tcd ~/dev/dotfiles
+  autocmd BufWinLeave <buffer> source $MYVIMRC
 endfunction
 
 
