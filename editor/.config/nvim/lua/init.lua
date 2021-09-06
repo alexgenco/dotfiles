@@ -30,6 +30,7 @@ util.default_config = vim.tbl_extend(
       local opts = {noremap=true, silent=true}
 
       map('n', '<leader><c-f>', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
+      map('n', '<leader>m',     '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
       map('n', 'K',             '<cmd>lua vim.lsp.buf.hover()<cr>',      opts)
       map('n', '<c-]>',         '<cmd>Telescope lsp_definitions<cr>',    opts)
 

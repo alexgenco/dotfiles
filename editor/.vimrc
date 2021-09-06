@@ -33,6 +33,10 @@ if has('nvim-0.5')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
 endif
+
+if filereadable(expand("~/.local/etc/vimrc.plugins"))
+  source ~/.local/etc/vimrc.plugins
+endif
 call plug#end()
 
 " Settings
