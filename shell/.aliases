@@ -5,6 +5,7 @@ alias gs='git status'
 alias gg='git grep'
 alias vim=nvim
 alias vi=nvim
+alias dcp='docker compose'
 
 # Ensure non-standard $TERM isn't forwarded to remote hosts
 function ssh() {
