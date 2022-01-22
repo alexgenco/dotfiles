@@ -54,7 +54,10 @@ lsp.rust_analyzer.setup{
       cmd = { '~/.local/bin/rust-analyzer' },
       cargo = {
         loadOutDirsFromCheck = true
-      }
+      },
+      procMacro = {
+        enable = true
+      },
     }
   }
 }
