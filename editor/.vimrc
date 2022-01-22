@@ -277,8 +277,8 @@ nnoremap <silent> <leader>G <cmd>Telescope live_grep<cr>
 nnoremap <silent> <leader>a <cmd>Telescope lsp_code_actions<cr>
 vnoremap <silent> <leader>a <cmd>Telescope lsp_range_code_actions<cr>
 nnoremap <silent> <leader>r <cmd>Telescope lsp_references<cr>
-nnoremap <silent> <leader>d <cmd>Telescope lsp_document_diagnostics<cr>
-nnoremap <silent> <leader>D <cmd>Telescope lsp_workspace_diagnostics<cr>
+nnoremap <silent> <leader>d <cmd>Telescope diagnostics bufnr=0<cr>
+nnoremap <silent> <leader>D <cmd>Telescope diagnostics<cr>
 nnoremap <silent> <leader>: <cmd>Telescope command_history<cr>
 
 
