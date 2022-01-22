@@ -261,6 +261,10 @@ nnoremap Y y$
 nnoremap k gk
 nnoremap j gj
 
+" navigate quickfix
+nnoremap <silent> <leader>c <cmd>cne<cr>
+nnoremap <silent> <leader>C <cmd>cpr<cr>
+
 " run tests
 nnoremap <silent> <leader>t     <cmd>TestFile<cr>
 nnoremap <silent> <leader>T     <cmd>TestNearest<cr>
