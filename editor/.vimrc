@@ -25,6 +25,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'fxn/vim-monochrome'
 Plug 'benmills/vimux'
 Plug 'vim-test/vim-test'
+Plug 'vim-ruby/vim-ruby'
 
 if has('nvim-0.5')
   Plug 'hrsh7th/nvim-compe'
