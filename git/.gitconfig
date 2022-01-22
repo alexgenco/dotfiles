@@ -41,5 +41,3 @@
 	ff = only
 [core]
 	attributesfile = /Users/alex/.gitattributes
-[url "git@github.com:"]
-	insteadOf = https://github.com/
