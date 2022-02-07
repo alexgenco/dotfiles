@@ -43,3 +43,7 @@ if [ -f ~/.local/etc/git-completion.bash ]; then
 fi
 
 eval "$(rbenv init - zsh)"
+
+if [ -f /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
