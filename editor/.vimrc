@@ -270,6 +270,7 @@ nnoremap <silent> <leader>t     <cmd>TestFile<cr>
 nnoremap <silent> <leader>T     <cmd>TestNearest<cr>
 nnoremap <silent> <leader><c-t> <cmd>TestLast<cr>
 nnoremap <silent> <leader>v     <cmd>call EditDotfiles()<cr>
+nnoremap <silent> <leader>s     <cmd>call NewScratch()<cr>
 
 " telescope.nvim mappings (these will fail in Vim)
 nnoremap <silent> <leader>f <cmd>Telescope find_files find_command=rg,-i,--hidden,--files,-g,!.git<cr>
@@ -303,6 +304,12 @@ function! EditDotfiles() abort
   tabnew ~/.vimrc
   tcd ~/dev/dotfiles
   autocmd BufWinLeave <buffer> source $MYVIMRC
+endfunction
+
+" open a scratch buffer
+function! NewScratch() abort
+  tabnew
+  setlocal buftype=nofile bufhidden=hide noswapfile
 endfunction
 
 
