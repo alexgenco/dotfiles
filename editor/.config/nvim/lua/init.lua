@@ -61,3 +61,7 @@ lsp.rust_analyzer.setup{
     }
   }
 }
+
+lsp.elixirls.setup{
+    cmd = { "/usr/local/src/elixir-ls/language_server.sh" };
+}
