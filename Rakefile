@@ -78,7 +78,7 @@ task :setup do
     end
 
     dep("kitty") do
-      sh "brew cask install kitty"
+      sh "brew install kitty --cask"
     end
 
     dep("rust-analyzer") do
