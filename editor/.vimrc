@@ -32,6 +32,8 @@ if has('nvim-0.7')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
   Plug 'nvim-telescope/telescope-ui-select.nvim'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/nvim-cmp'
 endif
 
 if filereadable(expand("~/.local/etc/vimrc.plugins"))

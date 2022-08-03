@@ -2,6 +2,23 @@ local lsp = require('lspconfig')
 local telescope = require('telescope')
 local sorters = require('telescope.sorters')
 local actions = require('telescope.actions')
+local cmp = require('cmp')
+local cmp_nvim_lsp = require('cmp_nvim_lsp')
+
+cmp.setup {
+  sources = {
+    {
+      name = 'nvim_lsp'
+    }
+  },
+  mapping = cmp.mapping.preset.insert {
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-c>'] = cmp.mapping.abort(),
+  }
+}
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 -- Override telescope defaults
 telescope.setup({
@@ -25,9 +42,12 @@ telescope.setup({
 
 telescope.load_extension("ui-select")
 
-lsp.gopls.setup{}
+lsp.gopls.setup {
+  capabilities = capabilities
+}
 
-lsp.rust_analyzer.setup{
+lsp.rust_analyzer.setup {
+  capabilities = capabilities,
   settings = {
     ['rust-analyzer'] = {
       cmd = { '~/.local/bin/rust-analyzer' },
@@ -41,6 +61,7 @@ lsp.rust_analyzer.setup{
   }
 }
 
-lsp.elixirls.setup{
-    cmd = { "/usr/local/src/elixir-ls/language_server.sh" };
+lsp.elixirls.setup {
+  capabilities = capabilities,
+  cmd = { "/usr/local/src/elixir-ls/language_server.sh" };
 }
