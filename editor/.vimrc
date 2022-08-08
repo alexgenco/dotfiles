@@ -273,16 +273,6 @@ nnoremap <silent> <leader><c-t> <cmd>TestLast<cr>
 nnoremap <silent> <leader>v     <cmd>call EditDotfiles()<cr>
 nnoremap <silent> <leader>s     <cmd>call NewScratch()<cr>
 
-" lsp mappings
-nnoremap <silent> <leader>d <cmd>lua vim.diagnostic.get(0)<cr>
-nnoremap <silent> <leader>D <cmd>lua vim.diagnostic.get()<cr>
-nnoremap <silent> <leader>a <cmd>lua vim.lsp.buf.code_action()<cr>
-nnoremap <silent> <leader>m <cmd>lua vim.lsp.buf.rename()<cr>
-vnoremap <silent> <leader>a <cmd>lua vim.lsp.buf.range_code_action()<cr>
-nnoremap <silent> <leader><c-f> <cmd>lua vim.lsp.buf.formatting()<cr>
-nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<cr>
-nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<cr>
-
 " telescope.nvim mappings
 nnoremap <silent> <leader>: <cmd>Telescope command_history<cr>
 nnoremap <silent> <leader>F <cmd>Telescope git_files show_untracked=true<cr>
@@ -292,7 +282,8 @@ nnoremap <silent> <leader>f <cmd>Telescope find_files find_command=rg,-i,--hidde
 nnoremap <silent> <leader>g <cmd>Telescope grep_string<cr>
 nnoremap <silent> <leader>h <cmd>Telescope help_tags<cr>
 nnoremap <silent> <leader>r <cmd>Telescope lsp_references<cr>
-
+" more lsp mappings defined in `$XDG_CONFIG_HOME/nvim/lua/init.lua`
+"
 
 
 " Functions
