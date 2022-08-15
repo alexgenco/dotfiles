@@ -14,4 +14,4 @@ else
   opt="--fixup"
 fi
 
-exec git commit --verbose --edit "$opt"="$rev"
+exec git commit --verbose "$opt"="$rev" --edit

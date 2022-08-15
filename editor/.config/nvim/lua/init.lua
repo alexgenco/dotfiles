@@ -15,10 +15,16 @@ cmp.setup {
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-c>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = 'replace',
+      select = true,
+    },
   }
 }
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+capabilities = cmp_nvim_lsp.update_capabilities(capabilities, {
+  snippetSupport = false,
+})
 
 -- Override telescope defaults
 telescope.setup({
@@ -27,6 +33,7 @@ telescope.setup({
     generic_sorter = sorters.get_fzy_sorter,
     mappings = {
       i = {
+        ["<esc>"] = actions.close,
         ["<c-u>"] = false, -- Allow <c-u> to clear current query
         ["<c-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
         ["<c-space>"] = actions.toggle_selection,
