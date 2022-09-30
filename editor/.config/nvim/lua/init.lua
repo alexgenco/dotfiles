@@ -55,8 +55,6 @@ local on_attach = function(client, bufnr)
   end
 
   -- lsp mappings
-  map('n', '<leader>d',     '<cmd>lua vim.diagnostic.get(0)<cr>')
-  map('n', '<leader>D',     '<cmd>lua vim.diagnostic.get()<cr>')
   map('n', '<leader>a',     '<cmd>lua vim.lsp.buf.code_action()<cr>')
   map('n', '<leader>m',     '<cmd>lua vim.lsp.buf.rename()<cr>')
   map('v', '<leader>a',     '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
@@ -66,6 +64,8 @@ local on_attach = function(client, bufnr)
 
   -- telescope.nvim lsp mappings
   map('n', '<leader>r', '<cmd>Telescope lsp_references<cr>')
+  map('n', '<leader>d', '<cmd>Telescope diagnostics bufnr=0<cr>')
+  map('n', '<leader>D', '<cmd>Telescope diagnostics<cr>')
 end
 
 lsp.gopls.setup {
