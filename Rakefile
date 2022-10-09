@@ -174,7 +174,7 @@ task :setup do
   end
 
   dep("gopls") do
-    sh "PATH=$PATH:/usr/local/go/bin GO111MODULE=on go get golang.org/x/tools/gopls@latest"
+    sh "PATH=$PATH:/usr/local/go/bin GO111MODULE=on go install golang.org/x/tools/gopls@latest"
   end
 end
 
