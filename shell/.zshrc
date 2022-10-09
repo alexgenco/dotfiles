@@ -11,6 +11,10 @@ SAVEHIST=10000
 
 bindkey -e
 
+if type brew &>/dev/null; then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
+
 autoload -U edit-command-line
 autoload -Uz compinit && compinit
 zle -N edit-command-line
