@@ -95,6 +95,10 @@ task :setup do
     dep("ripgrep", "command -v rg > /dev/null") do
       sh "brew install ripgrep"
     end
+
+    dep("coreutils", "brew leaves -r | fgrep -xq coreutils") do
+      sh "brew install coreutils"
+    end
   when /linux/
     dep("apt-get", "sudo apt-get update")
 
@@ -156,7 +160,7 @@ task :setup do
     sh "git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build"
   end
 
-  dep("ruby", "~/.rbenv/bin/rbenv versions | grep -q -F 2.6.0") do
+  dep("ruby", "~/.rbenv/bin/rbenv versions | fgrep -q 2.6.0") do
     sh "~/.rbenv/bin/rbenv install 2.6.0 && ~/.rbenv/bin/rbenv global 2.6.0"
   end
 
