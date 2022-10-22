@@ -15,7 +15,8 @@ if type brew &>/dev/null; then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
-autoload -U edit-command-line
+autoload -Uz edit-command-line
+autoload -Uz zmv
 autoload -Uz compinit && compinit
 zle -N edit-command-line
 bindkey '^x^e' edit-command-line
