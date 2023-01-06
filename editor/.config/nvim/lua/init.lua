@@ -6,10 +6,14 @@ local cmp = require('cmp')
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
 cmp.setup {
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end
+  },
   sources = {
-    {
-      name = 'nvim_lsp'
-    }
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' }
   },
   mapping = cmp.mapping.preset.insert {
     ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -21,10 +25,8 @@ cmp.setup {
     },
   }
 }
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = cmp_nvim_lsp.update_capabilities(capabilities, {
-  snippetSupport = false,
-})
+
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Override telescope defaults
 telescope.setup({
