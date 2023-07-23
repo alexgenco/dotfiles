@@ -26,7 +26,7 @@ cmp.setup {
   }
 }
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = cmp_nvim_lsp.default_capabilities()
 
 -- Override telescope defaults
 telescope.setup({
@@ -60,7 +60,7 @@ local on_attach = function(client, bufnr)
   map('n', '<leader>a',     '<cmd>lua vim.lsp.buf.code_action()<cr>')
   map('n', '<leader>m',     '<cmd>lua vim.lsp.buf.rename()<cr>')
   map('v', '<leader>a',     '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
-  map('n', '<leader><c-f>', '<cmd>lua vim.lsp.buf.formatting()<cr>')
+  map('n', '<leader><c-f>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
   map('n', '<c-]>',         '<cmd>lua vim.lsp.buf.definition()<cr>')
   map('n', 'K',             '<cmd>lua vim.lsp.buf.hover()<cr>')
 
@@ -100,5 +100,5 @@ lsp.rust_analyzer.setup {
 lsp.elixirls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
-  cmd = { "/usr/local/src/elixir-ls/language_server.sh" };
+  cmd = { "/usr/local/src/elixir-ls/language_server.sh" }
 }
