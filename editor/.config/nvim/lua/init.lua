@@ -86,7 +86,7 @@ lsp.rust_analyzer.setup {
   on_attach = on_attach,
   settings = {
     ['rust-analyzer'] = {
-      cmd = { '~/.local/bin/rust-analyzer' },
+      cmd = { '~/.cargo/bin/rust-analyzer' },
       cargo = {
         loadOutDirsFromCheck = true
       },
