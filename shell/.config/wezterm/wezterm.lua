@@ -1,7 +1,7 @@
 local wezterm = require 'wezterm'
 local act = wezterm.action
 
-function beginResize(dir)
+function begin_resize(dir)
   return act.Multiple{
     act.AdjustPaneSize{dir, 5},
     act.ActivateKeyTable{
@@ -14,10 +14,28 @@ function beginResize(dir)
   }
 end
 
+function prompt_for_tab_title()
+  return act.PromptInputLine {
+    description = wezterm.format{
+      {Attribute={Intensity='Bold'}},
+      {Text='rename tab:'},
+    },
+    action = wezterm.action_callback(function(window, pane, line)
+      -- line will be `nil` if they hit escape without entering anything
+      -- An empty string if they just hit enter
+      -- Or the actual line of text they wrote
+      if line then
+        window:active_tab():set_title(line)
+      end
+    end),
+  }
+end
+
 return {
   font = wezterm.font 'Berkeley Mono',
   audible_bell = 'Disabled',
-  hide_tab_bar_if_only_one_tab = true,
+  use_fancy_tab_bar = false,
+  tab_bar_at_bottom = true,
 
   -- tmux bindings
   leader = { key="a", mods="CTRL" },
@@ -43,10 +61,11 @@ return {
     {key = "a", mods = "LEADER|CTRL",  action=act.ActivateLastTab},
     {key = "p", mods = "LEADER",       action=act{ActivateTabRelative=-1}},
     {key = "n", mods = "LEADER",       action=act{ActivateTabRelative=1}},
-    {key = "H", mods = "LEADER|SHIFT", action=beginResize("Left")},
-    {key = "L", mods = "LEADER|SHIFT", action=beginResize("Right")},
-    {key = "J", mods = "LEADER|SHIFT", action=beginResize("Down")},
-    {key = "K", mods = "LEADER|SHIFT", action=beginResize("Up")},
+    {key = "H", mods = "LEADER|SHIFT", action=begin_resize("Left")},
+    {key = "L", mods = "LEADER|SHIFT", action=begin_resize("Right")},
+    {key = "J", mods = "LEADER|SHIFT", action=begin_resize("Down")},
+    {key = "K", mods = "LEADER|SHIFT", action=begin_resize("Up")},
+    {key = ",", mods = "LEADER",       action=prompt_for_tab_title()},
   },
   key_tables = {
 	resize_pane = {
