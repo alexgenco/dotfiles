@@ -22,9 +22,12 @@ function begin_resize(direction)
 	})
 end
 
--- tmux bindings
+wezterm.on("maximize-window", function(window, pane) window:maximize() end)
+
 cnf.leader = { key = "a", mods = "CTRL" }
 cnf.keys = {
+	{ key = "=", mods = "CMD|OPT", action = act({ EmitEvent = "maximize-window" }) },
+	-- tmux bindings
 	{ key = "a", mods = "LEADER", action = act({ SendString = "\x01" }) },
 	{ key = "-", mods = "LEADER", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
 	{ key = "|", mods = "LEADER", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
