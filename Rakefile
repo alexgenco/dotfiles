@@ -146,8 +146,8 @@ task :setup do
     sh "git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build"
   end
 
-  dep("ruby", "~/.rbenv/bin/rbenv versions | fgrep -q 2.6.0") do
-    sh "~/.rbenv/bin/rbenv install 2.6.0 && ~/.rbenv/bin/rbenv global 2.6.0"
+  dep("ruby", "~/.rbenv/bin/rbenv versions | fgrep -q 3.1") do
+    sh "~/.rbenv/bin/rbenv install 3.1.2 && ~/.rbenv/bin/rbenv global 3.1.2"
   end
 
   dep("bundler") do
