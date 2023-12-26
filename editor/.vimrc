@@ -220,6 +220,8 @@ let g:VimuxHeight = "50"
 " vim-test settings
 if exists("$TMUX")
   let test#strategy = "vimux"
+elseif exists("$WEZTERM_PANE")
+  let test#strategy = "wezterm"
 elseif has("nvim")
   let test#strategy = "neovim"
 elseif exists("*term_start")
