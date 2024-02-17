@@ -22,7 +22,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'fxn/vim-monochrome'
+Plug 'alexgenco/vim-monochrome'
 Plug 'benmills/vimux'
 Plug 'vim-test/vim-test'
 Plug 'vim-ruby/vim-ruby'
