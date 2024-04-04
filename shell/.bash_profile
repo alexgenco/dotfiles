@@ -34,6 +34,10 @@ if [ -f ~/.aliases ]; then
   source ~/.aliases
 fi
 
+if [ -f ~/.cargo/env ]; then
+  source ~/.cargo/env
+fi
+
 if [ -f ~/.local/etc/bashrc ]; then
   source ~/.local/etc/bashrc
 fi

@@ -31,6 +31,10 @@ fi
 setopt prompt_subst
 PROMPT='%B%U%D{%H:%M:%S} %3~$(__git_ps1 2>/dev/null) %#%b%u '
 
+if [ -f ~/.cargo/env ]; then
+  source ~/.cargo/env
+fi
+
 if [ -f ~/.env ]; then
   source ~/.env
 fi
