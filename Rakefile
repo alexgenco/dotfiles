@@ -70,7 +70,7 @@ task :setup do
     end
 
     dep("nvim") do
-      sh "brew install --HEAD neovim"
+      sh "brew install neovim"
     end
 
     dep("bash completion", "test -f $(brew --prefix)/etc/bash_completion") do
