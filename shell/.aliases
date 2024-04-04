@@ -2,6 +2,7 @@ alias la='ls -al'
 alias be='bundle exec'
 alias g=git
 alias gs='git status'
+alias gb='git branch --sort=-committerdate'
 alias gg='git grep'
 alias gj='git jump'
 alias gjg='git jump grep'

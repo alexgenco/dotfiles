@@ -6,7 +6,7 @@
   co = checkout
   ci = commit -v
   cif = fixup
-  br = branch
+  br = branch --sort=-committerdate
   dc = diff --cached
   dv = difftool -t vimdiff -y
   hist = log --pretty=format:'%C(yellow)[%ad]%C(reset) %C(green)[%h]%C(reset) | %C(red)%s %C(bold red){{%an}}%C(reset) %C(blue)%d%C(reset)' --graph --date=short
