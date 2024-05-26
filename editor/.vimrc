@@ -30,7 +30,7 @@ Plug 'vim-ruby/vim-ruby'
 if has('nvim-0.7')
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
+  Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.7' }
   Plug 'nvim-telescope/telescope-ui-select.nvim'
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/nvim-cmp'
@@ -146,8 +146,8 @@ if !has('nvim') && &ttimeoutlen == -1
   set ttimeoutlen=10
 endif
 
-" fold based on indent, disabled by default
-set foldmethod=indent
+" only enable manual folding
+set foldmethod=manual
 set nofoldenable
 
 " let buffers exist in the background
@@ -190,10 +190,6 @@ set path+=**
 
 " faster update time (default is 4s)
 set updatetime=500
-
-if exists("+termguicolors")
-  set termguicolors
-endif
 
 if exists('+inccommand')
   set inccommand=nosplit
@@ -345,6 +341,12 @@ augroup END
 
 " Colorscheme
 "
+
+if exists("+termguicolors")
+  " my preference for monochrome theme
+  set notermguicolors
+endif
+
 color monochrome
 
 " Local Settings

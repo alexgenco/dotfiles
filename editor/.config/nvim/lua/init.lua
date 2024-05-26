@@ -66,6 +66,7 @@ local on_attach = function(client, bufnr)
 
   -- telescope.nvim lsp mappings
   map('n', '<leader>r', '<cmd>Telescope lsp_references<cr>')
+  map('n', '<leader>i', '<cmd>Telescope lsp_implementations<cr>')
   map('n', '<leader>d', '<cmd>Telescope diagnostics bufnr=0<cr>')
   map('n', '<leader>D', '<cmd>Telescope diagnostics<cr>')
 end
@@ -87,6 +88,7 @@ lsp.rust_analyzer.setup {
   settings = {
     ['rust-analyzer'] = {
       cmd = { '~/.cargo/bin/rust-analyzer' },
+      check = { command = 'clippy' },
       cargo = {
         loadOutDirsFromCheck = true
       },
