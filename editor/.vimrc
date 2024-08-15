@@ -22,7 +22,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'alexgenco/vim-monochrome'
 Plug 'benmills/vimux'
 Plug 'vim-test/vim-test'
 Plug 'vim-ruby/vim-ruby'
@@ -191,6 +190,9 @@ set path+=**
 " faster update time (default is 4s)
 set updatetime=500
 
+" don't change EOL
+set nofixeol
+
 if exists('+inccommand')
   set inccommand=nosplit
 endif
@@ -342,12 +344,15 @@ augroup END
 " Colorscheme
 "
 
-if exists("+termguicolors")
+if has("termguicolors")
   " my preference for monochrome theme
   set notermguicolors
 endif
 
-color monochrome
+set background=dark
+colorscheme quiet
+hi! Keyword cterm=bold
+hi! String ctermfg=110
 
 " Local Settings
 "
