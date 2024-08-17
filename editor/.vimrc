@@ -337,7 +337,7 @@ augroup vimrcEx
   au BufNewFile,BufReadPre *.go setlocal shiftwidth=4 noexpandtab
 
   " remove autoindent in git commits, enable spelling
-  au FileType gitcommit setl nocin nosi spell spelllang=en_us
+  au FileType gitcommit,text setl nocin nosi spell spelllang=en_us
 augroup END
 
 
