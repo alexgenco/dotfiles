@@ -104,3 +104,8 @@ lsp.elixirls.setup {
   on_attach = on_attach,
   cmd = { "/usr/local/src/elixir-ls/language_server.sh" }
 }
+
+lsp.gleam.setup {
+  capabilities = capabilities,
+  on_attach = on_attach
+}
