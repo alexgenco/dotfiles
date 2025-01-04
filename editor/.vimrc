@@ -273,6 +273,9 @@ nnoremap <silent> <leader><c-t> <cmd>TestLast<cr>
 nnoremap <silent> <leader>v     <cmd>call EditDotfiles()<cr>
 nnoremap <silent> <leader>s     <cmd>call NewScratch()<cr>
 
+" make current file executable
+nnoremap <silent> <leader><c-x> :silent !chmod +x %<cr>
+
 " telescope.nvim mappings
 nnoremap <silent> <leader>: <cmd>Telescope command_history<cr>
 nnoremap <silent> <leader>F <cmd>Telescope git_files show_untracked=true<cr>
