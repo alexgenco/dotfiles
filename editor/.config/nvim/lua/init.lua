@@ -104,3 +104,8 @@ lsp.gleam.setup {
   capabilities = capabilities,
   on_attach = on_attach
 }
+
+lsp.erlangls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach
+}
