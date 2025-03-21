@@ -154,7 +154,7 @@ set hidden
 set splitbelow splitright
 
 " use ripgrep for :grep
-set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+set grepprg=rg\ --hidden\ --glob\ '!.git'\ --vimgrep\ --no-heading\ --smart-case
 
 " status line
 set laststatus=2
