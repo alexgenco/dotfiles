@@ -345,15 +345,8 @@ augroup END
 " Colorscheme
 "
 
-if has("termguicolors")
-  " my preference for monochrome theme
-  set notermguicolors
-endif
-
 set background=dark
 colorscheme quiet
-hi! Keyword cterm=bold
-hi! String ctermfg=110
 
 " Local Settings
 "
