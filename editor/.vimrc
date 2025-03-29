@@ -262,9 +262,11 @@ nnoremap Y y$
 nnoremap k gk
 nnoremap j gj
 
-" navigate quickfix
-nnoremap <silent> <leader>c <cmd>cne<cr>
-nnoremap <silent> <leader>C <cmd>cpr<cr>
+" navigation (these are now default in nvim 0.11)
+nnoremap <silent> ]q <cmd>cnext<cr>
+nnoremap <silent> [q <cmd>cprevious<cr>
+nnoremap <silent> ]b <cmd>bnext<cr>
+nnoremap <silent> [b <cmd>bprevious<cr>
 
 " run tests
 nnoremap <silent> <leader>t     <cmd>TestFile<cr>
