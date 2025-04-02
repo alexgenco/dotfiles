@@ -1,32 +1,13 @@
 local telescope = require('telescope')
 local sorters = require('telescope.sorters')
 local actions = require('telescope.actions')
---local cmp = require('cmp')
---local cmp_nvim_lsp = require('cmp_nvim_lsp')
-
---cmp.setup {
---  sources = {
---    { name = 'nvim_lsp' },
---  },
---  mapping = cmp.mapping.preset.insert {
---    ['<C-n>'] = cmp.mapping.select_next_item(),
---    ['<C-p>'] = cmp.mapping.select_prev_item(),
---    ['<C-c>'] = cmp.mapping.abort(),
---    ['<CR>'] = cmp.mapping.confirm {
---      behavior = 'replace',
---      select = true,
---    },
---  }
---}
-
---local capabilities = cmp_nvim_lsp.default_capabilities()
---capabilities.textDocument.completion.completionItem.snippetSupport = false
 
 -- Override telescope defaults
 telescope.setup({
   defaults = {
     file_sorter = sorters.get_fzy_sorter,
     generic_sorter = sorters.get_fzy_sorter,
+    border = false, -- prefer `winborder`
     mappings = {
       i = {
         ["<esc>"] = actions.close,
@@ -59,12 +40,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     -- lsp mappings
-    map('n', '<leader>a',     '<cmd>lua vim.lsp.buf.code_action()<cr>')
-    map('n', '<leader>m',     '<cmd>lua vim.lsp.buf.rename()<cr>')
-    map('v', '<leader>a',     '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
     map('n', '<leader><c-f>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
     map('n', '<c-]>',         '<cmd>lua vim.lsp.buf.definition()<cr>')
-    map('n', 'K',             '<cmd>lua vim.lsp.buf.hover()<cr>')
+    map('n', '<leader>e',     '<cmd>lua vim.diagnostic.open_float()<cr>')
 
     -- telescope.nvim lsp mappings
     map('n', '<leader>r', '<cmd>Telescope lsp_references<cr>')
@@ -74,13 +52,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end
 })
 
--- add this back when telescope supports it
--- https://github.com/nvim-telescope/telescope.nvim/issues/3436
---vim.o.winborder = 'none'
+vim.o.winborder = 'single'
 
 vim.diagnostic.config({
   virtual_text = true,
-  --virtual_lines = { current_line = true },
 })
 
 vim.lsp.config('*', {
