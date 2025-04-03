@@ -24,10 +24,8 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'benmills/vimux'
 Plug 'vim-test/vim-test'
-Plug 'vim-ruby/vim-ruby'
 
 if has('nvim-0.7')
-  Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
   Plug 'nvim-telescope/telescope-ui-select.nvim'
@@ -72,10 +70,6 @@ endif
 
 if exists("&breakindent")
   set breakindent
-endif
-
-if has("path_extra")
-  setglobal tags-=./tags tags-=./tags; tags^=./tags;
 endif
 
 " more context while scrolling
@@ -159,9 +153,6 @@ set laststatus=2
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-10(%3p%%\ %4l:%-2c%)
 set ruler
 
-" display as much of last line as possible
-set display+=lastline
-
 " move cursor beyond end of line in visual block mode
 set virtualedit=block
 
@@ -180,9 +171,6 @@ set report=0
 " turn off mouse support
 set mouse=
 
-" search in subfolders with :find
-set path+=**
-
 " faster update time (default is 4s)
 set updatetime=500
 
@@ -190,12 +178,11 @@ set updatetime=500
 set nofixeol
 
 if exists('+inccommand')
-  set inccommand=nosplit
+  set inccommand=split
 endif
 
-" load matchit.vim, but only if the user hasn't installed a newer version.
-if !exists("g:loaded_matchit") && findfile("plugin/matchit.vim", &rtp) ==# ""
-  runtime! macros/matchit.vim
+if exists('&winborder')
+  set winborder=single
 endif
 
 " netrw settings
@@ -214,8 +201,6 @@ let g:VimuxHeight = "50"
 " vim-test settings
 if exists("$TMUX")
   let test#strategy = "vimux"
-elseif exists("$WEZTERM_PANE")
-  let test#strategy = "wezterm"
 elseif has("nvim")
   let test#strategy = "neovim"
 elseif exists("*term_start")
@@ -228,25 +213,8 @@ endif
 let g:test#echo_command = 0
 let g:test#preserve_screen = 1
 
-" ruby settings
-let g:ruby_indent_block_style = "do"
-let g:ruby_no_expensive=1
-
 " fix incorrect sh non-POSIX highlighting
 let g:is_posix=1
-
-" fzf
-let g:fzf_layout = {'down': '~38%'}
-
-" compe (this is overridden for LSP languages in init.lua)
-let g:compe = {
-      \ 'autocomplete': v:false,
-      \ 'source': {
-      \   'path': v:true,
-      \   'buffer': v:true,
-      \   'tags': v:true,
-      \   }
-      \ }
 
 
 " Keybindings
@@ -260,18 +228,10 @@ nnoremap Y y$
 nnoremap k gk
 nnoremap j gj
 
-" navigation (these are now default in nvim 0.11)
-nnoremap <silent> ]q <cmd>cnext<cr>
-nnoremap <silent> [q <cmd>cprevious<cr>
-nnoremap <silent> ]b <cmd>bnext<cr>
-nnoremap <silent> [b <cmd>bprevious<cr>
-
 " run tests
 nnoremap <silent> <leader>t     <cmd>TestFile<cr>
 nnoremap <silent> <leader>T     <cmd>TestNearest<cr>
 nnoremap <silent> <leader><c-t> <cmd>TestLast<cr>
-nnoremap <silent> <leader>v     <cmd>call EditDotfiles()<cr>
-nnoremap <silent> <leader>s     <cmd>call NewScratch()<cr>
 
 " make current file executable
 nnoremap <silent> <leader><c-x> :silent !chmod +x %<cr>
@@ -284,8 +244,7 @@ nnoremap <silent> <leader>b <cmd>Telescope buffers<cr>
 nnoremap <silent> <leader>f <cmd>Telescope find_files find_command=rg,-i,--hidden,--files,-g,!.git<cr>
 nnoremap <silent> <leader>g <cmd>Telescope grep_string<cr>
 nnoremap <silent> <leader>h <cmd>Telescope help_tags<cr>
-nnoremap <silent> <leader>r <cmd>Telescope lsp_references<cr>
-" more lsp mappings defined in `$XDG_CONFIG_HOME/nvim/lua/init.lua`
+" more lsp mappings defined in init.lua
 "
 
 
@@ -301,19 +260,6 @@ function! MkdirIfNeeded(file, buf) abort
   endif
 endfunction
 
-" open a tab for editing dotfiles, and reload after close
-function! EditDotfiles() abort
-  tabnew ~/.vimrc
-  tcd ~/dev/dotfiles
-  autocmd BufWinLeave <buffer> source $MYVIMRC
-endfunction
-
-" open a scratch buffer
-function! NewScratch() abort
-  tabnew
-  setlocal buftype=nofile bufhidden=hide noswapfile
-endfunction
-
 
 " Autocmds
 "
@@ -323,19 +269,11 @@ augroup vimrcEx
   " create parent directories when saving a new file
   autocmd BufWritePre * call MkdirIfNeeded(expand("<afile>"), +expand("<abuf>"))
 
-  " don't show line numbers in nvim terminal buffers
-  if exists("##TermOpen")
-    autocmd TermOpen term://* setlocal nonumber | startinsert
-  endif
-
   " jump to the last known cursor position
   autocmd BufReadPost *
         \ if &ft != "gitcommit" && line("'\"") > 0 && line("'\"") <= line("$") |
         \   exe "normal g`\"" |
         \ endif
-
-  " set tab expansion for go
-  au BufNewFile,BufReadPre *.go setlocal shiftwidth=4 noexpandtab
 
   " remove autoindent in git commits, enable spelling
   au FileType gitcommit,text setl nocin nosi spell spelllang=en_us

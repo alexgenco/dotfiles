@@ -35,6 +35,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
     end
 
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr')
+
     local map = function(type, key, value)
       vim.api.nvim_buf_set_keymap(bufnr, type, key, value, {noremap = true, silent = true})
     end
@@ -51,8 +54,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('n', '<leader>D', '<cmd>Telescope diagnostics<cr>')
   end
 })
-
-vim.o.winborder = 'single'
 
 vim.diagnostic.config({
   virtual_text = { current_line = true },
