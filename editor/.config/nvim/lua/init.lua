@@ -42,7 +42,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- lsp mappings
     map('n', '<leader><c-f>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
     map('n', '<c-]>',         '<cmd>lua vim.lsp.buf.definition()<cr>')
-    map('n', '<leader>e',     '<cmd>lua vim.diagnostic.open_float()<cr>')
+    map('n', '<c-k>',         '<cmd>lua vim.diagnostic.open_float()<cr>')
 
     -- telescope.nvim lsp mappings
     map('n', '<leader>r', '<cmd>Telescope lsp_references<cr>')
@@ -55,7 +55,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.o.winborder = 'single'
 
 vim.diagnostic.config({
-  virtual_text = true,
+  virtual_text = { current_line = true },
 })
 
 vim.lsp.config('*', {
