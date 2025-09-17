@@ -7,7 +7,6 @@ telescope.setup({
   defaults = {
     file_sorter = sorters.get_fzy_sorter,
     generic_sorter = sorters.get_fzy_sorter,
-    border = false, -- prefer `winborder`
     mappings = {
       i = {
         ["<esc>"] = actions.close,
@@ -45,10 +44,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- lsp mappings
     map('n', '<leader><c-f>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
     map('n', '<c-]>',         '<cmd>lua vim.lsp.buf.definition()<cr>')
-    map('n', '<c-k>',         '<cmd>lua vim.diagnostic.open_float()<cr>')
 
     -- telescope.nvim lsp mappings
-    map('n', '<leader>r', '<cmd>Telescope lsp_references<cr>')
     map('n', '<leader>i', '<cmd>Telescope lsp_implementations<cr>')
     map('n', '<leader>d', '<cmd>Telescope diagnostics bufnr=0<cr>')
     map('n', '<leader>D', '<cmd>Telescope diagnostics<cr>')
@@ -60,8 +57,7 @@ vim.diagnostic.config({
 })
 
 vim.lsp.config('*', {
-  root_markers = { '.git', vim.uv.cwd() },
-  on_attach = on_attach,
+  root_markers = { '.git', vim.uv.cwd() }
 })
 
 vim.lsp.config.gopls = {
@@ -78,10 +74,10 @@ vim.lsp.config.rust_analyzer = {
   root_markers = { 'Cargo.toml', 'Cargo.lock' },
   settings = {
     ['rust-analyzer'] = {
-      checkOnSave = { command = 'clippy' },
+      check = { command = 'clippy' },
       cargo = { loadOutDirsFromCheck = true },
       procMacro = { enable = true },
-      diagnostics = { enable = true, enableExperimental = true },
+      diagnostics = { enable = true },
     }
   }
 }
@@ -99,6 +95,5 @@ vim.lsp.enable({ 'erlangls' })
 
 --lsp.gleam.setup {
 --  capabilities = capabilities,
---  on_attach = on_attach
 --}
 

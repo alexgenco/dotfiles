@@ -122,7 +122,6 @@ set sessionoptions-=options
 
 " persistent undo
 set undofile
-set undodir=~/.vim/undo
 
 " store temporary files in a central spot
 set backup
@@ -178,7 +177,7 @@ set updatetime=500
 set nofixeol
 
 if exists('+inccommand')
-  set inccommand=split
+  set inccommand=nosplit
 endif
 
 if exists('&winborder')
