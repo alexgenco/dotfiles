@@ -1,4 +1,4 @@
-theme = UltraDark
+theme = Ultra Dark
 window-theme = dark
 
 font-family = Berkeley Mono
@@ -6,3 +6,5 @@ font-family-bold = Berkeley Mono Bold
 font-family-italic = Berkeley Mono Italic
 font-family-bold-italic = Berkeley Mono Bold Italic
 font-thicken = true
+
+maximize = true
