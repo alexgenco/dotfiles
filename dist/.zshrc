@@ -52,8 +52,8 @@ if [ -f ~/.local/etc/git-completion.bash ]; then
   zstyle ':completion:*:*:git:*' script ~/.local/etc/git-completion.bash
 fi
 
-eval "$(rbenv init - zsh)"
-
 if [ -f /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
+
+eval "$(mise activate zsh)"

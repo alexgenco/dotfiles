@@ -1,200 +1,108 @@
-require "fileutils"
-require "open-uri"
 require "rbconfig"
-require "shellwords"
 
 Dir.chdir File.expand_path(__dir__)
 
-def dep(exec, shell = "command -v #{exec} > /dev/null")
-  deps = ENV.key?("deps") ? ENV["deps"].split(",") : [/.*/]
-  return if deps.none? { |pat| pat === exec }
-
-  sh(shell) do |ok, status|
-    if !ok || ENV.fetch("force", "").split(",").include?(exec)
-      block_given? ? yield : exit(status.exitstatus)
-    end
-  end
+def macos?
+  RbConfig::CONFIG["host_os"].match?(/(darwin|mac os)/)
 end
 
-def target_dirs(&block)
-  ENV.fetch("dirs", "*/")
-    .split(",")
-    .flat_map { |dir| Dir.glob(dir) }
-    .uniq
-    .each(&block)
-end
+desc "Setup dev tools"
+task :tools do
+  filter = ENV.key?("only") ? ENV["only"].split(",") : [/.*/]
+  forced = ENV.fetch("force", "").split(",")
 
-def local_bin(executable)
-  dir = File.join(Dir.home, ".local/bin")
-  exe = File.join(dir, executable)
+  [
+    {
+      name: "macos key repeat",
+      platform: :macos,
+      test: "test `defaults -currentHost read -g KeyRepeat` = 1",
+      install: -> {
+        sh "defaults -currentHost write -g InitialKeyRepeat -int 15"
+        sh "defaults -currentHost write -g KeyRepeat -int 1"
+        sh "defaults -currentHost write -g ApplePressAndHoldEnabled -bool false"
+      }
+    },
+    {
+      name: "xcode-select",
+      platform: :macos,
+      test: "xcode-select --print-path > /dev/null",
+      install: "xcode-select --install"
+    },
+    {
+      name: "brew",
+      install: '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+    },
+    {
+      name: "bash completion",
+      test: "test -f $(brew --prefix)/etc/bash_completion",
+      install: "brew install bash-completion"
+    },
+    {
+      name: "ripgrep",
+      test: "command -v rg > /dev/null",
+    },
+    {
+      name: "ghostty",
+      platform: :macos,
+      install: "brew install ghostty --cask",
+    },
+    {
+      name: "coreutils",
+      platform: :macos,
+      test: "brew leaves -r | fgrep -xq coreutils",
+    },
+    :git,
+    :mise,
+    {
+      name: "mise install",
+      test: "test -z \"$(mise ls --missing --no-header --silent)\"",
+      install: "mise install",
+    },
+    {
+      name: "bundler",
+      install: "gem install bundler",
+    },
+    {
+      name: "gopls",
+      install: "go install golang.org/x/tools/gopls@latest",
+    },
+    :nvim,
+    :stow,
+    :tmux,
+  ].each do |entry|
+    opts = entry.is_a?(Symbol) ? { name: entry.to_s } : entry
+    name = opts[:name].to_s
+    test = opts.fetch(:test) { "command -v #{name} > /dev/null" }
+    install = opts.fetch(:install) { "brew install #{name}" }
+    next if filter.none? { |pat| pat === name }
+    next if opts[:platform] == :macos && !macos?
 
-  FileUtils.mkdir_p(dir)
-  yield exe
-  FileUtils.chmod("+x", exe)
-end
-
-desc "Setup dependencies"
-task :setup do
-  case RbConfig::CONFIG["host_os"]
-  when /(darwin|mac os)/
-    dep("keyboard", "test `defaults -currentHost read -g KeyRepeat` = 1") do
-      sh "defaults -currentHost write -g InitialKeyRepeat -int 15"
-      sh "defaults -currentHost write -g KeyRepeat -int 1"
-      sh "defaults -currentHost write -g ApplePressAndHoldEnabled -bool false"
-    end
-
-    dep("brew") do
-      URI.open("https://raw.githubusercontent.com/Homebrew/install/master/install.sh") do |io|
-        sh "bash", "-c", io.read
+    sh(test) do |ok, _|
+      next if ok && !forced.include?(name)
+      case install
+      when String
+        sh(install)
+      when Proc
+        install.call
       end
     end
-
-    dep("git") do
-      sh "brew install git"
-    end
-
-    dep("stow") do
-      sh "brew install stow"
-    end
-
-    dep("htop") do
-      sh "brew install htop"
-    end
-
-    dep("tmux") do
-      sh "brew install tmux"
-    end
-
-    dep("xcode-select", "xcode-select --print-path > /dev/null") do
-      sh "xcode-select --install"
-    end
-
-    dep("nvim") do
-      sh "brew install neovim"
-    end
-
-    dep("bash completion", "test -f $(brew --prefix)/etc/bash_completion") do
-      sh "brew install bash-completion"
-    end
-
-    dep("ghostty") do
-      sh "brew install ghostty --cask"
-    end
-
-    dep("go") do
-      sh "brew install go"
-    end
-
-    dep("ripgrep", "command -v rg > /dev/null") do
-      sh "brew install ripgrep"
-    end
-
-    dep("coreutils", "brew leaves -r | fgrep -xq coreutils") do
-      sh "brew install coreutils"
-    end
-  when /linux/
-    dep("apt-get", "sudo apt-get update")
-
-    dep("git") do
-      sh "sudo apt-get -y install git-core"
-    end
-
-    dep("stow") do
-      sh "sudo apt-get -y install stow"
-    end
-
-    dep("htop") do
-      sh "sudo apt-get -y install htop"
-    end
-
-    dep("tmux") do
-      sh "sudo apt-get -y install libevent-dev libncurses5-dev"
-      sh "curl -L https://github.com/tmux/tmux/releases/download/2.8/tmux-2.8.tar.gz | " \
-        "sudo tar xvz -C /usr/local/src"
-
-      Dir.chdir("/usr/local/src/tmux-2.8") do
-        sh "sudo bash -c './configure && make && make install'"
-      end
-    end
-
-    dep("nvim") do
-      sh "sudo apt-get install neovim"
-    end
-
-    dep("go") do
-      sh "curl -L https://golang.org/dl/go1.16.3.linux-amd64.tar.gz | " \
-        "sudo tar xvz -C /usr/local"
-    end
-
-    dep("ripgrep", "command -v rg > /dev/null") do
-      URI.open("https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep_12.1.1_amd64.deb") do |io|
-        IO.copy_stream(io, "/tmp/ripgrep.deb")
-        io.flush
-      end
-
-      sh "sudo dpkg -i /tmp/ripgrep.deb"
-    end
-  else
-    abort "Don't know how to install on this platform."
-  end
-
-  dep("rbenv", "test -d ~/.rbenv && git -C ~/.rbenv pull") do
-    sh "git clone https://github.com/sstephenson/rbenv.git ~/.rbenv"
-  end
-
-  dep("ruby-build", "test -d ~/.rbenv/plugins/ruby-build && git -C ~/.rbenv/plugins/ruby-build pull") do
-    sh "git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build"
-  end
-
-  dep("ruby", "~/.rbenv/bin/rbenv versions | fgrep -q 3.1") do
-    sh "~/.rbenv/bin/rbenv install 3.1.2 && ~/.rbenv/bin/rbenv global 3.1.2"
-  end
-
-  dep("bundler") do
-    sh "~/.rbenv/shims/gem install bundler"
-  end
-
-  dep("vim plugins", "nvim -e +PlugInstall! +qa!") do
-    warn "Failed to install nvim plugins"
-  end
-
-  dep("rust", "command -v rustc > /dev/null") do
-    sh "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs " \
-      "| sh -s -- -y --no-modify-path -c rust-src"
-  end
-
-  dep("rust-analyzer") do
-    sh "rustup component add rust-analyzer"
-  end
-
-  dep("gopls") do
-    sh "PATH=$PATH:/usr/local/go/bin GO111MODULE=on go install golang.org/x/tools/gopls@latest"
   end
 end
 
 desc "Symlink files into $HOME"
 task :link do
-  target_dirs do |dir|
-    sh "stow -t ~ --ignore='.*\\.gitkeep' #{dir.shellescape}"
-  end
+  sh "stow -t ~ dist"
 end
 
 desc "Remove symlinks from $HOME"
 task :unlink do
-  target_dirs do |dir|
-    sh "stow -t ~ -D #{dir.shellescape}"
-  end
-end
-
-desc "Cleanup installed vim plugins"
-task :cleanup do
-  sh "rm -vrf ~/.vim/plugged"
+  sh "stow -t ~ -D dist"
 end
 
 desc "Install dependencies and dotfiles"
-task install: [:setup, :link]
+task install: [:tools, :link]
 
-desc "Uninstall dotfiles and cleanup"
-task uninstall: [:unlink, :cleanup]
+desc "Uninstall dotfiles"
+task uninstall: [:unlink]
 
 task default: :install
