@@ -93,7 +93,11 @@ vim.lsp.config.erlangls = {
 
 vim.lsp.enable({ 'erlangls' })
 
---lsp.gleam.setup {
---  capabilities = capabilities,
---}
+vim.lsp.config.gleam = {
+  cmd = { 'gleam', 'lsp' },
+  filetypes = { 'gleam' },
+  single_file_support = true,
+  root_markers = { 'gleam.toml' },
+}
 
+vim.lsp.enable({ 'gleam' })
