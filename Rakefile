@@ -77,8 +77,8 @@ task :setup do
       sh "brew install bash-completion"
     end
 
-    dep("kitty") do
-      sh "brew install kitty --cask"
+    dep("ghostty") do
+      sh "brew install ghostty --cask"
     end
 
     dep("go") do
