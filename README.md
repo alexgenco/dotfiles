@@ -1,25 +1,19 @@
 ## Installation
 
-Setup dependencies and symlink files:
+Install dev tools and symlink dotfiles:
 
 ```shell
 rake install
 ```
 
-Only symlink files from specific directories:
+Only install specific dev tools:
 
 ```shell
-rake symlink dirs=editor,shell
-```
-
-Only setup specific dependencies:
-
-```shell
-rake setup deps=git,tmux
+rake tools only=git,tmux
 ```
 
 Force reinstall of a dependency:
 
 ```shell
-rake setup deps=ruby force=ruby
+rake tools only=tmux force=tmux
 ```

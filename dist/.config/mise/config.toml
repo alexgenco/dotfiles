@@ -1,0 +1,7 @@
+[tools]
+ruby = "latest"
+go = "latest"
+
+[tools.rust]
+version = "latest"
+components = "rust-analyzer,rust-src,clippy"

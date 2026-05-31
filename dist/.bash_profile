@@ -42,4 +42,4 @@ if [ -f ~/.local/etc/bashrc ]; then
   source ~/.local/etc/bashrc
 fi
 
-eval "$(rbenv init -)"
+eval "$(mise activate bash)"
