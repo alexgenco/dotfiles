@@ -3,17 +3,17 @@
 Install dev tools and symlink dotfiles:
 
 ```shell
-rake install
+./install.sh
 ```
 
-Only install specific dev tools:
+Only symlink dotfiles:
 
 ```shell
-rake tools only=git,tmux
+./install.sh link
 ```
 
-Force reinstall of a dependency:
+Only install dev tools:
 
 ```shell
-rake tools only=tmux force=tmux
+./install.sh tools
 ```

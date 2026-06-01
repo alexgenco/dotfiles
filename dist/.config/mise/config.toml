@@ -1,6 +1,9 @@
 [tools]
 ruby = "latest"
-go = "latest"
+
+[tools.go]
+version = "latest"
+postinstall = "go install golang.org/x/tools/gopls@latest"
 
 [tools.rust]
 version = "latest"
