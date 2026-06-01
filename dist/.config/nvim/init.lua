@@ -203,20 +203,6 @@ vim.keymap.set('n', '<leader>h',     '<cmd>Telescope help_tags<cr>',            
 --
 local augroup = vim.api.nvim_create_augroup('vimrcEx', {clear = true})
 
--- jump to last cursor position (ignoring git commit buffers)
-vim.api.nvim_create_autocmd('BufReadPost', {
-  group = augroup,
-  pattern = '*',
-  callback = function()
-    if vim.bo.filetype ~= 'gitcommit' then
-      local mark = vim.api.nvim_buf_get_mark(0, '"')
-      if mark[1] > 0 and mark[1] <= vim.api.nvim_buf_line_count(0) then
-        vim.api.nvim_win_set_cursor(0, mark)
-      end
-    end
-  end
-})
-
 -- check spelling for buffer types containing prose
 vim.api.nvim_create_autocmd('FileType', {
   group = augroup,
