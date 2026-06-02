@@ -1,1 +1,3 @@
 /dist/.config/nvim/nvim-pack-lock.json
+/dist/.config/nvim/lua/local.lua
+/dist/.config/mise/config.local.toml

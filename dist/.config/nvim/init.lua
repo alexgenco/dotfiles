@@ -133,7 +133,7 @@ vim.lsp.config('*', {
 -- go lsp settings
 vim.lsp.config.gopls = {
   cmd = { 'gopls' },
-  filetypes = { 'go', 'gotempl', 'gowork', 'gomod' },
+  filetypes = { 'go', 'gotmpl', 'gowork', 'gomod' },
   root_markers = { 'go.mod', 'go.work' },
 }
 vim.lsp.enable({ 'gopls' })
@@ -153,24 +153,6 @@ vim.lsp.config.rust_analyzer = {
   }
 }
 vim.lsp.enable({ 'rust_analyzer' })
-
--- erlang lsp settings
-vim.lsp.config.erlangls = {
-  cmd = { 'erlang_ls' },
-  filetypes = { 'erlang' },
-  single_file_support = true,
-  root_markers = { 'rebar.config', 'erlang.mk', 'Emakefile' },
-}
-vim.lsp.enable({ 'erlangls' })
-
--- gleam lsp settings
-vim.lsp.config.gleam = {
-  cmd = { 'gleam', 'lsp' },
-  filetypes = { 'gleam' },
-  single_file_support = true,
-  root_markers = { 'gleam.toml' },
-}
-vim.lsp.enable({ 'gleam' })
 
 
 -- Keybindings
@@ -248,3 +230,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 --
 vim.opt.background = 'dark'
 vim.cmd.colorscheme('quiet')
+
+
+-- Local overrides (~/.config/nvim/lua/local.lua)
+pcall(require, 'local')
