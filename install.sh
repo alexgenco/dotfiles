@@ -1,40 +1,37 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
+set -euo pipefail
 
 cd "$(dirname "$0")"
 
-brew_install() {
-  if ! brew ls --versions "$@" > /dev/null; then
-    brew install "$@"
-  fi
-}
+os="$(uname)"
 
 tools() {
+  case "$os" in
+    Darwin)
+      defaults -currentHost write -g InitialKeyRepeat -int 15
+      defaults -currentHost write -g KeyRepeat -int 1
+      defaults -currentHost write -g ApplePressAndHoldEnabled -bool false
+
+      if ! xcode-select --print-path &>/dev/null; then
+        xcode-select --install
+      fi
+      ;;
+    *)
+      # Homebrew supports linux, it just requires putting it in PATH, which I
+      # haven't gotten around to yet.
+      #
+      # See: https://docs.brew.sh/Homebrew-on-Linux#requirements
+      echo "Can't install for os=$os" >&2
+      exit 1
+      ;;
+  esac
+
   if ! command -v brew &>/dev/null; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
 
-  if [ "$(uname)" = "Darwin" ]; then
-    defaults -currentHost write -g InitialKeyRepeat -int 15
-    defaults -currentHost write -g KeyRepeat -int 1
-    defaults -currentHost write -g ApplePressAndHoldEnabled -bool false
-
-    if ! xcode-select --print-path &>/dev/null; then
-      xcode-select --install
-    fi
-
-    brew_install --cask ghostty
-  fi
-
-  brew_install mise
-  brew_install ripgrep
-  brew_install git
-  brew_install nvim
-  brew_install stow
-  brew_install tmux
-
-  mise --silent install
+  brew bundle install
 }
 
 link() {
