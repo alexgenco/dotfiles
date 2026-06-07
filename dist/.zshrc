@@ -6,31 +6,34 @@ setopt INC_APPEND_HISTORY
 setopt INC_APPEND_HISTORY_TIME
 setopt INTERACTIVE_COMMENTS
 
-HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+export HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
+export HISTSIZE=10000
+export SAVEHIST=10000
 
 bindkey -e
 
-if type brew &>/dev/null; then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-fi
-
 autoload -Uz edit-command-line
 autoload -Uz zmv
-autoload -Uz compinit && compinit
+autoload -Uz compinit
 zle -N edit-command-line
 bindkey '^x^e' edit-command-line
+
+# Only run security audit once a day
+if [[ -n ~/.zcompdump(#qNmh-24) ]]; then
+  compinit -C
+else
+  compinit
+fi
 
 if [ -f ~/.git-prompt.sh ]; then
   source ~/.git-prompt.sh
 
-  GIT_PS1_SHOWDIRTYSTATE=1
-  GIT_PS1_SHOWUNTRACKEDFILES=1
+  export GIT_PS1_SHOWDIRTYSTATE=1
+  export GIT_PS1_SHOWUNTRACKEDFILES=1
 fi
 
 setopt prompt_subst
-PROMPT='%B%U%D{%H:%M:%S} %3~$(__git_ps1 2>/dev/null) %#%b%u '
+export PROMPT='%B%U%D{%H:%M:%S} %3~$(__git_ps1 2>/dev/null) %#%b%u '
 
 if [ -f ~/.cargo/env ]; then
   source ~/.cargo/env
@@ -54,6 +57,9 @@ fi
 
 if [ -f /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
-eval "$(mise activate zsh)"
+if [ -f /opt/homebrew/bin/mise ]; then
+  eval "$(/opt/homebrew/bin/mise activate zsh)"
+fi
